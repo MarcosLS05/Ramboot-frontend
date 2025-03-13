@@ -1,0 +1,126 @@
+body {
+   background-image: url('/assets/img/fondopantalla.jpg'); /* Cambia esto por la ruta de tu imagen */
+    background-size: cover; /* Ajusta la imagen para cubrir toda la pantalla */
+    background-position: center; /* Centra la imagen */
+    background-repeat: no-repeat; /* Evita que la imagen se repita */
+    background-attachment: fixed; /* Fija la imagen para que no se desplace con el scroll */
+  }
+
+  .container {
+    background-color: rgba(255, 255, 255, 0.8); /* Fondo semi-transparente para el contenido */
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 20px;
+  }
+  .welcome-section {
+    background: linear-gradient(90deg, #007bff, #00bfff);
+    padding: 2rem;
+    border-radius: 10px;
+    color: #fff;
+    margin-bottom: 2rem;
+  }
+
+  .welcome-section h2 {
+    font-size: 2rem;
+    font-weight: bold;
+  }
+
+  .welcome-section p {
+    font-size: 1.2rem;
+  }
+
+  .training-plans-section .card,
+  .nutrition-tips-section .card {
+    margin-bottom: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .training-plans-section .card:hover,
+  .nutrition-tips-section .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  .card-img-top {
+    height: 200px;
+    object-fit: cover;
+  }
+
+  .card-body {
+    padding: 20px;
+  }
+
+  .card-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+  }
+
+  .card-text {
+    font-size: 0.9rem;
+    color: #555;
+  }
+
+  .btn-primary {
+    background-color: #007bff;
+    border: none;
+    transition: background-color 0.3s ease;
+  }
+
+  .btn-primary:hover {
+    background-color: #0056b3;
+  }
+
+  .testimonials-section {
+    background: #f8f9fa;
+    padding: 2rem;
+    border-radius: 10px;
+  }
+
+  .testimonial-card {
+    background: #ffffff;
+    padding: 1.5rem;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .testimonial-card p {
+    font-size: 1rem;
+    color: #555;
+  }
+
+  .testimonial-author {
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: #007bff;
+    margin-top: 1rem;
+  }
+
+  .contact-section {
+    background: #007bff;
+    padding: 2rem;
+    border-radius: 10px;
+    color: #fff;
+  }
+
+  .contact-section h3 {
+    font-size: 2rem;
+    font-weight: bold;
+  }
+
+  .contact-section p {
+    font-size: 1.1rem;
+  }
+
+  .btn-success {
+    background-color: #28a745;
+    border: none;
+    transition: background-color 0.3s ease;
+  }
+
+  .btn-success:hover {
+    background-color: #218838;
+  }
+
+  

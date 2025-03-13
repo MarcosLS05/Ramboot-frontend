@@ -1,0 +1,118 @@
+/* Estilos generales del navbar */
+.navbar {
+  background: linear-gradient(90deg, #1e3c72, #2a5298); /* Fondo degradado */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  padding: 0.5rem 1rem; /* Espaciado interno reducido */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Estilo del logo y la marca */
+.navbar-brand {
+  font-size: 1.25rem; /* Tamaño del texto reducido */
+  font-weight: bold; /* Texto en negrita */
+  color: #fff !important; /* Color blanco */
+  display: flex;
+  align-items: center;
+  gap: 0.5rem; /* Espaciado entre el logo y el texto */
+}
+
+.navbar-brand img {
+  border: 2px solid #fff; /* Borde blanco para el logo */
+  border-radius: 50%; /* Logo redondeado */
+  width: 40px; /* Ajuste del tamaño del logo */
+  height: 40px;
+  transition: transform 0.3s ease; /* Transición suave para el logo */
+}
+
+.navbar-brand:hover img {
+  transform: rotate(360deg); /* Rotación del logo al pasar el mouse */
+}
+
+/* Estilo de los enlaces del navbar */
+.nav-link {
+  color: rgba(255, 255, 255, 0.8) !important; /* Color del texto */
+  font-size: 0.9rem; /* Tamaño del texto reducido */
+  padding: 0.5rem 0.75rem; /* Espaciado interno reducido */
+  transition: all 0.3s ease; /* Transición suave */
+  position: relative; /* Posición relativa para el pseudo-elemento */
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  background: #fff;
+  bottom: 0;
+  left: 0;
+  transition: width 0.3s ease; /* Transición suave para el subrayado */
+}
+
+.nav-link:hover::after {
+  width: 100%; /* Subrayado completo al pasar el mouse */
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: #fff !important; /* Color blanco al pasar el mouse o estar activo */
+  background-color: rgba(255, 255, 255, 0.1); /* Fondo semi-transparente */
+  border-radius: 5px; /* Bordes redondeados */
+  transform: translateY(-3px); /* Levantar ligeramente el enlace */
+}
+
+/* Estilos para los botones dentro del navbar */
+.navbar-text .btn {
+  font-size: 0.9rem; /* Tamaño del texto del botón */
+  padding: 0.5rem 0.75rem; /* Espaciado interno reducido */
+  border-radius: 5px; /* Bordes redondeados */
+  transition: all 0.3s ease; /* Transición suave */
+}
+
+.navbar-text .btn-outline-light {
+  border-color: rgba(255, 255, 255, 0.5); /* Borde semi-transparente */
+  color: rgba(255, 255, 255, 0.8); /* Color del texto */
+}
+
+.navbar-text .btn-outline-light:hover {
+  background-color: rgba(255, 255, 255, 0.1); /* Fondo semi-transparente */
+  color: #fff; /* Color blanco */
+  transform: scale(1.05); /* Escalar ligeramente el botón */
+}
+
+/* Enlaces dentro del navbar-text */
+.navbar-text a.text-white {
+  text-decoration: none; /* Sin subrayado */
+  transition: color 0.3s ease; /* Transición suave */
+}
+
+.navbar-text a.text-white:hover {
+  color: #ddd !important; /* Color más claro al pasar el mouse */
+}
+
+/* Estilos para el botón de menú en móviles */
+.navbar-toggler {
+  border-color: rgba(255, 255, 255, 0.5); /* Borde semi-transparente */
+}
+
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255, 255, 255, 0.8)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}
+
+/* Ajustes para pantallas pequeñas */
+@media (max-width: 768px) {
+  .navbar-brand span {
+      display: none; /* Oculta el texto "GIMNASIO" en pantallas pequeñas */
+  }
+
+  .navbar {
+      flex-direction: column; /* Ajusta la dirección del contenido */
+      align-items: center;
+  }
+
+  .nav-link {
+      text-align: center;
+      width: 100%;
+  }
+}
