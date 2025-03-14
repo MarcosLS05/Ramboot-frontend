@@ -1,0 +1,76 @@
+/* Contenedor general */
+.container {
+    max-width: 900px;
+  }
+  
+  /* Input de búsqueda */
+  .search-bar {
+    width: 100%;
+    max-width: 300px;
+    padding: 0.6rem;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .search-bar:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.2);
+  }
+  
+  /* Estilos de las tarjetas */
+  .training-card {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out;
+    margin-bottom: 20px;
+  }
+  
+  .training-card:hover {
+    transform: translateY(-3px);
+  }
+  
+  /* Estilos del título */
+  .card-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+  
+  /* Estilos del botón */
+  .training-card .btn {
+    width: 100%;
+    font-weight: bold;
+    transition: background 0.3s ease;
+  }
+  
+  .training-card .btn:hover {
+    background: #218838;
+  }
+  
+  /* Paginación */
+  .pagination .page-link {
+    padding: 0.5rem 0.8rem;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background: white;
+    color: #007bff;
+    transition: all 0.3s ease;
+    margin: 0 0.2rem;
+    text-decoration: none;
+  }
+  
+  .pagination .page-link:hover,
+  .pagination .active {
+    background: #007bff;
+    color: white;
+  }
+  
+  /* Responsividad */
+  @media (max-width: 768px) {
+    .training-card {
+      margin-bottom: 15px;
+    }
+  }
+  

@@ -1,0 +1,68 @@
+<div class="row justify-content-center m-3">
+  <div class="col-lg-8 col-md-10 col-sm-12">
+    <!-- Título con íconos -->
+    <h1 class="my-5 text-center display-4 fw-bold">
+      <i class="bi bi-card-list"></i>
+      Detalle de Usuario
+      <i class="bi bi-person-circle"></i>
+    </h1>
+
+    <!-- Tabla de detalles del usuario -->
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <table class="table table-hover table-borderless my-4">
+          <tbody>
+            <tr>
+              <th scope="row" class="bg-danger text-white text-end pe-4 py-3">ID</th>
+              <td class="text-start ps-4 py-3">{{ oUsuario.id }}</td>
+            </tr>
+            <tr>
+              <th scope="row" class="bg-danger text-white text-end pe-4 py-3">ID</th>
+              <td class="text-start ps-4 py-3">{{ oUsuario.username }}</td>
+            </tr>
+            <tr>
+              <th scope="row" class="bg-primary text-white text-end pe-4 py-3">Nombre</th>
+              <td class="text-start ps-4 py-3">{{ oUsuario.nombre }}</td>
+            </tr>
+            <tr>
+              <th scope="row" class="bg-primary text-white text-end pe-4 py-3">Primer Apellido</th>
+              <td class="text-start ps-4 py-3">{{ oUsuario.apellido1 }}</td>
+            </tr>
+            <tr>
+              <th scope="row" class="bg-primary text-white text-end pe-4 py-3">Segundo Apellido</th>
+              <td class="text-start ps-4 py-3">{{ oUsuario.apellido2 }}</td>
+            </tr>
+            <tr>
+              <th scope="row" class="bg-primary text-white text-end pe-4 py-3">Correo</th>
+              <td class="text-start ps-4 py-3">{{ oUsuario.email }}</td>
+            </tr>
+            <tr>
+              <th scope="row" class="bg-primary text-white text-end pe-4 py-3">Tipo de Usuario</th>
+              <td class="text-start ps-5">
+                <a [routerLink]="['/admin/tipousuario/view', oUsuario.tipousuario.id]">
+                  {{ oUsuario!.tipousuario.titulo }} ({{oUsuario!.tipousuario.id}})
+                </a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Botones de acción -->
+    <div class="d-flex justify-content-center mt-5">
+      <a class="btn btn-warning mx-2" href="admin/usuario/plist">
+        <i class="bi bi-list"></i>
+        Ir a Listado de Usuarios
+      </a>
+      <a class="btn btn-primary mx-2" href="admin/usuario/edit/{{ oUsuario.id }}">
+        <i class="bi bi-pencil"></i>
+        Editar
+      </a>
+      <a class="btn btn-danger mx-2" href="admin/usuario/delete/{{ oUsuario.id }}">
+        <i class="bi bi-trash"></i>
+        Borrar
+      </a>
+    </div>
+  </div>
+</div>
