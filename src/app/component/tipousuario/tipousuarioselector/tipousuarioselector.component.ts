@@ -47,9 +47,9 @@ export class TipousuarioselectorComponent implements OnInit {
       ngOnInit() {
         this.getPage();
       }
-    
+
       getPage() {
-        
+
         this.oTipoUsuarioService
           .getPage(
             this.nPage,
@@ -70,23 +70,23 @@ export class TipousuarioselectorComponent implements OnInit {
               console.log(err);
             },
           });
-        
+
       }
-    
-     
-    
+
+
+
       select(oTipoUsuario: ITipousuario) {
-        
+
           // estamos en ventana emergente: no navegar
           // emitir el objeto seleccionado
-    
+
           this.dialogRef.close(oTipoUsuario);
-    
-    
+
+
       }
-    
-    
-    
+
+
+
       goToPage(p: number) {
         if (p) {
           this.nPage = p - 1;
@@ -94,36 +94,35 @@ export class TipousuarioselectorComponent implements OnInit {
         }
         return false;
       }
-    
+
       goToNext() {
         this.nPage++;
         this.getPage();
         return false;
       }
-    
+
       goToPrev() {
         this.nPage--;
         this.getPage();
         return false;
       }
-    
+
       sort(field: string) {
         this.strField = field;
         this.strDir = this.strDir === 'asc' ? 'desc' : 'asc';
         this.getPage();
       }
-    
+
       goToRpp(nrpp: number) {
         this.nPage = 0;
         this.nRpp = nrpp;
         this.getPage();
         return false;
       }
-    
+
       filter(event: KeyboardEvent) {
-        this.debounceSubject.next(this.strFiltro);    
+        this.debounceSubject.next(this.strFiltro);
       }
     }
 
-  
-    
+

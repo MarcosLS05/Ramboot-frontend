@@ -9,7 +9,7 @@ import { httpOptions, serverURL } from '../environment/environment';
   providedIn: 'root',
 })
 export class UsuarioService {
-  serverURL: string = serverURL + '/usuario';
+  serverURL: string = serverURL + '/usuarios';
 
   constructor(private oHttp: HttpClient) { }
 
@@ -116,10 +116,10 @@ export class UsuarioService {
   }
 
   create(oUsuario: IUsuario): Observable<IUsuario> {
-    const URL: string = `${serverURL}/usuario/new`; 
+    const URL: string = `${serverURL}/usuario/new`;
     return this.oHttp.post<IUsuario>(URL, oUsuario, httpOptions);
   }
-  
+
 
   update(oUsuario: IUsuario): Observable<IUsuario> {
     let URL: string = '';
@@ -149,7 +149,7 @@ export class UsuarioService {
     return this.oHttp.put<IUsuario>(this.serverURL + '/settipousuario/' + id + '/' + id_tipousuario, null);
   }
 
-  
+
 
 
 }

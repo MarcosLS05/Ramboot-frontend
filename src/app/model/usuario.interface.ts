@@ -18,4 +18,5 @@ export interface IUsuario {
     fecha_creacion: Date;
     ultima_conexion: Date;
     tipousuario: ITipousuario;
+    Gcontrata?: any;
 }

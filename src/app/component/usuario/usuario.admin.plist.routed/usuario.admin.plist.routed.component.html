@@ -91,10 +91,20 @@
                 @for (usuario of oPage?.content; track usuario.id) {
                 <tr>
                   <td class="text-center">{{ usuario.id }}</td>
+                  <td class="text-center">{{ usuario.username }}</td>
                   <td>{{ usuario.nombre | trim : 10 }}</td>
                   <td>{{ usuario.apellido1 }}</td>
                   <td>{{ usuario.apellido2 }}</td>
+                  <td>{{ usuario.dni }}</td>
+                  <td>{{ usuario.cp }}</td>
+                  <td>{{ usuario.telefono }}</td>
                   <td style="font-size: small">{{ usuario.email }}</td>
+                  <td>{{ usuario.feedback }}</td>
+                  <td>{{ usuario.isActive}}</td>
+                  <td>{{ usuario.saldo}}</td>
+                  <td>{{ usuario.fecha_creacion }}</td>
+                  <td>{{ usuario.ultima_conexion 
+                    }}</td>
                     <td class="text-start">
                       <a href="admin/tipousuario/view/{{ usuario.tipousuario.id }}">
                         {{ usuario.tipousuario.titulo }} ({{ usuario.tipousuario.id }})

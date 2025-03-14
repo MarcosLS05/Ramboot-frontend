@@ -1,9 +1,9 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container-fluid">
-    <!-- Logo y nombre del gimnasio -->
+    <!-- Logo y nombre del sitio -->
     <a class="navbar-brand d-flex align-items-center" href="#">
       <img src="assets/img/logo.png" alt="Logo" class="me-2" style="width: 40px; height: 40px; border-radius: 50%;">
-      <span class="d-none d-md-block">GIMNASIO</span> <!-- Solo muestra el texto en pantallas medianas y grandes -->
+      <span class="d-none d-md-block">TechGamer</span> <!-- Solo muestra el texto en pantallas medianas y grandes -->
     </a>
 
     <!-- Botón de menú para dispositivos móviles -->
@@ -32,12 +32,27 @@
         </li>
         <li class="nav-item">
           <a class="nav-link" [class.active]="strRuta == '/admin/usuario/plist'" href="admin/planesentrenamiento/plist">
-            <i class="bi bi-clipboard-data me-1"></i>Planes de Entrenamiento
+            <i class="bi bi-clipboard-data me-1"></i>Bonos
           </a>
         </li>
         <li class="nav-item">
           <a class="nav-link" [class.active]="strRuta == '/admin/usuario/plist'" href="/admin/grupocontrata/plist">
             <i class="bi bi-file-earmark-text me-1"></i>Contratos
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [class.active]="strRuta == '/admin/usuario/plist'" href="/admin/grupocontrata/plist">
+            <i class="bi bi-file-earmark-text me-1"></i>Zonas
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [class.active]="strRuta == '/admin/usuario/plist'" href="/admin/grupocontrata/plist">
+            <i class="bi bi-file-earmark-text me-1"></i>Bebidas
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [class.active]="strRuta == '/admin/usuario/plist'" href="/admin/grupocontrata/plist">
+            <i class="bi bi-file-earmark-text me-1"></i>Snacks
           </a>
         </li>
       </ul>

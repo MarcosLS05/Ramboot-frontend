@@ -7,7 +7,7 @@ import { CryptoService } from '../../../service/crypto.service';
 import { MatIconModule } from '@angular/material/icon';
 import {
   FormControl,
-  FormGroup,  
+  FormGroup,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
@@ -35,7 +35,7 @@ declare let bootstrap: any;
     RouterModule,
     CommonModule,
     MatIconModule,
-    
+
   ],
   styleUrls: ['./usuario.admin.create.routed.component.css'],
 })
@@ -50,22 +50,22 @@ export class UsuarioAdminCreateRoutedComponent implements OnInit {
   myModal: any;
 
   form: FormGroup = new FormGroup({});
- 
+
 
   constructor(
     private oUsuarioService: UsuarioService,
     private oRouter: Router,
     private oTipoUsuarioService: tipousuarioService,
     private oCryptoService: CryptoService
-  
+
   ) {}
 
-  
+
     ngOnInit() {
       this.createForm();
       if (this.oUsuarioForm) {
         this.oUsuarioForm.markAllAsTouched();
-      
+
         // Suscripción a los cambios en el campo 'tipousuario'
         this.oUsuarioForm.controls['tipousuario'].valueChanges.subscribe(change => {
           if (change && change.id) {
@@ -91,7 +91,7 @@ export class UsuarioAdminCreateRoutedComponent implements OnInit {
         });
       }
     }
-    
+
   createForm() {
     this.oUsuarioForm = new FormGroup({
       nombre: new FormControl('', [
@@ -124,7 +124,7 @@ export class UsuarioAdminCreateRoutedComponent implements OnInit {
       id: null,
       titulo: null,
     });
-   
+
   }
 
   showModal(mensaje: string) {
@@ -157,7 +157,7 @@ export class UsuarioAdminCreateRoutedComponent implements OnInit {
     if (this.oUsuarioForm?.invalid) {
       this.showModal('Formulario inválido');
       return;
-    } else {      
+    } else {
       const hashedPassword = this.oCryptoService.getHashSHA256(this.oUsuarioForm?.value.password);
       this.oUsuarioForm?.controls['password'].setValue(hashedPassword);
       this.oUsuarioService.create(this.oUsuarioForm?.value).subscribe({
@@ -178,7 +178,7 @@ export class UsuarioAdminCreateRoutedComponent implements OnInit {
       maxHeight: '500px',
       width: '50%',
       maxWidth: '90%',
-      
+
 
 
     });

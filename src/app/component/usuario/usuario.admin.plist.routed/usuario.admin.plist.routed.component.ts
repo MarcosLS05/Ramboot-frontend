@@ -20,7 +20,7 @@ import { HttpErrorResponse } from '@angular/common/http';
   imports: [CommonModule, FormsModule, TrimPipe, RouterModule],
 })
 export class UsuarioAdminPlistRoutedComponent implements OnInit {
-  
+
   oPage: IPage<IUsuario> | null = null;
   //
   nPage: number = 0; // 0-based server count
@@ -82,7 +82,7 @@ export class UsuarioAdminPlistRoutedComponent implements OnInit {
           console.log(result);
 
           /*   ----> ejercicio
-          // sustituir el tipo de apunte en el id de apunte seleccionado en oPage.content        
+          // sustituir el tipo de apunte en el id de apunte seleccionado en oPage.content
           this.oPage?.content.forEach((apunte) => {
             if (apunte.id === id) {
               apunte.tipoapunte = result;
