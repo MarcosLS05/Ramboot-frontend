@@ -20,6 +20,8 @@ import { TipousuarioAdminViewRoutedComponent } from './component/tipousuario/tip
 import { TipousuarioAdminCreateRoutedComponent } from './component/tipousuario/tipousuario.admin.create.routed/tipousuario.admin.create.routed.component';
 import { TipousuarioAdminDeleteRoutedComponent } from './component/tipousuario/tipousuario.admin.delete.routed/tipousuario.admin.delete.component';
 
+import { serverURL } from './environment/environment';
+
 export const routes: Routes = [
 
     { path: '', component: SharedHomeRoutedComponent},

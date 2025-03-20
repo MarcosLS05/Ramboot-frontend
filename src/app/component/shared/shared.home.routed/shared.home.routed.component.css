@@ -1,8 +1,7 @@
 body {
   background-color: #000; /* Fondo negro */
-  color: #fff; /* Texto blanco */
   font-family: 'Arial', sans-serif;
-  background-image: url('/assets/img/fondo-gaming.jpg'); /* Cambia esto por la ruta de tu imagen */
+  background-image: url('/src/app/assets/img/fondoPagina.jpg'); /* Cambia esto por la ruta de tu imagen */
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
