@@ -43,6 +43,7 @@ export class SharedLoginRoutedComponent implements OnInit {
   onSubmit() {
     if (this.loginForm.valid) {
       const hashedPassword = this.oCryptoService.getHashSHA256(this.loginForm.value.password);
+      console.log(hashedPassword);
       this.oLoginService.login(this.loginForm.value.email, hashedPassword).subscribe({
         next: (token: string) => {
           console.log('Token recibido:', token);
@@ -67,7 +68,7 @@ export class SharedLoginRoutedComponent implements OnInit {
   onAdmin() {
     this.loginForm.setValue({
       email: 'usuario@example.com',
-      password: '123'
+      password: '12345'
     });
   }
 

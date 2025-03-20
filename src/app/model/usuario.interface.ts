@@ -13,10 +13,10 @@ export interface IUsuario {
     email: string;
     feedback: string;
     password: string;
-    isActive: boolean;
+    active: boolean;
     saldo: DoubleRange;
-    fecha_creacion: Date;
-    ultima_conexion: Date;
+    creadoEn: Date;
+    ultimoLoginEn: Date;
     tipousuario: ITipousuario;
     Gcontrata?: any;
 }

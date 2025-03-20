@@ -20,7 +20,6 @@ import { HttpErrorResponse } from '@angular/common/http';
   imports: [CommonModule, FormsModule, TrimPipe, RouterModule],
 })
 export class UsuarioAdminPlistRoutedComponent implements OnInit {
-
   oPage: IPage<IUsuario> | null = null;
   //
   nPage: number = 0; // 0-based server count
@@ -51,7 +50,13 @@ export class UsuarioAdminPlistRoutedComponent implements OnInit {
 
   getPage() {
     this.oUsuarioService
-      .getPage(this.nPage, this.nRpp, this.strField, this.strDir, this.strFiltro)
+      .getPage(
+        this.nPage,
+        this.nRpp,
+        this.strField,
+        this.strDir,
+        this.strFiltro
+      )
       .subscribe({
         next: (oPageFromServer: IPage<IUsuario>) => {
           this.oPage = oPageFromServer;
@@ -73,10 +78,9 @@ export class UsuarioAdminPlistRoutedComponent implements OnInit {
         maxHeight: '500px',
         width: '50%',
         maxWidth: '90%',
-
       });
 
-      dialogRef.afterClosed().subscribe(result => {
+      dialogRef.afterClosed().subscribe((result) => {
         console.log('The dialog was closed');
         if (result !== undefined) {
           console.log(result);
@@ -100,14 +104,12 @@ export class UsuarioAdminPlistRoutedComponent implements OnInit {
               console.log(err);
             },
           });
-
         }
       });
       return false;
     } else {
       return false;
     }
-
   }
 
   edit(oUsuario: IUsuario) {
@@ -161,17 +163,17 @@ export class UsuarioAdminPlistRoutedComponent implements OnInit {
     this.debounceSubject.next(this.strFiltro);
   }
 
-//  <td class="text-start">
-//  <a href="admin/tipousuario/view/{{ usuario.tipousuario.id }}">
-//    {{ usuario.tipousuario.titulo }} ({{ usuario.tipousuario.id }})
-//  </a>
-//  <a href="admin/usuario/plist/xtipousuario/{{ usuario.tipousuario.id }}">
-//    <i class="bi bi-filter-circle"></i>
- // </a>
-//</td>
+  //  <td class="text-start">
+  //  <a href="admin/tipousuario/view/{{ usuario.tipousuario.id }}">
+  //    {{ usuario.tipousuario.titulo }} ({{ usuario.tipousuario.id }})
+  //  </a>
+  //  <a href="admin/usuario/plist/xtipousuario/{{ usuario.tipousuario.id }}">
+  //    <i class="bi bi-filter-circle"></i>
+  // </a>
+  //</td>
 
-//<td class="text-center">
-//<a href="/admin/planesentrenamiento/plist/xusuario/{{ usuario.id }}" class="btn btn-primary">{{ usuario.planesentrenamiento }}</a>
+  //<td class="text-center">
+  //<a href="/admin/planesentrenamiento/plist/xusuario/{{ usuario.id }}" class="btn btn-primary">{{ usuario.planesentrenamiento }}</a>
 
-//</td>
+  //</td>
 }
