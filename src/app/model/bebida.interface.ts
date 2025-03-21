@@ -1,9 +1,6 @@
-
-
 export interface IBebida {
-
-    id: number;
-    nombre: string;
-    precio_unidad: number;
-    stock: number;
+  id: number;
+  nombre: string;
+  precio: DoubleRange;
+  stock: number;
 }

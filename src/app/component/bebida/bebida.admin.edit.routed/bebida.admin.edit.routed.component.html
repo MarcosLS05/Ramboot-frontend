@@ -1,0 +1,238 @@
+<div class="container-fluid py-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-8 col-md-10 col-sm-12">
+      <div class="card border-0 shadow-lg">
+        <div class="card-header bg-primary text-white text-center">
+          <h2 class="fw-bold">
+            <i class="bi bi-person-circle"></i> Edición de Usuario
+            <i class="bi bi-pencil"></i>
+          </h2>
+        </div>
+        <div class="card-body">
+          <form [formGroup]="oBebidaForm!" (ngSubmit)="onSubmit()" novalidate>
+            <div class="mb-3">
+              <label for="username" class="form-label fw-bold">Username</label>
+              <input
+                type="text"
+                id="username"
+                class="form-control"
+                formControlName="username"
+                placeholder="username"
+              />
+              <div
+                *ngIf="oBebidaForm?.get('username')?.errors"
+                class="text-danger"
+              >
+                <small
+                  *ngIf="oBebidaForm?.get('username')?.hasError('required')"
+                  >Debes introducir un username.</small
+                >
+                <small
+                  *ngIf="oBebidaForm?.get('username')?.hasError('minlength')"
+                  >El username es demasiado corto.</small
+                >
+                <small
+                  *ngIf="oBebidaForm?.get('username')?.hasError('maxlength')"
+                  >El username es demasiado largo.</small
+                >
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="nombre" class="form-label fw-bold">Nombre</label>
+              <input
+                type="text"
+                id="nombre"
+                class="form-control"
+                formControlName="nombre"
+                placeholder="Nombre"
+              />
+              <div
+                *ngIf="oBebidaForm?.get('nombre')?.errors"
+                class="text-danger"
+              >
+                <small *ngIf="oBebidaForm?.get('nombre')?.hasError('required')"
+                  >Debes introducir un nombre.</small
+                >
+                <small *ngIf="oBebidaForm?.get('nombre')?.hasError('minlength')"
+                  >El nombre es demasiado corto.</small
+                >
+                <small *ngIf="oBebidaForm?.get('nombre')?.hasError('maxlength')"
+                  >El nombre es demasiado largo.</small
+                >
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="apellido1" class="form-label fw-bold"
+                >Primer Apellido</label
+              >
+              <input
+                type="text"
+                id="apellido1"
+                class="form-control"
+                formControlName="apellido1"
+                placeholder="Primer Apellido"
+              />
+              <div
+                *ngIf="oBebidaForm?.get('apellido1')?.errors"
+                class="text-danger"
+              >
+                <small
+                  *ngIf="oBebidaForm?.get('apellido1')?.hasError('required')"
+                  >Debes introducir un apellido.</small
+                >
+                <small
+                  *ngIf="oBebidaForm?.get('apellido1')?.hasError('minlength')"
+                  >El apellido es demasiado corto.</small
+                >
+                <small
+                  *ngIf="oBebidaForm?.get('apellido1')?.hasError('maxlength')"
+                  >El apellido es demasiado largo.</small
+                >
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="apellido2" class="form-label fw-bold"
+                >Segundo Apellido</label
+              >
+              <input
+                type="text"
+                id="apellido2"
+                class="form-control"
+                formControlName="apellido2"
+                placeholder="Segundo Apellido"
+              />
+            </div>
+
+            <div class="mb-3">
+              <label for="dni" class="form-label fw-bold">Documento</label>
+              <input
+                type="text"
+                id="dni"
+                class="form-control"
+                formControlName="dni"
+                placeholder="Documento"
+              />
+            </div>
+            <div class="mb-3">
+              <label for="cp" class="form-label fw-bold">Código Postal</label>
+              <input
+                type="number"
+                id="cp"
+                class="form-control"
+                formControlName="cp"
+                placeholder="Código Postal"
+              />
+            </div>
+            <div class="mb-3">
+              <label for="telefono" class="form-label fw-bold">Télefono</label>
+              <input
+                type="number"
+                id="telefono"
+                class="form-control"
+                formControlName="telefono"
+                placeholder="telefono"
+              />
+            </div>
+
+            <div class="mb-3">
+              <label for="email" class="form-label fw-bold"
+                >Correo Electrónico</label
+              >
+              <input
+                type="email"
+                id="email"
+                class="form-control"
+                formControlName="email"
+                placeholder="Correo Electrónico"
+              />
+              <div
+                *ngIf="oBebidaForm?.get('email')?.errors"
+                class="text-danger"
+              >
+                <small *ngIf="oBebidaForm?.get('email')?.hasError('required')"
+                  >Debes introducir un correo.</small
+                >
+                <small *ngIf="oBebidaForm?.get('email')?.hasError('email')"
+                  >El formato del correo es incorrecto.</small
+                >
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="saldo" class="form-label fw-bold">Saldo</label>
+              <input
+                type="saldo"
+                id="saldo"
+                class="form-control"
+                formControlName="saldo"
+                placeholder="saldo"
+              />
+            </div>
+
+            <div class="mt-4 d-flex justify-content-evenly">
+              <button
+                class="btn btn-warning mt-4 mx-1"
+                [routerLink]="['/admin', 'usuario', 'plist']"
+              >
+                <i class="bi bi-list"></i> Ir a listado de Usuarios
+              </button>
+              <button
+                class="btn btn-secondary mt-4 mx-1"
+                type="reset"
+                (click)="onReset()"
+              >
+                <i class="bi bi-x-lg"></i> Reset
+              </button>
+              <button
+                class="btn btn-success mt-4 mx-1"
+                type="submit"
+                [disabled]="!oBebidaForm?.valid"
+              >
+                <i class="bi bi-save"></i> Guardar
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div
+    class="modal fade"
+    [id]="'mimodal'"
+    tabindex="-1"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Mensaje</h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+            (click)="hideModal()"
+          ></button>
+        </div>
+        <div class="modal-body text-center">
+          <p class="fs-5">{{ strMessage }}</p>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-primary"
+            data-bs-dismiss="modal"
+            (click)="hideModal()"
+          >
+            Cerrar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
