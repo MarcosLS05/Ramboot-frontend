@@ -1,4 +1,4 @@
-import { Component,inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -35,12 +35,10 @@ declare let bootstrap: any;
     RouterModule,
     CommonModule,
     MatIconModule,
-
   ],
   styleUrls: ['./usuario.admin.create.routed.component.css'],
 })
 export class UsuarioAdminCreateRoutedComponent implements OnInit {
-
   id: number = 0;
   oUsuarioForm: FormGroup | undefined = undefined;
   oUsuario: IUsuario | null = null;
@@ -51,30 +49,29 @@ export class UsuarioAdminCreateRoutedComponent implements OnInit {
 
   form: FormGroup = new FormGroup({});
 
-
   constructor(
     private oUsuarioService: UsuarioService,
     private oRouter: Router,
     private oTipoUsuarioService: tipousuarioService,
     private oCryptoService: CryptoService
-
   ) {}
 
+  ngOnInit() {
+    this.createForm();
+    if (this.oUsuarioForm) {
+      this.oUsuarioForm.markAllAsTouched();
 
-    ngOnInit() {
-      this.createForm();
-      if (this.oUsuarioForm) {
-        this.oUsuarioForm.markAllAsTouched();
-
-        // Suscripción a los cambios en el campo 'tipousuario'
-        this.oUsuarioForm.controls['tipousuario'].valueChanges.subscribe(change => {
+      // Suscripción a los cambios en el campo 'tipousuario'
+      this.oUsuarioForm.controls['tipousuario'].valueChanges.subscribe(
+        (change) => {
           if (change && change.id) {
             // Obtener el objeto tipousuario del servidor
             this.oTipoUsuarioService.get(change.id).subscribe({
               next: (oTipoUsuario: ITipousuario) => {
                 this.oTipoUsuario = oTipoUsuario;
               },
-              error: (err: HttpErrorResponse) => {  // Tipo de error especificado
+              error: (err: HttpErrorResponse) => {
+                // Tipo de error especificado
                 console.log(err);
                 this.oTipoUsuario = {} as ITipousuario;
                 // Marcar el campo como inválido si hay un error
@@ -83,48 +80,86 @@ export class UsuarioAdminCreateRoutedComponent implements OnInit {
                     invalid: true,
                   });
                 }
-              }
+              },
             });
           } else {
             this.oTipoUsuario = {} as ITipousuario;
           }
-        });
-      }
+        }
+      );
     }
+  }
 
   createForm() {
     this.oUsuarioForm = new FormGroup({
+      username: new FormControl('', [
+        Validators.required,
+        Validators.minLength(3),
+        Validators.maxLength(10),
+      ]),
       nombre: new FormControl('', [
         Validators.required,
         Validators.minLength(3),
-        Validators.maxLength(50),
+        Validators.maxLength(10),
       ]),
       apellido1: new FormControl('', [
         Validators.required,
         Validators.minLength(3),
-        Validators.maxLength(50),
+        Validators.maxLength(10),
       ]),
       apellido2: new FormControl(''),
+      dni: new FormControl('', [
+        Validators.required,
+        Validators.minLength(9),
+        Validators.maxLength(9),
+      ]),
+      cp: new FormControl('', [
+        Validators.required,
+        Validators.minLength(5),
+        Validators.maxLength(5),
+      ]),
+      telefono: new FormControl('', [
+        Validators.required,
+        Validators.minLength(9),
+        Validators.maxLength(9),
+      ]),
       email: new FormControl('', [Validators.required, Validators.email]),
+      feedback: new FormControl(''),
       password: new FormControl(''),
+      active: new FormControl(false),
+      saldo: new FormControl(0),
+      creadoEn: new FormControl(new Date()),
+      ultimoLoginEn: new FormControl(new Date()),
       tipousuario: new FormGroup({
-        id: new FormControl('', Validators.required), // ID de tipocuenta
-        titulo: new FormControl(''), // titulo de tipocuenta
+        id: new FormControl('', Validators.required),
+        titulo: new FormControl(''),
       }),
     });
   }
 
   updateForm() {
+    this.oUsuarioForm?.controls['username'].setValue('');
     this.oUsuarioForm?.controls['nombre'].setValue('');
     this.oUsuarioForm?.controls['apellido1'].setValue('');
     this.oUsuarioForm?.controls['apellido2'].setValue('');
+    this.oUsuarioForm?.controls['dni'].setValue('');
+    this.oUsuarioForm?.controls['cp'].setValue('');
+    this.oUsuarioForm?.controls['telefono'].setValue('');
     this.oUsuarioForm?.controls['email'].setValue('');
+    this.oUsuarioForm?.controls['feedback'].setValue('');
     this.oUsuarioForm?.controls['password'].setValue('');
+    this.oUsuarioForm?.controls['active'].setValue('');
+    this.oUsuarioForm?.controls['saldo'].setValue('');
+    this.oUsuarioForm?.controls['creadoEn'].setValue(new Date());
+    this.oUsuarioForm?.controls['ultimoLoginEn'].setValue(new Date());
     this.oUsuarioForm?.controls['tipousuario'].setValue({
       id: null,
       titulo: null,
     });
-
+    this.oUsuarioForm?.controls['gcontrata'].setValue({
+      id: null,
+      titulo: null,
+    });
   }
 
   showModal(mensaje: string) {
@@ -141,8 +176,6 @@ export class UsuarioAdminCreateRoutedComponent implements OnInit {
     this.isPasswordVisible = !this.isPasswordVisible;
   }
 
-
-
   onReset() {
     this.updateForm();
     return false;
@@ -151,14 +184,16 @@ export class UsuarioAdminCreateRoutedComponent implements OnInit {
   hideModal = () => {
     this.myModal.hide();
     this.oRouter.navigate(['/admin/usuario/view/' + this.oUsuario?.id]);
-  }
+  };
 
   onSubmit() {
     if (this.oUsuarioForm?.invalid) {
       this.showModal('Formulario inválido');
       return;
     } else {
-      const hashedPassword = this.oCryptoService.getHashSHA256(this.oUsuarioForm?.value.password);
+      const hashedPassword = this.oCryptoService.getHashSHA256(
+        this.oUsuarioForm?.value.password
+      );
       this.oUsuarioForm?.controls['password'].setValue(hashedPassword);
       this.oUsuarioService.create(this.oUsuarioForm?.value).subscribe({
         next: (oUsuario: IUsuario) => {
@@ -178,12 +213,9 @@ export class UsuarioAdminCreateRoutedComponent implements OnInit {
       maxHeight: '500px',
       width: '50%',
       maxWidth: '90%',
-
-
-
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result) => {
       console.log('The dialog was closed');
       if (result !== undefined) {
         console.log(result);
@@ -195,7 +227,4 @@ export class UsuarioAdminCreateRoutedComponent implements OnInit {
     });
     return false;
   }
-
-
-
 }

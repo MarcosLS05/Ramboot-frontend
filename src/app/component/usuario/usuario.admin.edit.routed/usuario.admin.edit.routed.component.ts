@@ -25,7 +25,13 @@ declare let bootstrap: any;
   templateUrl: './usuario.admin.edit.routed.component.html',
   styleUrls: ['./usuario.admin.edit.routed.component.css'],
   standalone: true,
-  imports: [RouterModule, ReactiveFormsModule, CommonModule, MatFormFieldModule, MatInputModule],
+  imports: [
+    RouterModule,
+    ReactiveFormsModule,
+    CommonModule,
+    MatFormFieldModule,
+    MatInputModule,
+  ],
 })
 export class UsuarioAdminEditRoutedComponent implements OnInit {
   id: number = 0;
@@ -54,40 +60,69 @@ export class UsuarioAdminEditRoutedComponent implements OnInit {
     this.oUsuarioForm?.markAllAsTouched();
 
     // Suscripción a cambios en el campo 'tipousuario'
-    this.oUsuarioForm?.controls['tipousuario'].valueChanges.subscribe(change => {
-      if (change && change.id) {
-        this.oTipoUsuarioService.get(change.id).subscribe({
-          next: (oTipoUsuario: ITipousuario) => {
-            this.oTipoUsuario = oTipoUsuario;
-          },
-          error: (err: HttpErrorResponse) => {
-            console.log(err);
-            this.oTipoUsuario = {} as ITipousuario;
-            this.oUsuarioForm?.controls['tipousuario'].setErrors({ invalid: true });
-          }
-        });
-      } else {
-        this.oTipoUsuario = {} as ITipousuario;
+    this.oUsuarioForm?.controls['tipousuario'].valueChanges.subscribe(
+      (change) => {
+        if (change && change.id) {
+          this.oTipoUsuarioService.get(change.id).subscribe({
+            next: (oTipoUsuario: ITipousuario) => {
+              this.oTipoUsuario = oTipoUsuario;
+            },
+            error: (err: HttpErrorResponse) => {
+              console.log(err);
+              this.oTipoUsuario = {} as ITipousuario;
+              this.oUsuarioForm?.controls['tipousuario'].setErrors({
+                invalid: true,
+              });
+            },
+          });
+        } else {
+          this.oTipoUsuario = {} as ITipousuario;
+        }
       }
-    });
+    );
   }
 
   createForm() {
     this.oUsuarioForm = new FormGroup({
       id: new FormControl('', [Validators.required]),
+      username: new FormControl('', [
+        Validators.required,
+        Validators.minLength(3),
+        Validators.maxLength(20),
+      ]),
       nombre: new FormControl('', [
         Validators.required,
         Validators.minLength(3),
-        Validators.maxLength(50),
+        Validators.maxLength(10),
       ]),
       apellido1: new FormControl('', [
         Validators.required,
         Validators.minLength(3),
-        Validators.maxLength(50),
+        Validators.maxLength(10),
       ]),
       apellido2: new FormControl(''),
+      dni: new FormControl('', [
+        Validators.required,
+        Validators.minLength(9),
+        Validators.maxLength(9),
+      ]),
+      cp: new FormControl('', [
+        Validators.required,
+        Validators.minLength(5),
+        Validators.maxLength(5),
+      ]),
+      telefono: new FormControl('', [
+        Validators.required,
+        Validators.minLength(9),
+        Validators.maxLength(9),
+      ]),
       email: new FormControl('', [Validators.required, Validators.email]),
+      feedback: new FormControl(''),
       password: new FormControl(''),
+      active: new FormControl(false),
+      saldo: new FormControl(0),
+      creadoEn: new FormControl(new Date()),
+      ultimoLoginEn: new FormControl(new Date()),
       tipousuario: new FormGroup({
         id: new FormControl('', Validators.required),
         titulo: new FormControl(''),
@@ -99,14 +134,23 @@ export class UsuarioAdminEditRoutedComponent implements OnInit {
     if (this.oUsuario) {
       this.oUsuarioForm?.patchValue({
         id: this.oUsuario.id,
+        username: this.oUsuario.username,
         nombre: this.oUsuario.nombre,
         apellido1: this.oUsuario.apellido1,
         apellido2: this.oUsuario.apellido2,
+        dni: this.oUsuario.dni,
+        cp: this.oUsuario.cp,
+        telefono: this.oUsuario.telefono,
         email: this.oUsuario.email,
+        feedback: this.oUsuario.feedback,
+        active: this.oUsuario.active,
+        saldo: this.oUsuario.saldo,
+        creadoEn: this.oUsuario.creadoEn,
+        ultimoLoginEn: this.oUsuario.ultimoLoginEn,
         tipousuario: {
           id: this.oUsuario.tipousuario?.id || '',
           titulo: this.oUsuario.tipousuario?.titulo || '',
-        }
+        },
       });
     }
   }
@@ -145,8 +189,13 @@ export class UsuarioAdminEditRoutedComponent implements OnInit {
     let usuarioActualizado = { ...this.oUsuarioForm.value };
 
     // Encriptar la contraseña solo si el usuario la ha cambiado
-    if (usuarioActualizado.password && usuarioActualizado.password.trim() !== '') {
-      usuarioActualizado.password = this.oCryptoService.getHashSHA256(usuarioActualizado.password);
+    if (
+      usuarioActualizado.password &&
+      usuarioActualizado.password.trim() !== ''
+    ) {
+      usuarioActualizado.password = this.oCryptoService.getHashSHA256(
+        usuarioActualizado.password
+      );
     } else {
       usuarioActualizado.password = this.oUsuario?.password; // Mantener la contraseña existente
     }
@@ -167,7 +216,7 @@ export class UsuarioAdminEditRoutedComponent implements OnInit {
   onReset() {
     this.oUsuarioService.get(this.id).subscribe({
       next: (oUsuario: IUsuario) => {
-        this.oUsuario= oUsuario;
+        this.oUsuario = oUsuario;
         this.updateForm();
       },
       error: (error) => {
@@ -186,7 +235,7 @@ export class UsuarioAdminEditRoutedComponent implements OnInit {
       data: { origen: '', idBalance: '' },
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result) => {
       if (result !== undefined) {
         this.oUsuarioForm?.controls['tipousuario'].setValue({
           id: result.id,

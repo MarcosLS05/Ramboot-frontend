@@ -3,14 +3,15 @@ import { UsuarioService } from '../../../service/usuario.service';
 import { IUsuario } from '../../../model/usuario.interface';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ActivatedRoute, RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-usuario.admin.view.routed',
   standalone: true,
-  imports: [RouterModule],
-  
+  imports: [RouterModule, CommonModule],
+
   templateUrl: './usuario.admin.view.routed.component.html',
-  styleUrls: ['./usuario.admin.view.routed.component.css']
+  styleUrls: ['./usuario.admin.view.routed.component.css'],
 })
 export class UsuarioAdminViewRoutedComponent implements OnInit {
   //
@@ -20,11 +21,13 @@ export class UsuarioAdminViewRoutedComponent implements OnInit {
   numeroApuntes: number = 0;
   numeroApuntesAbiertos: number = 0;
   //
-  constructor(private oActivatedRoute: ActivatedRoute, private oUsuarioService: UsuarioService) { }
+  constructor(
+    private oActivatedRoute: ActivatedRoute,
+    private oUsuarioService: UsuarioService
+  ) {}
 
   ngOnInit() {
     this.id = this.oActivatedRoute.snapshot.params['id'];
-
 
     this.getOne();
   }

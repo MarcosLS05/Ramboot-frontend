@@ -84,16 +84,6 @@ export class UsuarioAdminPlistRoutedComponent implements OnInit {
         console.log('The dialog was closed');
         if (result !== undefined) {
           console.log(result);
-
-          /*   ----> ejercicio
-          // sustituir el tipo de apunte en el id de apunte seleccionado en oPage.content
-          this.oPage?.content.forEach((apunte) => {
-            if (apunte.id === id) {
-              apunte.tipoapunte = result;
-            }
-          });
-          */
-
           // llamada al servidor
           this.oUsuarioService.setTipousuario(id, result.id).subscribe({
             next: (response: IUsuario) => {

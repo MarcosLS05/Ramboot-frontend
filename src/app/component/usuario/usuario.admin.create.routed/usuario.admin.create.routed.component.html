@@ -1,154 +1,246 @@
 <div class="container mt-5 d-flex align-items-center justify-content-center">
-  <div class="card shadow-lg p-4" style="max-width: 600px; width: 100%">
+  <div
+    class="card shadow-lg p-4"
+    style="
+      max-width: 900px;
+      width: 100%;
+      background-color: #1a1a1a;
+      border: 1px solid #ff8c42;
+    "
+  >
     <div class="card-body">
-      <h2 class="text-center mb-4">
+      <h2 class="text-center mb-4" style="color: #ff8c42">
         <i class="bi bi-plus-square"></i>
         Creación de Usuario
         <i class="bi bi-person-circle"></i>
       </h2>
 
       <form [formGroup]="oUsuarioForm!" (ngSubmit)="onSubmit()" novalidate>
-        <!-- Username -->
-        <div class="mb-3">
-          <mat-form-field appearance="outline" class="w-100">
-            <mat-label>Username</mat-label>
-            <input matInput formControlName="username" required />
-            <mat-hint align="start">De 3 a 50 caracteres</mat-hint>
-            @if (oUsuarioForm?.get('username')?.hasError('required')) {
-            <mat-error>El campo username es obligatorio</mat-error>
-            } @if (oUsuarioForm?.get('username')?.hasError('minlength')) {
-            <mat-error>El username debe ser más largo</mat-error>
-            } @if (oUsuarioForm?.get('username')?.hasError('maxlength')) {
-            <mat-error>El username debe ser más corto</mat-error>
-            }
-          </mat-form-field>
-        </div>
-
-        <!-- Nombre -->
-        <div class="mb-3">
-          <mat-form-field appearance="outline" class="w-100">
-            <mat-label>Nombre</mat-label>
-            <input matInput formControlName="nombre" required />
-            <mat-hint align="start">De 3 a 50 caracteres</mat-hint>
-            @if (oUsuarioForm?.get('nombre')?.hasError('required')) {
-            <mat-error>El campo nombre es obligatorio</mat-error>
-            } @if (oUsuarioForm?.get('nombre')?.hasError('minlength')) {
-            <mat-error>El nombre debe ser más largo</mat-error>
-            } @if (oUsuarioForm?.get('nombre')?.hasError('maxlength')) {
-            <mat-error>El nombre debe ser más corto</mat-error>
-            }
-          </mat-form-field>
-        </div>
-
-        <!-- Primer Apellido -->
-        <div class="mb-3">
-          <mat-form-field appearance="outline" class="w-100">
-            <mat-label>Primer Apellido</mat-label>
-            <input matInput formControlName="apellido1" required />
-            <mat-hint align="start">De 3 a 50 caracteres</mat-hint>
-            @if (oUsuarioForm?.get('apellido1')?.hasError('required')) {
-            <mat-error>Debes introducir un primer apellido</mat-error>
-            } @if (oUsuarioForm?.get('apellido1')?.hasError('minlength')) {
-            <mat-error>Debes introducir un apellido más largo</mat-error>
-            } @if (oUsuarioForm?.get('apellido1')?.hasError('maxlength')) {
-            <mat-error>Debes introducir un apellido más corto</mat-error>
-            }
-          </mat-form-field>
-        </div>
-
-        <!-- Segundo Apellido -->
-        <div class="mb-3">
-          <mat-form-field appearance="outline" class="w-100">
-            <mat-label>Segundo Apellido</mat-label>
-            <input matInput formControlName="apellido2" />
-          </mat-form-field>
-        </div>
-
-        <!-- DNI  -->
-        <div class="mb-3">
-          <mat-form-field appearance="outline" class="w-100">
-            <mat-label>DNI </mat-label>
-            <input matInput formControlName="dni" required />
-            <mat-hint align="start">De 3 a 50 caracteres</mat-hint>
-            @if (oUsuarioForm?.get('dni')?.hasError('required')) {
-            <mat-error>Debes introducir un dni</mat-error>
-            } @if (oUsuarioForm?.get('dni')?.hasError('minlength')) {
-            <mat-error>Debes introducir un dni más largo</mat-error>
-            } @if (oUsuarioForm?.get('dni')?.hasError('maxlength')) {
-            <mat-error>Debes introducir un dni más corto</mat-error>
-            }
-          </mat-form-field>
-        </div>
-
-        <!-- Codigo Postal  -->
-        <div class="mb-3">
-          <mat-form-field appearance="outline" class="w-100">
-            <mat-label> Código Postal </mat-label>
-            <input matInput formControlName="cp" required />
-            <mat-hint align="start">De 3 a 50 caracteres</mat-hint>
-            @if (oUsuarioForm?.get('cp')?.hasError('required')) {
-            <mat-error>Debes introducir un código Postal</mat-error>
-            } @if (oUsuarioForm?.get('cp')?.hasError('minlength')) {
-            <mat-error>Debes introducir un código Postal más largo</mat-error>
-            } @if (oUsuarioForm?.get('cp')?.hasError('maxlength')) {
-            <mat-error>Debes introducir un código Postal más corto</mat-error>
-            }
-          </mat-form-field>
-        </div>
-
-        <!-- Telefono -->
-        <div class="mb-3">
-          <mat-form-field appearance="outline" class="w-100">
-            <mat-label>Telefono</mat-label>
-            <input matInput formControlName="telefono" />
-          </mat-form-field>
-        </div>
-
-        <!-- Email -->
-        <div class="mb-3">
-          <mat-form-field appearance="outline" class="w-100">
-            <mat-label>Email</mat-label>
-            <input matInput formControlName="email" required />
-            <mat-hint align="start">Formato email</mat-hint>
-            @if (oUsuarioForm?.get('email')?.hasError('required')) {
-            <mat-error>Debes introducir un email</mat-error>
-            } @if (oUsuarioForm?.get('email')?.hasError('email')) {
-            <mat-error>Debes introducir un email correcto</mat-error>
-            }
-          </mat-form-field>
-        </div>
-
-        <!-- Password -->
-        <div class="mb-3">
-          <mat-form-field appearance="outline" class="w-100">
-            <mat-label>Password</mat-label>
-            <input
-              matInput
-              formControlName="password"
-              type="password"
-              required
-            />
-          </mat-form-field>
-        </div>
-
-        <!-- Tipo de Usuario -->
-        <div formGroupName="tipousuario" class="mb-4">
-          <mat-form-field appearance="outline" class="w-100">
-            <mat-label>Tipo de Usuario</mat-label>
-            <div class="d-flex justify-content-end">
-              <button
-                class="btn btn-primary"
-                (click)="showTipoUsuarioSelectorModal()"
-              >
-                <i class="bi bi-search"></i>
-                Buscar
-              </button>
+        <!-- Sección de Información Básica -->
+        <div class="section mb-4">
+          <h4 class="mb-3" style="color: #ff8c42">Información Básica</h4>
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label style="color: #ff8c42">Username</mat-label>
+                <input
+                  matInput
+                  formControlName="username"
+                  required
+                  style="color: #fff"
+                />
+                <mat-hint align="start" style="color: #ccc"
+                  >De 3 a 10 caracteres</mat-hint
+                >
+                @if (oUsuarioForm?.get('username')?.hasError('required')) {
+                <mat-error>El campo username es obligatorio</mat-error>
+                } @if (oUsuarioForm?.get('username')?.hasError('minlength')) {
+                <mat-error>El username debe ser más largo</mat-error>
+                } @if (oUsuarioForm?.get('username')?.hasError('maxlength')) {
+                <mat-error>El username debe ser más corto</mat-error>
+                }
+              </mat-form-field>
             </div>
-            <div class="d-flex justify-content-start">
-              {{ oTipoUsuario.titulo }}
+            <div class="col-md-6 mb-3">
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label style="color: #ff8c42">Nombre</mat-label>
+                <input
+                  matInput
+                  formControlName="nombre"
+                  required
+                  style="color: #fff"
+                />
+                <mat-hint align="start" style="color: #ccc"
+                  >De 3 a 10 caracteres</mat-hint
+                >
+                @if (oUsuarioForm?.get('nombre')?.hasError('required')) {
+                <mat-error>El campo nombre es obligatorio</mat-error>
+                } @if (oUsuarioForm?.get('nombre')?.hasError('minlength')) {
+                <mat-error>El nombre debe ser más largo</mat-error>
+                } @if (oUsuarioForm?.get('nombre')?.hasError('maxlength')) {
+                <mat-error>El nombre debe ser más corto</mat-error>
+                }
+              </mat-form-field>
             </div>
-            <input matInput formControlName="id" />
-          </mat-form-field>
+          </div>
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label style="color: #ff8c42">Primer Apellido</mat-label>
+                <input
+                  matInput
+                  formControlName="apellido1"
+                  required
+                  style="color: #fff"
+                />
+                <mat-hint align="start" style="color: #ccc"
+                  >De 3 a 10 caracteres</mat-hint
+                >
+                @if (oUsuarioForm?.get('apellido1')?.hasError('required')) {
+                <mat-error>Debes introducir un primer apellido</mat-error>
+                } @if (oUsuarioForm?.get('apellido1')?.hasError('minlength')) {
+                <mat-error>Debes introducir un apellido más largo</mat-error>
+                } @if (oUsuarioForm?.get('apellido1')?.hasError('maxlength')) {
+                <mat-error>Debes introducir un apellido más corto</mat-error>
+                }
+              </mat-form-field>
+            </div>
+            <div class="col-md-6 mb-3">
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label style="color: #ff8c42">Segundo Apellido</mat-label>
+                <input
+                  matInput
+                  formControlName="apellido2"
+                  style="color: #fff"
+                />
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sección de Datos Personales -->
+        <div class="section mb-4">
+          <h4 class="mb-3" style="color: #ff8c42">Datos Personales</h4>
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label style="color: #ff8c42">DNI</mat-label>
+                <input
+                  matInput
+                  formControlName="dni"
+                  required
+                  style="color: #fff"
+                />
+                <mat-hint align="start" style="color: #ccc"
+                  >De 3 a 9 caracteres</mat-hint
+                >
+                @if (oUsuarioForm?.get('dni')?.hasError('required')) {
+                <mat-error>Debes introducir un dni con 9 cifras</mat-error>
+                } @if (oUsuarioForm?.get('dni')?.hasError('minlength')) {
+                <mat-error>Debes introducir un dni más largo</mat-error>
+                } @if (oUsuarioForm?.get('dni')?.hasError('maxlength')) {
+                <mat-error>Debes introducir un dni más corto</mat-error>
+                }
+              </mat-form-field>
+            </div>
+            <div class="col-md-6 mb-3">
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label style="color: #ff8c42">Código Postal</mat-label>
+                <input
+                  matInput
+                  formControlName="cp"
+                  required
+                  style="color: #fff"
+                />
+                <mat-hint align="start" style="color: #ccc"
+                  >De 3 a 5 números</mat-hint
+                >
+                @if (oUsuarioForm?.get('cp')?.hasError('required')) {
+                <mat-error
+                  >Debes introducir un Código Postal con 5 cifras</mat-error
+                >
+                } @if (oUsuarioForm?.get('cp')?.hasError('minlength')) {
+                <mat-error
+                  >Debes introducir un código Postal más largo</mat-error
+                >
+                } @if (oUsuarioForm?.get('cp')?.hasError('maxlength')) {
+                <mat-error
+                  >Debes introducir un código Postal más corto</mat-error
+                >
+                }
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label style="color: #ff8c42">Teléfono</mat-label>
+                <input
+                  matInput
+                  formControlName="telefono"
+                  required
+                  style="color: #fff"
+                />
+                <mat-hint align="start" style="color: #ccc"
+                  >De 3 a 9 números</mat-hint
+                >
+                @if (oUsuarioForm?.get('telefono')?.hasError('required')) {
+                <mat-error>Debes introducir un teléfono con 9 cifras</mat-error>
+                } @if (oUsuarioForm?.get('telefono')?.hasError('minlength')) {
+                <mat-error>Debes introducir un teléfono más largo</mat-error>
+                } @if (oUsuarioForm?.get('telefono')?.hasError('maxlength')) {
+                <mat-error>Debes introducir un teléfono más corto</mat-error>
+                }
+              </mat-form-field>
+            </div>
+            <div class="col-md-6 mb-3">
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label style="color: #ff8c42">Email</mat-label>
+                <input
+                  matInput
+                  formControlName="email"
+                  required
+                  style="color: #fff"
+                />
+                <mat-hint align="start" style="color: #ccc"
+                  >Formato email</mat-hint
+                >
+                @if (oUsuarioForm?.get('email')?.hasError('required')) {
+                <mat-error>Debes introducir un email</mat-error>
+                } @if (oUsuarioForm?.get('email')?.hasError('email')) {
+                <mat-error>Debes introducir un email correcto</mat-error>
+                }
+              </mat-form-field>
+            </div>
+            <div class="mb-3">
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label style="color: #ff8c42">Feedback</mat-label>
+                <mat-select formControlName="feedback" required>
+                  <mat-option value="option1">Instagram</mat-option>
+                  <mat-option value="option2">Twitter</mat-option>
+                  <mat-option value="option3">En un evento</mat-option>
+                  <mat-option value="option4">Otro (especificar)</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sección de Seguridad -->
+        <div class="section mb-4">
+          <h4 class="mb-3" style="color: #ff8c42">Seguridad</h4>
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label style="color: #ff8c42">Password</mat-label>
+                <input
+                  matInput
+                  formControlName="password"
+                  type="password"
+                  required
+                  style="color: #fff"
+                />
+              </mat-form-field>
+            </div>
+            <div class="col-md-6 mb-3">
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label style="color: #ff8c42">Tipo de Usuario</mat-label>
+                <div class="d-flex justify-content-end">
+                  <button
+                    class="btn btn-primary"
+                    (click)="showTipoUsuarioSelectorModal()"
+                  >
+                    <i class="bi bi-search"></i>
+                    Buscar
+                  </button>
+                </div>
+                <div class="d-flex justify-content-start" style="color: #fff">
+                  {{ oTipoUsuario.titulo }}
+                </div>
+                <input matInput formControlName="id" style="color: #fff" />
+              </mat-form-field>
+            </div>
+          </div>
         </div>
 
         <!-- Botones de acción -->
@@ -187,9 +279,14 @@
   aria-hidden="true"
 >
   <div class="modal-dialog">
-    <div class="modal-content">
+    <div
+      class="modal-content"
+      style="background-color: #1a1a1a; border: 1px solid #ff8c42"
+    >
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">GIMNASIO</h5>
+        <h5 class="modal-title" id="exampleModalLabel" style="color: #ff8c42">
+          TechGamer
+        </h5>
         <button
           type="button"
           class="btn-close"
@@ -198,7 +295,7 @@
           (click)="hideModal()"
         ></button>
       </div>
-      <div class="modal-body">
+      <div class="modal-body" style="color: #fff">
         <p>{{ strMessage }}</p>
       </div>
       <div class="modal-footer">

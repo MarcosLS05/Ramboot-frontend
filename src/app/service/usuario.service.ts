@@ -11,7 +11,7 @@ import { httpOptions, serverURL } from '../environment/environment';
 export class UsuarioService {
   serverURL: string = serverURL + '/usuarios';
 
-  constructor(private oHttp: HttpClient) { }
+  constructor(private oHttp: HttpClient) {}
 
   getPage(
     page: number,
@@ -76,7 +76,6 @@ export class UsuarioService {
     return this.oHttp.get<IPage<IUsuario>>(URL, httpOptions);
   }
 
-
   getPageXPlanesentrenamiento(
     page: number,
     size: number,
@@ -116,10 +115,9 @@ export class UsuarioService {
   }
 
   create(oUsuario: IUsuario): Observable<IUsuario> {
-    const URL: string = `${serverURL}/usuario/new`;
+    const URL: string = `${serverURL}/usuarios/new`;
     return this.oHttp.post<IUsuario>(URL, oUsuario, httpOptions);
   }
-
 
   update(oUsuario: IUsuario): Observable<IUsuario> {
     let URL: string = '';
@@ -146,10 +144,9 @@ export class UsuarioService {
   }
 
   setTipousuario(id: number, id_tipousuario: number): Observable<IUsuario> {
-    return this.oHttp.put<IUsuario>(this.serverURL + '/settipousuario/' + id + '/' + id_tipousuario, null);
+    return this.oHttp.put<IUsuario>(
+      this.serverURL + '/settipousuario/' + id + '/' + id_tipousuario,
+      null
+    );
   }
-
-
-
-
 }
