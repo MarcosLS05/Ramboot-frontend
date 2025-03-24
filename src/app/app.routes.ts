@@ -26,6 +26,19 @@ import { BebidaAdminEditRoutedComponent } from './component/bebida/bebida.admin.
 import { BebidaAdminViewRoutedComponent } from './component/bebida/bebida.admin.view.routed/bebida.admin.view.routed.component';
 import { BebidaAdminDeleteRoutedComponent } from './component/bebida/bebida.admin.delete.routed/bebida.admin.delete.component';
 
+import { SnackAdminPlistRoutedComponent } from './component/snack/snack.admin.plist.routed/snack.admin.plist.routed.component';
+import { SnackAdminCreateRoutedComponent } from './component/snack/snack.admin.create.routed/snack.admin.create.routed.component';
+import { SnackAdminEditRoutedComponent } from './component/snack/snack.admin.edit.routed/snack.admin.edit.routed.component';
+import { SnackAdminViewRoutedComponent } from './component/snack/snack.admin.view.routed/snack.admin.view.routed.component';
+import { SnackAdminDeleteRoutedComponent } from './component/snack/snack.admin.delete.routed/snack.admin.delete.component';
+import { SnackselectorComponent } from './component/snack/snackselector/snackselector.component';
+
+import { ZonaAdminPlistRoutedComponent } from './component/zona/zona.admin.plist.routed/zona.admin.plist.routed.component';
+import { ZonaAdminEditRoutedComponent } from './component/zona/zona.admin.edit.routed/zona.admin.edit.routed.component';
+import { ZonaAdminViewRoutedComponent } from './component/zona/zona.admin.view.routed/zona.admin.view.routed.component';
+import { ZonaAdminCreateRoutedComponent } from './component/zona/zona.admin.create.routed/zona.admin.create.routed.component';
+import { ZonaAdminDeleteRoutedComponent } from './component/zona/zona.admin.delete.routed/zona.admin.delete.component';
+
 import { serverURL } from './environment/environment';
 
 export const routes: Routes = [
@@ -118,6 +131,62 @@ export const routes: Routes = [
   {
     path: 'admin/bebida/delete/:id',
     component: BebidaAdminDeleteRoutedComponent,
+    canActivate: [AdminGuard],
+  },
+
+  {
+    path: 'admin/snack/plist',
+    component: SnackAdminPlistRoutedComponent,
+    canActivate: [AdminGuard],
+  },
+  {
+    path: 'admin/snack/edit/:id',
+    component: SnackAdminEditRoutedComponent,
+    canActivate: [AdminGuard],
+  },
+  {
+    path: 'admin/snack/view/:id',
+    component: SnackAdminViewRoutedComponent,
+    canActivate: [AdminGuard],
+  },
+  {
+    path: 'admin/snack/create',
+    component: SnackAdminCreateRoutedComponent,
+    canActivate: [AdminGuard],
+    pathMatch: 'full',
+  },
+  {
+    path: 'admin/snack/delete/:id',
+    component: SnackAdminDeleteRoutedComponent,
+    canActivate: [AdminGuard],
+  },
+
+  { path: 'snackselector', component: SnackselectorComponent },
+
+  {
+    path: 'admin/zona/plist',
+    component: ZonaAdminPlistRoutedComponent,
+    canActivate: [AdminGuard],
+  },
+  {
+    path: 'admin/zona/edit/:id',
+    component: ZonaAdminEditRoutedComponent,
+    canActivate: [AdminGuard],
+  },
+  {
+    path: 'admin/zona/view/:id',
+    component: ZonaAdminViewRoutedComponent,
+    canActivate: [AdminGuard],
+  },
+  {
+    path: 'admin/zona/create',
+    component: ZonaAdminCreateRoutedComponent,
+    canActivate: [AdminGuard],
+    pathMatch: 'full',
+  },
+  {
+    path: 'admin/zona/delete/:id',
+    component: ZonaAdminDeleteRoutedComponent,
     canActivate: [AdminGuard],
   },
 ];

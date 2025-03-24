@@ -1,7 +1,5 @@
-
-
 export interface IZona {
-        id: number;
-        titulo: string;
-        precio_hora: DoubleRange;
+  id: number;
+  titulo: string;
+  precio: DoubleRange;
 }

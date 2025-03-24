@@ -1,0 +1,184 @@
+<div class="container mt-50">
+  <div class="row justify-content-center">
+    <div class="col-md-60">
+      <div class="card shadow-sm">
+        <div class="card-header bg-dark text-white">
+          <h2 class="my-2 text-center">
+            <i class="bi bi-people-fill"></i>
+            Lista de Productos
+            <i class="bi bi-person-badge"></i>
+          </h2>
+        </div>
+        <div class="card-body">
+          <div class="d-flex justify-content-between align-items-center mb-4">
+            <a href="admin/snack/create" class="btn btn-success">
+              <i class="bi bi-plus-circle"></i>
+              Crear nuevo Snack
+            </a>
+            <div class="input-group w-25">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Buscar"
+                (keyup)="filter($event)"
+                [(ngModel)]="strFiltro"
+              />
+              <button class="btn btn-outline-secondary" type="button">
+                <i class="bi bi-search"></i>
+              </button>
+            </div>
+          </div>
+
+          <div class="d-flex justify-content-between mb-3">
+            <h5 class="text-muted">
+              @if (strFiltro.length > 0) { Filtrado por:
+              <span class="text-primary">{{ strFiltro }}</span>
+              } @else { Sin filtrar }
+            </h5>
+            <h5 class="text-muted">
+              Mostrando {{ oPage?.numberOfElements | number : "1.0-0" }} de
+              {{ oPage?.totalElements | number : "1.0-0" }}
+            </h5>
+          </div>
+
+          <div class="table-responsive">
+            <table class="table table-hover table-striped">
+              <thead class="thead-dark">
+                <tr>
+                  <th (click)="sort('id')" class="cursor-pointer">
+                    ID @if (strField === 'id') { @if (strDir === 'desc') {
+                    <i class="bi bi-caret-down-fill"></i>
+                    } @else {
+                    <i class="bi bi-caret-up-fill"></i>} }
+                  </th>
+                  <th (click)="sort('nombre')" class="cursor-pointer">
+                    Nombre @if (strField === 'nombre') { @if (strDir === 'desc')
+                    {
+                    <i class="bi bi-caret-down-fill"></i>
+                    } @else {
+                    <i class="bi bi-caret-up-fill"></i>} }
+                  </th>
+                  <th (click)="sort('precio_unidad')" class="cursor-pointer">
+                    Precio unidad @if (strField === 'precio_unidad') { @if
+                    (strDir === 'desc') {
+                    <i class="bi bi-caret-down-fill"></i>
+                    } @else {
+                    <i class="bi bi-caret-up-fill"></i>} }
+                  </th>
+                  <th (click)="sort('creadoEn')" class="cursor-pointer">
+                    Stock @if (strField === 'creadoEn') { @if (strDir ===
+                    'desc') {
+                    <i class="bi bi-caret-down-fill"></i>
+                    } @else {
+                    <i class="bi bi-caret-up-fill"></i>} }
+                  </th>
+
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                @for (Snack of oPage?.content; track Snack.id) {
+                <tr>
+                  <td class="text-center">{{ Snack.id }}</td>
+                  <td class="text-center">{{ Snack.nombre }}</td>
+                  <td>{{ Snack.precio }}</td>
+                  <td>{{ Snack.stock }}</td>
+
+                  <td>
+                    <div class="btn-group" role="group">
+                      <button
+                        type="button"
+                        class="btn btn-sm btn-outline-primary"
+                        (click)="view(Snack)"
+                      >
+                        <i class="bi bi-eye"></i>
+                      </button>
+                      <button
+                        type="button"
+                        class="btn btn-sm btn-outline-warning"
+                        (click)="edit(Snack)"
+                      >
+                        <i class="bi bi-pencil"></i>
+                      </button>
+                      <button
+                        type="button"
+                        class="btn btn-sm btn-outline-danger"
+                        (click)="remove(Snack)"
+                      >
+                        <i class="bi bi-trash"></i>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+                } @empty {
+                <tr>
+                  <td colspan="7" class="text-center">No hay Productos</td>
+                </tr>
+                }
+              </tbody>
+            </table>
+          </div>
+
+          <div class="d-flex justify-content-between align-items-center mt-4">
+            <nav>
+              <ul class="pagination mb-0">
+                <li class="page-item" [class.active]="nRpp === 10">
+                  <a class="page-link" (click)="goToRpp(10)" href="#">10</a>
+                </li>
+                <li class="page-item" [class.active]="nRpp === 50">
+                  <a class="page-link" (click)="goToRpp(50)" href="#">50</a>
+                </li>
+                <li class="page-item" [class.active]="nRpp === 100">
+                  <a class="page-link" (click)="goToRpp(100)" href="#">100</a>
+                </li>
+              </ul>
+            </nav>
+
+            <nav>
+              <ul class="pagination mb-0">
+                <li class="page-item">
+                  <a
+                    class="page-link"
+                    [class.disabled]="nPage - -1 === 1"
+                    (click)="goToPrev()"
+                    href="#"
+                  >
+                    <i class="bi bi-chevron-left"></i>
+                    Anterior
+                  </a>
+                </li>
+                @for (pag of arrBotonera; track pag) {
+                <li class="page-item">
+                  @if (pag === '...') {
+                  <a class="page-link">{{ pag }}</a>
+                  } @else {
+                  <a
+                    class="page-link"
+                    href="#"
+                    (click)="goToPage(-(-pag))"
+                    [class.active]="nPage - -1 === -(-pag)"
+                  >
+                    {{ pag }}
+                  </a>
+                  }
+                </li>
+                }
+                <li class="page-item">
+                  <a
+                    class="page-link"
+                    [class.disabled]="nPage - -1 === oPage?.totalPages"
+                    (click)="goToNext()"
+                    href="#"
+                  >
+                    Siguiente
+                    <i class="bi bi-chevron-right"></i>
+                  </a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
