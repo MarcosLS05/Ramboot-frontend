@@ -18,6 +18,18 @@
           </th>
           <td class="text-start ps-5">{{ oBebida!.nombre }}</td>
         </tr>
+        <tr class="text-center">
+          <th scope="row" class="bg-primary text-white text-end pe-5">
+            Precio unidad
+          </th>
+          <td class="text-start ps-5">{{ oBebida!.precio }}</td>
+        </tr>
+        <tr class="text-center">
+          <th scope="row" class="bg-primary text-white text-end pe-5">
+            Stock Disponible
+          </th>
+          <td class="text-start ps-5">{{ oBebida!.stock }}</td>
+        </tr>
       </tbody>
     </table>
   </div>
@@ -29,7 +41,7 @@
   <div class="d-flex justify-content-center mt-4">
     <button
       class="btn btn-warning mt-4 mx-1"
-      [routerLink]="['/admin', 'Bebida', 'plist']"
+      [routerLink]="['/admin', 'bebida', 'plist']"
     >
       <i class="bi bi-list"></i>
       Ir a listado de Bebidas

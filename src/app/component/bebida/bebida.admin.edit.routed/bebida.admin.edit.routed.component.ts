@@ -54,10 +54,20 @@ export class BebidaAdminEditRoutedComponent implements OnInit {
   createForm() {
     this.oBebidaForm = new FormGroup({
       id: new FormControl('', [Validators.required]),
-      titulo: new FormControl('', [
+      nombre: new FormControl('', [
         Validators.required,
         Validators.minLength(3),
-        Validators.maxLength(255),
+        Validators.maxLength(25),
+      ]),
+      precio: new FormControl('', [
+        Validators.required,
+        Validators.min(0),
+        Validators.max(100),
+      ]),
+      stock: new FormControl('', [
+        Validators.required,
+        Validators.min(0),
+        Validators.max(100),
       ]),
     });
   }
@@ -77,8 +87,8 @@ export class BebidaAdminEditRoutedComponent implements OnInit {
 
   updateForm() {
     this.oBebidaForm?.controls['id'].setValue(this.oBebida?.id);
-    this.oBebidaForm?.controls['titulo'].setValue(this.oBebida?.nombre);
-    this.oBebidaForm?.controls['precio_unidad'].setValue(this.oBebida?.precio);
+    this.oBebidaForm?.controls['nombre'].setValue(this.oBebida?.nombre);
+    this.oBebidaForm?.controls['precio'].setValue(this.oBebida?.precio);
     this.oBebidaForm?.controls['stock'].setValue(this.oBebida?.stock);
   }
 
@@ -116,10 +126,10 @@ export class BebidaAdminEditRoutedComponent implements OnInit {
         next: (oBebida: IBebida) => {
           this.oBebida = oBebida;
           this.updateForm();
-          this.showModal('bebida ' + this.oBebida.id + ' actualizado');
+          this.showModal('Producto ' + this.oBebida.id + ' actualizado');
         },
         error: (error) => {
-          this.showModal('Error al actualizar el bebida');
+          this.showModal('Error al actualizar el producto');
           console.error(error);
         },
       });

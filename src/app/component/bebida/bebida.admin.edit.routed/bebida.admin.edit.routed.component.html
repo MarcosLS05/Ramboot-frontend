@@ -4,40 +4,12 @@
       <div class="card border-0 shadow-lg">
         <div class="card-header bg-primary text-white text-center">
           <h2 class="fw-bold">
-            <i class="bi bi-person-circle"></i> Edición de Usuario
+            <i class="bi bi-person-circle"></i> Edición del Producto
             <i class="bi bi-pencil"></i>
           </h2>
         </div>
         <div class="card-body">
           <form [formGroup]="oBebidaForm!" (ngSubmit)="onSubmit()" novalidate>
-            <div class="mb-3">
-              <label for="username" class="form-label fw-bold">Username</label>
-              <input
-                type="text"
-                id="username"
-                class="form-control"
-                formControlName="username"
-                placeholder="username"
-              />
-              <div
-                *ngIf="oBebidaForm?.get('username')?.errors"
-                class="text-danger"
-              >
-                <small
-                  *ngIf="oBebidaForm?.get('username')?.hasError('required')"
-                  >Debes introducir un username.</small
-                >
-                <small
-                  *ngIf="oBebidaForm?.get('username')?.hasError('minlength')"
-                  >El username es demasiado corto.</small
-                >
-                <small
-                  *ngIf="oBebidaForm?.get('username')?.hasError('maxlength')"
-                  >El username es demasiado largo.</small
-                >
-              </div>
-            </div>
-
             <div class="mb-3">
               <label for="nombre" class="form-label fw-bold">Nombre</label>
               <input
@@ -64,120 +36,55 @@
             </div>
 
             <div class="mb-3">
-              <label for="apellido1" class="form-label fw-bold"
-                >Primer Apellido</label
-              >
+              <label for="precio" class="form-label fw-bold">precio</label>
               <input
-                type="text"
-                id="apellido1"
+                type="number"
+                id="precio"
                 class="form-control"
-                formControlName="apellido1"
-                placeholder="Primer Apellido"
+                formControlName="precio"
+                placeholder="precio"
               />
               <div
-                *ngIf="oBebidaForm?.get('apellido1')?.errors"
+                *ngIf="oBebidaForm?.get('precio')?.errors"
                 class="text-danger"
               >
-                <small
-                  *ngIf="oBebidaForm?.get('apellido1')?.hasError('required')"
-                  >Debes introducir un apellido.</small
+                <small *ngIf="oBebidaForm?.get('precio')?.hasError('required')"
+                  >Debes introducir un precio.</small
                 >
-                <small
-                  *ngIf="oBebidaForm?.get('apellido1')?.hasError('minlength')"
-                  >El apellido es demasiado corto.</small
-                >
-                <small
-                  *ngIf="oBebidaForm?.get('apellido1')?.hasError('maxlength')"
-                  >El apellido es demasiado largo.</small
+                <small *ngIf="oBebidaForm?.get('precio')?.hasError('min')"
+                  >El precio debe ser un número positivo.</small
                 >
               </div>
             </div>
 
             <div class="mb-3">
-              <label for="apellido2" class="form-label fw-bold"
-                >Segundo Apellido</label
-              >
-              <input
-                type="text"
-                id="apellido2"
-                class="form-control"
-                formControlName="apellido2"
-                placeholder="Segundo Apellido"
-              />
-            </div>
-
-            <div class="mb-3">
-              <label for="dni" class="form-label fw-bold">Documento</label>
-              <input
-                type="text"
-                id="dni"
-                class="form-control"
-                formControlName="dni"
-                placeholder="Documento"
-              />
-            </div>
-            <div class="mb-3">
-              <label for="cp" class="form-label fw-bold">Código Postal</label>
+              <label for="stock" class="form-label fw-bold">Stock</label>
               <input
                 type="number"
-                id="cp"
+                id="stock"
                 class="form-control"
-                formControlName="cp"
-                placeholder="Código Postal"
-              />
-            </div>
-            <div class="mb-3">
-              <label for="telefono" class="form-label fw-bold">Télefono</label>
-              <input
-                type="number"
-                id="telefono"
-                class="form-control"
-                formControlName="telefono"
-                placeholder="telefono"
-              />
-            </div>
-
-            <div class="mb-3">
-              <label for="email" class="form-label fw-bold"
-                >Correo Electrónico</label
-              >
-              <input
-                type="email"
-                id="email"
-                class="form-control"
-                formControlName="email"
-                placeholder="Correo Electrónico"
+                formControlName="stock"
+                placeholder="Stock"
               />
               <div
-                *ngIf="oBebidaForm?.get('email')?.errors"
+                *ngIf="oBebidaForm?.get('stock')?.errors"
                 class="text-danger"
               >
-                <small *ngIf="oBebidaForm?.get('email')?.hasError('required')"
-                  >Debes introducir un correo.</small
+                <small *ngIf="oBebidaForm?.get('stock')?.hasError('required')"
+                  >Debes introducir un stock.</small
                 >
-                <small *ngIf="oBebidaForm?.get('email')?.hasError('email')"
-                  >El formato del correo es incorrecto.</small
+                <small *ngIf="oBebidaForm?.get('stock')?.hasError('min')"
+                  >El stock debe ser un número positivo.</small
                 >
               </div>
-            </div>
-
-            <div class="mb-3">
-              <label for="saldo" class="form-label fw-bold">Saldo</label>
-              <input
-                type="saldo"
-                id="saldo"
-                class="form-control"
-                formControlName="saldo"
-                placeholder="saldo"
-              />
             </div>
 
             <div class="mt-4 d-flex justify-content-evenly">
               <button
                 class="btn btn-warning mt-4 mx-1"
-                [routerLink]="['/admin', 'usuario', 'plist']"
+                [routerLink]="['/admin', 'bebida', 'plist']"
               >
-                <i class="bi bi-list"></i> Ir a listado de Usuarios
+                <i class="bi bi-list"></i> Ir a listado de los productos
               </button>
               <button
                 class="btn btn-secondary mt-4 mx-1"

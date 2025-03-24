@@ -47,15 +47,25 @@ export class BebidaAdminCreateRoutedComponent implements OnInit {
       nombre: new FormControl('', [
         Validators.required,
         Validators.minLength(3),
-        Validators.maxLength(255),
+        Validators.maxLength(25),
       ]),
-      precio_unidad: new FormControl('', [Validators.required]),
-      stock: new FormControl('', [Validators.required]),
+      precio: new FormControl('', [
+        Validators.required,
+        Validators.min(0),
+        Validators.max(100),
+      ]),
+      stock: new FormControl('', [
+        Validators.required,
+        Validators.min(0),
+        Validators.max(100),
+      ]),
     });
   }
 
   updateForm() {
     this.oBebidaForm?.controls['nombre'].setValue('');
+    this.oBebidaForm?.controls['precio'].setValue('');
+    this.oBebidaForm?.controls['stock'].setValue('');
   }
 
   showModal(mensaje: string) {
@@ -84,10 +94,11 @@ export class BebidaAdminCreateRoutedComponent implements OnInit {
       this.oBebidaService.create(this.oBebidaForm?.value).subscribe({
         next: (oBebida: IBebida) => {
           this.oBebida = oBebida;
-          this.showModal('Tipo usuario creado con el id: ' + this.oBebida.id);
+          this.updateForm();
+          this.showModal('Producto ' + this.oBebida.id + ' creado');
         },
         error: (err) => {
-          this.showModal('Error al crear el bebida');
+          this.showModal('Error al crear el producto');
           console.log(err);
         },
       });

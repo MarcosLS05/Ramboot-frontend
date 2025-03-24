@@ -20,27 +20,7 @@
         <div class="section mb-4">
           <h4 class="mb-3" style="color: #ff8c42">Información Básica</h4>
           <div class="row">
-            <div class="col-md-6 mb-3">
-              <mat-form-field appearance="outline" class="w-100">
-                <mat-label style="color: #ff8c42">Username</mat-label>
-                <input
-                  matInput
-                  formControlName="username"
-                  required
-                  style="color: #fff"
-                />
-                <mat-hint align="start" style="color: #ccc"
-                  >De 3 a 10 caracteres</mat-hint
-                >
-                @if (oBebidaForm?.get('username')?.hasError('required')) {
-                <mat-error>El campo username es obligatorio</mat-error>
-                } @if (oBebidaForm?.get('username')?.hasError('minlength')) {
-                <mat-error>El username debe ser más largo</mat-error>
-                } @if (oBebidaForm?.get('username')?.hasError('maxlength')) {
-                <mat-error>El username debe ser más corto</mat-error>
-                }
-              </mat-form-field>
-            </div>
+            <div class="col-md-6 mb-3"></div>
             <div class="col-md-6 mb-3">
               <mat-form-field appearance="outline" class="w-100">
                 <mat-label style="color: #ff8c42">Nombre</mat-label>
@@ -66,160 +46,29 @@
           <div class="row">
             <div class="col-md-6 mb-3">
               <mat-form-field appearance="outline" class="w-100">
-                <mat-label style="color: #ff8c42">Primer Apellido</mat-label>
+                <mat-label style="color: #ff8c42">Precio unidad</mat-label>
                 <input
                   matInput
-                  formControlName="apellido1"
+                  formControlName="precio"
                   required
                   style="color: #fff"
                 />
                 <mat-hint align="start" style="color: #ccc"
                   >De 3 a 10 caracteres</mat-hint
                 >
-                @if (oBebidaForm?.get('apellido1')?.hasError('required')) {
-                <mat-error>Debes introducir un primer apellido</mat-error>
-                } @if (oBebidaForm?.get('apellido1')?.hasError('minlength')) {
-                <mat-error>Debes introducir un apellido más largo</mat-error>
-                } @if (oBebidaForm?.get('apellido1')?.hasError('maxlength')) {
-                <mat-error>Debes introducir un apellido más corto</mat-error>
+                @if (oBebidaForm?.get('precio')?.hasError('required')) {
+                <mat-error>Debes introducir un precio</mat-error>
+                } @if (oBebidaForm?.get('precio')?.hasError('minlength')) {
+                <mat-error>Debes introducir un precio más alto</mat-error>
+                } @if (oBebidaForm?.get('precio')?.hasError('maxlength')) {
+                <mat-error>Debes introducir un apellido más bajo</mat-error>
                 }
               </mat-form-field>
             </div>
             <div class="col-md-6 mb-3">
               <mat-form-field appearance="outline" class="w-100">
-                <mat-label style="color: #ff8c42">Segundo Apellido</mat-label>
-                <input
-                  matInput
-                  formControlName="apellido2"
-                  style="color: #fff"
-                />
-              </mat-form-field>
-            </div>
-          </div>
-        </div>
-
-        <!-- Sección de Datos Personales -->
-        <div class="section mb-4">
-          <h4 class="mb-3" style="color: #ff8c42">Datos Personales</h4>
-          <div class="row">
-            <div class="col-md-6 mb-3">
-              <mat-form-field appearance="outline" class="w-100">
-                <mat-label style="color: #ff8c42">DNI</mat-label>
-                <input
-                  matInput
-                  formControlName="dni"
-                  required
-                  style="color: #fff"
-                />
-                <mat-hint align="start" style="color: #ccc"
-                  >De 3 a 9 caracteres</mat-hint
-                >
-                @if (oBebidaForm?.get('dni')?.hasError('required')) {
-                <mat-error>Debes introducir un dni con 9 cifras</mat-error>
-                } @if (oBebidaForm?.get('dni')?.hasError('minlength')) {
-                <mat-error>Debes introducir un dni más largo</mat-error>
-                } @if (oBebidaForm?.get('dni')?.hasError('maxlength')) {
-                <mat-error>Debes introducir un dni más corto</mat-error>
-                }
-              </mat-form-field>
-            </div>
-            <div class="col-md-6 mb-3">
-              <mat-form-field appearance="outline" class="w-100">
-                <mat-label style="color: #ff8c42">Código Postal</mat-label>
-                <input
-                  matInput
-                  formControlName="cp"
-                  required
-                  style="color: #fff"
-                />
-                <mat-hint align="start" style="color: #ccc"
-                  >De 3 a 5 números</mat-hint
-                >
-                @if (oBebidaForm?.get('cp')?.hasError('required')) {
-                <mat-error
-                  >Debes introducir un Código Postal con 5 cifras</mat-error
-                >
-                } @if (oBebidaForm?.get('cp')?.hasError('minlength')) {
-                <mat-error
-                  >Debes introducir un código Postal más largo</mat-error
-                >
-                } @if (oBebidaForm?.get('cp')?.hasError('maxlength')) {
-                <mat-error
-                  >Debes introducir un código Postal más corto</mat-error
-                >
-                }
-              </mat-form-field>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-6 mb-3">
-              <mat-form-field appearance="outline" class="w-100">
-                <mat-label style="color: #ff8c42">Teléfono</mat-label>
-                <input
-                  matInput
-                  formControlName="telefono"
-                  required
-                  style="color: #fff"
-                />
-                <mat-hint align="start" style="color: #ccc"
-                  >De 3 a 9 números</mat-hint
-                >
-                @if (oBebidaForm?.get('telefono')?.hasError('required')) {
-                <mat-error>Debes introducir un teléfono con 9 cifras</mat-error>
-                } @if (oBebidaForm?.get('telefono')?.hasError('minlength')) {
-                <mat-error>Debes introducir un teléfono más largo</mat-error>
-                } @if (oBebidaForm?.get('telefono')?.hasError('maxlength')) {
-                <mat-error>Debes introducir un teléfono más corto</mat-error>
-                }
-              </mat-form-field>
-            </div>
-            <div class="col-md-6 mb-3">
-              <mat-form-field appearance="outline" class="w-100">
-                <mat-label style="color: #ff8c42">Email</mat-label>
-                <input
-                  matInput
-                  formControlName="email"
-                  required
-                  style="color: #fff"
-                />
-                <mat-hint align="start" style="color: #ccc"
-                  >Formato email</mat-hint
-                >
-                @if (oBebidaForm?.get('email')?.hasError('required')) {
-                <mat-error>Debes introducir un email</mat-error>
-                } @if (oBebidaForm?.get('email')?.hasError('email')) {
-                <mat-error>Debes introducir un email correcto</mat-error>
-                }
-              </mat-form-field>
-            </div>
-            <div class="mb-3">
-              <mat-form-field appearance="outline" class="w-100">
-                <mat-label style="color: #ff8c42">Feedback</mat-label>
-                <mat-select formControlName="feedback" required>
-                  <mat-option value="option1">Instagram</mat-option>
-                  <mat-option value="option2">Twitter</mat-option>
-                  <mat-option value="option3">En un evento</mat-option>
-                  <mat-option value="option4">Otro (especificar)</mat-option>
-                </mat-select>
-              </mat-form-field>
-            </div>
-          </div>
-        </div>
-
-        <!-- Sección de Seguridad -->
-        <div class="section mb-4">
-          <h4 class="mb-3" style="color: #ff8c42">Seguridad</h4>
-          <div class="row">
-            <div class="col-md-6 mb-3">
-              <mat-form-field appearance="outline" class="w-100">
-                <mat-label style="color: #ff8c42">Password</mat-label>
-                <input
-                  matInput
-                  formControlName="password"
-                  type="password"
-                  required
-                  style="color: #fff"
-                />
+                <mat-label style="color: #ff8c42">Stock disponible</mat-label>
+                <input matInput formControlName="stock" style="color: #fff" />
               </mat-form-field>
             </div>
           </div>
@@ -229,10 +78,10 @@
         <div class="d-flex justify-content-between mt-4">
           <button
             class="btn btn-warning"
-            [routerLink]="['/admin', 'usuario', 'plist']"
+            [routerLink]="['/admin', 'bebida', 'plist']"
           >
             <i class="bi bi-list"></i>
-            Ir a listado de Usuarios
+            Ir a listado de Productos
           </button>
           <button class="btn btn-secondary" (click)="onReset()">
             <i class="bi bi-x-lg"></i>
