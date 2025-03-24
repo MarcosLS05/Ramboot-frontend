@@ -1,0 +1,28 @@
+.btn-ver-contratos {
+    background-color: #4CAF50; /* Verde moderno */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 13px;
+    font-weight: 500;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: inline-flex;
+    align-items: center;  
+}
+  
+  .btn-ver-contratos:hover {
+    background-color: #45a049; /* Verde un poco más oscuro al pasar el mouse */
+    transform: translateY(-5px); /* Efecto de elevación */
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+  }
+  
+  .btn-ver-contratos:active {
+    transform: translateY(0); /* Reset al hacer clic */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .btn-ver-contratos i {
+    font-size: 16px; /* Tamaño del icono */
+  }

@@ -39,6 +39,12 @@ import { ZonaAdminViewRoutedComponent } from './component/zona/zona.admin.view.r
 import { ZonaAdminCreateRoutedComponent } from './component/zona/zona.admin.create.routed/zona.admin.create.routed.component';
 import { ZonaAdminDeleteRoutedComponent } from './component/zona/zona.admin.delete.routed/zona.admin.delete.component';
 
+import { BonoAdminCreateRoutedComponent } from './component/bono/bono.admin.create.routed/bono.admin.create.routed.component';
+import { BonoAdminPlistRoutedComponent } from './component/bono/bono.admin.plist.routed/bono.admin.plist.routed.component';
+import { BonoAdminEditRoutedComponent } from './component/bono/bono.admin.edit.routed/bono.admin.edit.routed.component';
+import { BonoAdminViewRoutedComponent } from './component/bono/bono.admin.view.routed/bono.admin.view.routed.component';
+import { BonoAdminDeleteRoutedComponent } from './component/bono/bono.admin.delete.routed/bono.admin.delete.component';
+
 import { serverURL } from './environment/environment';
 
 export const routes: Routes = [
@@ -187,6 +193,32 @@ export const routes: Routes = [
   {
     path: 'admin/zona/delete/:id',
     component: ZonaAdminDeleteRoutedComponent,
+    canActivate: [AdminGuard],
+  },
+  {
+    path: 'admin/bono/plist',
+    component: BonoAdminPlistRoutedComponent,
+    canActivate: [AdminGuard],
+  },
+  {
+    path: 'admin/bono/edit/:id',
+    component: BonoAdminEditRoutedComponent,
+    canActivate: [AdminGuard],
+  },
+  {
+    path: 'admin/bono/view/:id',
+    component: BonoAdminViewRoutedComponent,
+    canActivate: [AdminGuard],
+  },
+  {
+    path: 'admin/bono/create',
+    component: BonoAdminCreateRoutedComponent,
+    canActivate: [AdminGuard],
+    pathMatch: 'full',
+  },
+  {
+    path: 'admin/bono/delete/:id',
+    component: BonoAdminDeleteRoutedComponent,
     canActivate: [AdminGuard],
   },
 ];

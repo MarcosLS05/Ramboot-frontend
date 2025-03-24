@@ -98,8 +98,8 @@ export class ZonaAdminEditRoutedComponent implements OnInit {
     });
   }
 
-  showModal(mensaje: string) {
-    this.message = mensaje;
+  showModal(strMessage: string) {
+    this.strMessage = strMessage;
     this.myModal = new bootstrap.Modal(document.getElementById('mimodal'), {
       keyboard: false,
     });

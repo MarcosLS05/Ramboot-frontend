@@ -11,43 +11,42 @@
     <div class="card-body">
       <h2 class="text-center mb-4" style="color: #ff8c42">
         <i class="bi bi-plus-square"></i>
-        Creación de Zonas
+        Creación de Usuario
         <i class="bi bi-person-circle"></i>
       </h2>
 
-      <form [formGroup]="oZonaForm!" (ngSubmit)="onSubmit()" novalidate>
+      <form [formGroup]="oBonoForm!" (ngSubmit)="onSubmit()" novalidate>
         <!-- Sección de Información Básica -->
         <div class="section mb-4">
-          <h4 class="mb-3 text-center" style="color: #ff8c42">
-            Información Básica
-          </h4>
+          <h4 class="mb-3" style="color: #ff8c42">Información Básica</h4>
           <div class="row">
-            <div class="col-md-6 mb-0">
+            <div class="col-md-6 mb-3"></div>
+            <div class="col-md-6 mb-3">
               <mat-form-field appearance="outline" class="w-100">
-                <mat-label style="color: #ff8c42"
-                  >Nombre de la nueva Zona</mat-label
-                >
+                <mat-label style="color: #ff8c42">Nombre</mat-label>
                 <input
                   matInput
-                  formControlName="titulo"
+                  formControlName="nombre"
                   required
                   style="color: #fff"
                 />
                 <mat-hint align="start" style="color: #ccc"
                   >De 3 a 10 caracteres</mat-hint
                 >
-                @if (oZonaForm?.get('titulo')?.hasError('required')) {
-                <mat-error>El campo título es obligatorio</mat-error>
-                } @if (oZonaForm?.get('titulo')?.hasError('minlength')) {
-                <mat-error>El título debe ser más largo</mat-error>
-                } @if (oZonaForm?.get('titulo')?.hasError('maxlength')) {
-                <mat-error>El título debe ser más corto</mat-error>
+                @if (oBonoForm?.get('nombre')?.hasError('required')) {
+                <mat-error>El campo nombre es obligatorio</mat-error>
+                } @if (oBonoForm?.get('nombre')?.hasError('minlength')) {
+                <mat-error>El nombre debe ser más largo</mat-error>
+                } @if (oBonoForm?.get('nombre')?.hasError('maxlength')) {
+                <mat-error>El nombre debe ser más corto</mat-error>
                 }
               </mat-form-field>
             </div>
-            <div class="col-md-6 mb-0">
+          </div>
+          <div class="row">
+            <div class="col-md-6 mb-3">
               <mat-form-field appearance="outline" class="w-100">
-                <mat-label style="color: #ff8c42">Precio por hora</mat-label>
+                <mat-label style="color: #ff8c42">Precio unidad</mat-label>
                 <input
                   matInput
                   formControlName="precio"
@@ -57,13 +56,19 @@
                 <mat-hint align="start" style="color: #ccc"
                   >De 3 a 10 caracteres</mat-hint
                 >
-                @if (oZonaForm?.get('precio')?.hasError('required')) {
+                @if (oBonoForm?.get('precio')?.hasError('required')) {
                 <mat-error>Debes introducir un precio</mat-error>
-                } @if (oZonaForm?.get('precio')?.hasError('minlength')) {
+                } @if (oBonoForm?.get('precio')?.hasError('minlength')) {
                 <mat-error>Debes introducir un precio más alto</mat-error>
-                } @if (oZonaForm?.get('precio')?.hasError('maxlength')) {
+                } @if (oBonoForm?.get('precio')?.hasError('maxlength')) {
                 <mat-error>Debes introducir un apellido más bajo</mat-error>
                 }
+              </mat-form-field>
+            </div>
+            <div class="col-md-6 mb-3">
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label style="color: #ff8c42">Stock disponible</mat-label>
+                <input matInput formControlName="stock" style="color: #fff" />
               </mat-form-field>
             </div>
           </div>
@@ -73,7 +78,7 @@
         <div class="d-flex justify-content-between mt-4">
           <button
             class="btn btn-warning"
-            [routerLink]="['/admin', 'zona', 'plist']"
+            [routerLink]="['/admin', 'Bono', 'plist']"
           >
             <i class="bi bi-list"></i>
             Ir a listado de Productos
@@ -85,7 +90,7 @@
           <button
             class="btn btn-primary"
             type="submit"
-            [disabled]="!oZonaForm?.valid"
+            [disabled]="!oBonoForm?.valid"
           >
             <i class="bi bi-floppy"></i>
             Guardar
@@ -111,7 +116,7 @@
     >
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel" style="color: #ff8c42">
-          RAMBOOT
+          TechGamer
         </h5>
         <button
           type="button"
