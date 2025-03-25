@@ -6,7 +6,7 @@ export interface IBono {
   id: number;
   nombre: string;
   precio: number;
-  snack?: any;
-  bebida?: any;
-  zona?: any;
+  snack: ISnack;
+  bebida: IBebida;
+  zona: IZona;
 }

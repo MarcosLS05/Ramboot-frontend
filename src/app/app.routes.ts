@@ -25,6 +25,7 @@ import { BebidaAdminPlistRoutedComponent } from './component/bebida/bebida.admin
 import { BebidaAdminEditRoutedComponent } from './component/bebida/bebida.admin.edit.routed/bebida.admin.edit.routed.component';
 import { BebidaAdminViewRoutedComponent } from './component/bebida/bebida.admin.view.routed/bebida.admin.view.routed.component';
 import { BebidaAdminDeleteRoutedComponent } from './component/bebida/bebida.admin.delete.routed/bebida.admin.delete.component';
+import { BebidaselectorComponent } from './component/bebida/bebidaselector/bebidaselector.component';
 
 import { SnackAdminPlistRoutedComponent } from './component/snack/snack.admin.plist.routed/snack.admin.plist.routed.component';
 import { SnackAdminCreateRoutedComponent } from './component/snack/snack.admin.create.routed/snack.admin.create.routed.component';
@@ -38,6 +39,7 @@ import { ZonaAdminEditRoutedComponent } from './component/zona/zona.admin.edit.r
 import { ZonaAdminViewRoutedComponent } from './component/zona/zona.admin.view.routed/zona.admin.view.routed.component';
 import { ZonaAdminCreateRoutedComponent } from './component/zona/zona.admin.create.routed/zona.admin.create.routed.component';
 import { ZonaAdminDeleteRoutedComponent } from './component/zona/zona.admin.delete.routed/zona.admin.delete.component';
+import { ZonaselectorComponent } from './component/zona/zonaselector/zonaselector.component';
 
 import { BonoAdminCreateRoutedComponent } from './component/bono/bono.admin.create.routed/bono.admin.create.routed.component';
 import { BonoAdminPlistRoutedComponent } from './component/bono/bono.admin.plist.routed/bono.admin.plist.routed.component';
@@ -141,6 +143,11 @@ export const routes: Routes = [
   },
 
   {
+    path: 'bebidaselector',
+    component: BebidaselectorComponent,
+  },
+
+  {
     path: 'admin/snack/plist',
     component: SnackAdminPlistRoutedComponent,
     canActivate: [AdminGuard],
@@ -195,6 +202,12 @@ export const routes: Routes = [
     component: ZonaAdminDeleteRoutedComponent,
     canActivate: [AdminGuard],
   },
+
+  {
+    path: 'zonaselector',
+    component: ZonaselectorComponent,
+  },
+
   {
     path: 'admin/bono/plist',
     component: BonoAdminPlistRoutedComponent,

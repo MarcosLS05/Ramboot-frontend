@@ -10,6 +10,9 @@ import { Router, RouterModule } from '@angular/router';
 import { TrimPipe } from '../../../pipe/trim.pipe';
 import { MatDialog } from '@angular/material/dialog';
 import { HttpErrorResponse } from '@angular/common/http';
+import { SnackselectorComponent } from '../../snack/snackselector/snackselector.component';
+import { BebidaselectorComponent } from '../../bebida/bebidaselector/bebidaselector.component';
+import { ZonaselectorComponent } from '../../zona/zonaselector/zonaselector.component';
 
 @Component({
   selector: 'app-bono.admin.routed',
@@ -68,6 +71,99 @@ export class BonoAdminPlistRoutedComponent implements OnInit {
           console.log(err);
         },
       });
+  }
+
+  showSnackSelectorModal(id: number | undefined) {
+    if (id) {
+      const dialogRef = this.dialog.open(SnackselectorComponent, {
+        height: '500px',
+        maxHeight: '500px',
+        width: '50%',
+        maxWidth: '90%',
+      });
+
+      dialogRef.afterClosed().subscribe((result) => {
+        console.log('The dialog was closed');
+        if (result !== undefined) {
+          console.log(result);
+          // llamada al servidor
+          this.oBonoService.setSnack(id, result.id).subscribe({
+            next: (response: IBono) => {
+              console.log(response);
+              this.getPage();
+            },
+            error: (err: HttpErrorResponse) => {
+              console.log(err);
+            },
+          });
+        }
+      });
+      return false;
+    } else {
+      return false;
+    }
+  }
+
+  showBebidaSelectorModal(id: number | undefined) {
+    if (id) {
+      const dialogRef = this.dialog.open(BebidaselectorComponent, {
+        height: '500px',
+        maxHeight: '500px',
+        width: '50%',
+        maxWidth: '90%',
+      });
+
+      dialogRef.afterClosed().subscribe((result) => {
+        console.log('The dialog was closed');
+        if (result !== undefined) {
+          console.log(result);
+          // llamada al servidor
+          this.oBonoService.setBebida(id, result.id).subscribe({
+            next: (response: IBono) => {
+              console.log(response);
+              this.getPage();
+            },
+            error: (err: HttpErrorResponse) => {
+              console.log(err);
+            },
+          });
+        }
+      });
+      return false;
+    } else {
+      return false;
+    }
+  }
+
+  showZonaSelectorModal(id: number | undefined) {
+    if (id) {
+      const dialogRef = this.dialog.open(ZonaselectorComponent, {
+        height: '500px',
+        maxHeight: '500px',
+        width: '50%',
+        maxWidth: '90%',
+      });
+
+      dialogRef.afterClosed().subscribe((result) => {
+        console.log('The dialog was closed');
+        if (result !== undefined) {
+          console.log(result);
+          // llamada al servidor
+          this.oBonoService.setBebida(id, result.id).subscribe({
+            next: (response: IBono) => {
+              console.log(response);
+              this.getPage();
+            },
+            error: (err: HttpErrorResponse) => {
+              console.log(err);
+            },
+          });
+        }
+      });
+      return false;
+    } else {
+      return false;
+    }
   }
 
   edit(oBono: IBono) {

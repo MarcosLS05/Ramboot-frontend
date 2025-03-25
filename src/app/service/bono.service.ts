@@ -72,4 +72,25 @@ export class BonoService {
   delete(id: number) {
     return this.oHttp.delete(this.serverURL + '/' + id);
   }
+
+  setSnack(id: number, id_snack: number): Observable<IBono> {
+    return this.oHttp.put<IBono>(
+      this.serverURL + '/setsnack/' + id + '/' + id_snack,
+      null
+    );
+  }
+
+  setBebida(id: number, id_bebida: number): Observable<IBono> {
+    return this.oHttp.put<IBono>(
+      this.serverURL + '/setbebida/' + id + '/' + id_bebida,
+      null
+    );
+  }
+
+  setZona(id: number, id_zona: number): Observable<IBono> {
+    return this.oHttp.put<IBono>(
+      this.serverURL + '/setzona/' + id + '/' + id_zona,
+      null
+    );
+  }
 }

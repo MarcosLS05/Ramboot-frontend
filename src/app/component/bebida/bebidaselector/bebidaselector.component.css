@@ -1,0 +1,103 @@
+/* Estilos generales del contenedor */
+.selector-container {
+    max-width: 600px;
+    background: #f8f9fa;
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Estilos del título */
+  .selector-title {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: #333;
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+  
+  /* Input de búsqueda */
+  .selector-search {
+    width: 100%;
+    padding: 0.6rem;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    transition: all 0.3s ease;
+  }
+  
+  .selector-search:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.2);
+  }
+  
+  /* Estilos de los elementos */
+  .selector-list {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0;
+  }
+  
+  .selector-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: white;
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    margin-bottom: 0.5rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  .selector-item:hover {
+    transform: translateY(-2px);
+  }
+  
+  /* Botón de selección */
+  .selector-btn {
+    border: none;
+    background: #28a745;
+    color: white;
+    padding: 0.5rem 0.8rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  
+  .selector-btn:hover {
+    background: #218838;
+  }
+  
+  /* Paginación */
+  .selector-pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+  }
+  
+  .selector-pagination .page-link {
+    padding: 0.5rem 0.8rem;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background: white;
+    color: #007bff;
+    transition: all 0.3s ease;
+    margin: 0 0.2rem;
+    text-decoration: none;
+  }
+  
+  .selector-pagination .page-link:hover,
+  .selector-pagination .active {
+    background: #007bff;
+    color: white;
+  }
+  
+  /* Responsividad */
+  @media (max-width: 576px) {
+    .selector-container {
+      max-width: 100%;
+      padding: 1rem;
+    }
+  }
+  

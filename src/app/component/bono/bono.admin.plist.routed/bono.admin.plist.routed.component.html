@@ -66,14 +66,7 @@
                     <i class="bi bi-caret-up-fill"></i>} }
                   </th>
                   <th (click)="sort('zona')" class="cursor-pointer">
-                    Zona disponible @if (strField === 'zona') { @if (strDir ===
-                    'desc') {
-                    <i class="bi bi-caret-down-fill"></i>
-                    } @else {
-                    <i class="bi bi-caret-up-fill"></i>} }
-                  </th>
-                  <th (click)="sort('bebida')" class="cursor-pointer">
-                    Bebida incluida @if (strField === 'bebida') { @if (strDir
+                    Producto incluido @if (strField === 'zona') { @if (strDir
                     === 'desc') {
                     <i class="bi bi-caret-down-fill"></i>
                     } @else {
@@ -81,6 +74,13 @@
                   </th>
                   <th (click)="sort('bebida')" class="cursor-pointer">
                     Producto incluido @if (strField === 'bebida') { @if (strDir
+                    === 'desc') {
+                    <i class="bi bi-caret-down-fill"></i>
+                    } @else {
+                    <i class="bi bi-caret-up-fill"></i>} }
+                  </th>
+                  <th (click)="sort('bebida')" class="cursor-pointer">
+                    Zona disponible @if (strField === 'bebida') { @if (strDir
                     === 'desc') {
                     <i class="bi bi-caret-down-fill"></i>
                     } @else {
@@ -95,21 +95,43 @@
                 <tr>
                   <td class="text-center">{{ bono.id }}</td>
                   <td class="text-center">{{ bono.nombre }}</td>
-                  <td>{{ bono.precio }}</td>
+                  <td>{{ bono.precio }} €/día</td>
                   <td class="text-start">
-                    <a href="admin/tipousuario/view/{{ bono.snack.id }}">
+                    <a href="admin/snack/view/{{ bono.snack.id }}">
                       {{ bono.snack.nombre }} ({{ bono.snack.id }})
                     </a>
-                    <a
-                      href="admin/usuario/plist/xtipousuario/{{
-                        bono.snack.id
-                      }}"
-                    >
+                    <a href="admin/snack/plist/xbono/{{ bono.snack.id }}">
                       <i class="bi bi-filter-circle"></i>
                     </a>
+                    <i
+                      class="bi bi-arrow-repeat"
+                      (click)="showSnackSelectorModal(bono.id)"
+                    ></i>
                   </td>
-                  <td>{{ bono.bebida.nombre }}</td>
-                  <td>{{ bono.zona.titulo }}</td>
+                  <td class="text-start">
+                    <a href="admin/bebida/view/{{ bono.bebida.id }}">
+                      {{ bono.bebida.nombre }} ({{ bono.snack.id }})
+                    </a>
+                    <a href="admin/bebida/plist/xbono/{{ bono.bebida.id }}">
+                      <i class="bi bi-filter-circle"></i>
+                    </a>
+                    <i
+                      class="bi bi-arrow-repeat"
+                      (click)="showBebidaSelectorModal(bono.id)"
+                    ></i>
+                  </td>
+                  <td class="text-start">
+                    <a href="admin/zona/view/{{ bono.zona.id }}">
+                      {{ bono.zona.titulo }} ({{ bono.zona.id }})
+                    </a>
+                    <a href="admin/zona/plist/xbono/{{ bono.zona.id }}">
+                      <i class="bi bi-filter-circle"></i>
+                    </a>
+                    <i
+                      class="bi bi-arrow-repeat"
+                      (click)="showZonaSelectorModal(bono.id)"
+                    ></i>
+                  </td>
 
                   <td>
                     <div class="btn-group" role="group">
