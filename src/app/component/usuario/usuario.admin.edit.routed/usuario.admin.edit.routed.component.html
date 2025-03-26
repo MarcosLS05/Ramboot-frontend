@@ -137,6 +137,23 @@
                 formControlName="telefono"
                 placeholder="telefono"
               />
+              <div
+                *ngIf="oUsuarioForm?.get('telefono')?.errors"
+                class="text-danger"
+              >
+                <small
+                  *ngIf="oUsuarioForm?.get('telefono')?.hasError('required')"
+                  >Debes introducir un telefono.</small
+                >
+                <small
+                  *ngIf="oUsuarioForm?.get('telefono')?.hasError('minlength')"
+                  >El telefono es demasiado corto.</small
+                >
+                <small
+                  *ngIf="oUsuarioForm?.get('telefono')?.hasError('maxlength')"
+                  >El telefono es demasiado largo.</small
+                >
+              </div>
             </div>
 
             <div class="mb-3">

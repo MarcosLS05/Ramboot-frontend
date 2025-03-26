@@ -1,0 +1,83 @@
+<div class="row justify-content-center m-3">
+  <div class="col-lg-8 col-md-10 col-sm-12">
+    <!-- Título con íconos -->
+    <h1 class="my-5 text-center display-4 fw-bold">
+      <i class="bi bi-card-list"></i>
+      Detalles
+      <i class="bi bi-person-circle"></i>
+    </h1>
+
+    <!-- Tabla de detalles del producto -->
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <table class="table table-hover table-borderless my-4">
+          <tbody>
+            <tr>
+              <th scope="row" class="bg-danger text-white text-end pe-4 py-3">
+                ID
+              </th>
+              <td class="text-start ps-4 py-3">{{ oGcontrata.id }}</td>
+            </tr>
+            <tr>
+              <th scope="row" class="bg-primary text-white text-end pe-4 py-3">
+                Creado en
+              </th>
+              <td class="text-start ps-4 py-3">
+                {{ oGcontrata.fecha_creacion | date : "dd/MM/yyyy HH:mm" }}
+              </td>
+            </tr>
+
+            <tr>
+              <th scope="row" class="bg-primary text-white text-end pe-4 py-3">
+                Metodo de pago
+              </th>
+              <td class="text-start ps-4 py-3">{{ oGcontrata.metodoPago }}</td>
+            </tr>
+            <tr>
+              <th scope="row" class="bg-primary text-white text-end pe-4 py-3">
+                Ticket
+              </th>
+              <td class="text-start ps-4 py-3">{{ oGcontrata.ticket }}</td>
+            </tr>
+            <tr>
+              <th scope="row" class="bg-primary text-white text-end pe-4 py-3">
+                Usuario
+              </th>
+              <td class="text-start ps-4 py-3">
+                {{ oGcontrata.usuario.nombre }}
+              </td>
+            </tr>
+            <tr>
+              <th scope="row" class="bg-primary text-white text-end pe-4 py-3">
+                Zona
+              </th>
+              <td class="text-start ps-4 py-3">{{ oGcontrata.zona.titulo }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Botones de acción -->
+    <div class="d-flex justify-content-center mt-5">
+      <a class="btn btn-warning mx-2" href="admin/gcontrata/plist">
+        <i class="bi bi-list"></i>
+        Ir a Listado de Productos
+      </a>
+      <a
+        class="btn btn-primary mx-2"
+        href="admin/gcontrata/edit/{{ oGcontrata.id }}"
+      >
+        <i class="bi bi-pencil"></i>
+        Editar
+      </a>
+      <a
+        class="btn btn-danger mx-2"
+        href="admin/gcontrata/delete/{{ oGcontrata.id }}"
+      >
+        <i class="bi bi-trash"></i>
+        Borrar
+      </a>
+    </div>
+  </div>
+</div>

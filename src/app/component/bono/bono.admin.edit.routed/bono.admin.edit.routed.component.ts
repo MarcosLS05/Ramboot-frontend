@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { IBono } from '../../../model/bono.interface';
 import { BonoService } from '../../../service/bono.service';
@@ -11,6 +11,9 @@ import {
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { CommonModule } from '@angular/common';
+import { SnackselectorComponent } from '../../snack/snackselector/snackselector.component';
+import { MatDialog } from '@angular/material/dialog';
+import { BebidaselectorComponent } from '../../bebida/bebidaselector/bebidaselector.component';
 
 declare let bootstrap: any;
 
@@ -32,6 +35,7 @@ export class BonoAdminEditRoutedComponent implements OnInit {
   strMessage: string = '';
   oBonoForm: FormGroup | undefined = undefined;
   oBono: IBono | null = null;
+  readonly dialog = inject(MatDialog);
   message: string = '';
   myModal: any;
 
@@ -122,6 +126,66 @@ export class BonoAdminEditRoutedComponent implements OnInit {
         },
       });
     }
+  }
+
+  showZonaSelectorModal() {
+    const dialogRef = this.dialog.open(SnackselectorComponent, {
+      height: '800px',
+      maxHeight: '1200px',
+      width: '80%',
+      maxWidth: '90%',
+      data: { origen: '' },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result !== undefined) {
+        this.oBonoForm?.controls['zona'].setValue({
+          id: result.id,
+          titulo: result.titulo,
+        });
+      }
+    });
+    return false;
+  }
+
+  showBebidaSelectorModal() {
+    const dialogRef = this.dialog.open(BebidaselectorComponent, {
+      height: '800px',
+      maxHeight: '1200px',
+      width: '80%',
+      maxWidth: '90%',
+      data: { origen: '' },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result !== undefined) {
+        this.oBonoForm?.controls['bebida'].setValue({
+          id: result.id,
+          nombre: result.nombre,
+        });
+      }
+    });
+    return false;
+  }
+
+  showSnackSelectorModal() {
+    const dialogRef = this.dialog.open(SnackselectorComponent, {
+      height: '800px',
+      maxHeight: '1200px',
+      width: '80%',
+      maxWidth: '90%',
+      data: { origen: '' },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result !== undefined) {
+        this.oBonoForm?.controls['snack'].setValue({
+          id: result.id,
+          nombre: result.nombre,
+        });
+      }
+    });
+    return false;
   }
 
   get() {

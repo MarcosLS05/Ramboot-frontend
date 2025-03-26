@@ -149,7 +149,7 @@ export class BonoAdminPlistRoutedComponent implements OnInit {
         if (result !== undefined) {
           console.log(result);
           // llamada al servidor
-          this.oBonoService.setBebida(id, result.id).subscribe({
+          this.oBonoService.setZona(id, result.id).subscribe({
             next: (response: IBono) => {
               console.log(response);
               this.getPage();

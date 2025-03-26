@@ -1,0 +1,110 @@
+<div class="container mt-5 d-flex align-items-center justify-content-center">
+  <div
+    class="card shadow-lg p-4"
+    style="
+      max-width: 900px;
+      width: 100%;
+      background-color: #1a1a1a;
+      border: 1px solid #ff8c42;
+    "
+  >
+    <div class="card-body">
+      <h2 class="text-center mb-4" style="color: #ff8c42">
+        <i class="bi bi-plus-square"></i>
+        Tienda
+        <i class="bi bi-person-circle"></i>
+      </h2>
+
+      <form [formGroup]="oGcontrataForm!" (ngSubmit)="onSubmit()" novalidate>
+        <!-- Sección de Información Básica -->
+        <div class="section mb-4">
+          <h4 class="mb-3" style="color: #ff8c42">Información Básica</h4>
+          <div class="row">
+            <div class="col-md-6 mb-3"></div>
+            <div class="mb-3">
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label style="color: #ff8c42">Método de pago</mat-label>
+                <mat-select formControlName="metodoPago" required>
+                  <mat-option value="Efectivo">Efectivo</mat-option>
+                  <mat-option value="Tarjeta bancaria"
+                    >Tarjeta bancaria</mat-option
+                  >
+                  <mat-option value="Bizum">Bizum</mat-option>
+                  <mat-option value="Otro...">Otro...</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+            <button (click)="generarTicket()">Generar Ticket</button>
+            <p *ngIf="TicketRandom">Ticket generado: {{ TicketRandom }}</p>
+          </div>
+        </div>
+
+        <!-- Botones de acción -->
+        <div class="d-flex justify-content-between mt-4">
+          <button
+            class="btn btn-warning"
+            [routerLink]="['/admin', 'gcontrata', 'plist']"
+          >
+            <i class="bi bi-list"></i>
+            Ir a listado de Productos
+          </button>
+          <button class="btn btn-secondary" (click)="onReset()">
+            <i class="bi bi-x-lg"></i>
+            Reset
+          </button>
+          <button
+            class="btn btn-primary"
+            type="submit"
+            [disabled]="!oGcontrataForm?.valid"
+          >
+            <i class="bi bi-floppy"></i>
+            Guardar
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  [id]="'mimodal'"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div
+      class="modal-content"
+      style="background-color: #1a1a1a; border: 1px solid #ff8c42"
+    >
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel" style="color: #ff8c42">
+          RAMBOOT
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+          (click)="hideModal()"
+        ></button>
+      </div>
+      <div class="modal-body" style="color: #fff">
+        <p>{{ strMessage }}</p>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-primary"
+          data-bs-dismiss="modal"
+          (click)="hideModal()"
+        >
+          Cerrar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

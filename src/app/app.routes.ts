@@ -47,6 +47,12 @@ import { BonoAdminEditRoutedComponent } from './component/bono/bono.admin.edit.r
 import { BonoAdminViewRoutedComponent } from './component/bono/bono.admin.view.routed/bono.admin.view.routed.component';
 import { BonoAdminDeleteRoutedComponent } from './component/bono/bono.admin.delete.routed/bono.admin.delete.component';
 
+import { GcontrataAdminCreateRoutedComponent } from './component/gcontrata/gcontrata.admin.create.routed/gcontrata.admin.create.routed.component';
+import { GcontrataAdminPlistRoutedComponent } from './component/gcontrata/gcontrata.admin.plist.routed/gcontrata.admin.plist.routed.component';
+import { GcontrataAdminEditRoutedComponent } from './component/gcontrata/gcontrata.admin.edit.routed/gcontrata.admin.edit.routed.component';
+import { GcontrataAdminViewRoutedComponent } from './component/gcontrata/gcontrata.admin.view.routed/gcontrata.admin.view.routed.component';
+import { GcontrataAdminDeleteRoutedComponent } from './component/gcontrata/gcontrata.admin.delete.routed/gcontrata.admin.delete.component';
+
 import { serverURL } from './environment/environment';
 
 export const routes: Routes = [
@@ -232,6 +238,32 @@ export const routes: Routes = [
   {
     path: 'admin/bono/delete/:id',
     component: BonoAdminDeleteRoutedComponent,
+    canActivate: [AdminGuard],
+  },
+  {
+    path: 'admin/gcontrata/plist',
+    component: GcontrataAdminPlistRoutedComponent,
+    canActivate: [AdminGuard],
+  },
+  {
+    path: 'admin/gcontrata/edit/:id',
+    component: GcontrataAdminEditRoutedComponent,
+    canActivate: [AdminGuard],
+  },
+  {
+    path: 'admin/gcontrata/view/:id',
+    component: GcontrataAdminViewRoutedComponent,
+    canActivate: [AdminGuard],
+  },
+  {
+    path: 'admin/gcontrata/create',
+    component: GcontrataAdminCreateRoutedComponent,
+    canActivate: [AdminGuard],
+    pathMatch: 'full',
+  },
+  {
+    path: 'admin/gcontrata/delete/:id',
+    component: GcontrataAdminDeleteRoutedComponent,
     canActivate: [AdminGuard],
   },
 ];

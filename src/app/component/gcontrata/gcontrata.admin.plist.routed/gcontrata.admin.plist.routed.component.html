@@ -5,15 +5,14 @@
         <div class="card-header bg-dark text-white">
           <h2 class="my-2 text-center">
             <i class="bi bi-people-fill"></i>
-            Lista de Usuarios
+            Caja
             <i class="bi bi-person-badge"></i>
           </h2>
         </div>
         <div class="card-body">
           <div class="d-flex justify-content-between align-items-center mb-4">
-            <a href="admin/usuario/create" class="btn btn-success">
+            <a href="admin/gcontrata/create" class="btn btn-success">
               <i class="bi bi-plus-circle"></i>
-              Crear nuevo usuario
             </a>
             <div class="input-group w-25">
               <input
@@ -45,71 +44,45 @@
             <table class="table table-hover table-striped">
               <thead class="thead-dark">
                 <tr>
-                  <th (click)="sort('username')" class="cursor-pointer">
-                    Username @if (strField === 'username') { @if (strDir ===
-                    'desc') {
+                  <th (click)="sort('id')" class="cursor-pointer">
+                    ID @if (strField === 'id') { @if (strDir === 'desc') {
                     <i class="bi bi-caret-down-fill"></i>
                     } @else {
                     <i class="bi bi-caret-up-fill"></i>} }
                   </th>
-                  <th (click)="sort('nombre')" class="cursor-pointer">
-                    Nombre @if (strField === 'nombre') { @if (strDir === 'desc')
-                    {
-                    <i class="bi bi-caret-down-fill"></i>
-                    } @else {
-                    <i class="bi bi-caret-up-fill"></i>} }
-                  </th>
-                  <th (click)="sort('apellido1')" class="cursor-pointer">
-                    Primer Apellido @if (strField === 'apellido1') { @if (strDir
+                  <th (click)="sort('fecha_creacion')" class="cursor-pointer">
+                    Creado en @if (strField === 'fecha_creacion') { @if (strDir
                     === 'desc') {
                     <i class="bi bi-caret-down-fill"></i>
                     } @else {
                     <i class="bi bi-caret-up-fill"></i>} }
                   </th>
-                  <th (click)="sort('telefono')" class="cursor-pointer">
-                    Télefono @if (strField === 'telefono') { @if (strDir ===
-                    'desc') {
+                  <th
+                    (click)="sort('metodoPago')"
+                    class="cursor-pointer text-center"
+                  >
+                    Método de pago @if (strField === 'metodoPago') { @if (strDir
+                    === 'desc') {
                     <i class="bi bi-caret-down-fill"></i>
                     } @else {
                     <i class="bi bi-caret-up-fill"></i>} }
                   </th>
-                  <th (click)="sort('email')" class="cursor-pointer">
-                    Correo @if (strField === 'email') { @if (strDir === 'desc')
+                  <th (click)="sort('ticket')" class="cursor-pointer">
+                    Ticket @if (strField === 'ticket') { @if (strDir === 'desc')
                     {
                     <i class="bi bi-caret-down-fill"></i>
                     } @else {
                     <i class="bi bi-caret-up-fill"></i>} }
                   </th>
-                  <th (click)="sort('active')" class="cursor-pointer">
-                    Estado @if (strField === 'active') { @if (strDir === 'desc')
-                    {
-                    <i class="bi bi-caret-down-fill"></i>
-                    } @else {
-                    <i class="bi bi-caret-up-fill"></i>} }
-                  </th>
-                  <th (click)="sort('saldo')" class="cursor-pointer">
-                    Saldo @if (strField === 'saldo') { @if (strDir === 'desc') {
-                    <i class="bi bi-caret-down-fill"></i>
-                    } @else {
-                    <i class="bi bi-caret-up-fill"></i>} }
-                  </th>
-                  <th (click)="sort('ultimoLoginEn')" class="cursor-pointer">
-                    Ultimo Login @if (strField === 'ultimoLoginEn') { @if
-                    (strDir === 'desc') {
-                    <i class="bi bi-caret-down-fill"></i>
-                    } @else {
-                    <i class="bi bi-caret-up-fill"></i>} }
-                  </th>
-                  <th (click)="sort('tipousuario')" class="cursor-pointer">
-                    Tipo de usuario @if (strField === 'tipousuario') { @if
-                    (strDir === 'desc') {
-                    <i class="bi bi-caret-down-fill"></i>
-                    } @else {
-                    <i class="bi bi-caret-up-fill"></i>} }
-                  </th>
-                  <th (click)="sort('Gcontrata')" class="cursor-pointer">
-                    Compras @if (strField === 'Gcontrata') { @if (strDir ===
+                  <th (click)="sort('usuario')" class="cursor-pointer">
+                    Usuario @if (strField === 'usuario') { @if (strDir ===
                     'desc') {
+                    <i class="bi bi-caret-down-fill"></i>
+                    } @else {
+                    <i class="bi bi-caret-up-fill"></i>} }
+                  </th>
+                  <th (click)="sort('zona')" class="cursor-pointer">
+                    Zona @if (strField === 'zona') { @if (strDir === 'desc') {
                     <i class="bi bi-caret-down-fill"></i>
                     } @else {
                     <i class="bi bi-caret-up-fill"></i>} }
@@ -119,96 +92,46 @@
                 </tr>
               </thead>
               <tbody>
-                @for (usuario of oPage?.content; track usuario.id) {
+                @for (Gcontrata of oPage?.content; track Gcontrata.id) {
                 <tr>
-                  <td class="text-center">{{ usuario.username }}</td>
-                  <td>{{ usuario.nombre | trim : 10 }}</td>
-                  <td>{{ usuario.apellido1 }}</td>
-                  <td>{{ usuario.telefono }}</td>
-                  <td style="font-size: small">{{ usuario.email }}</td>
+                  <td class="text-center">{{ Gcontrata.id }}</td>
                   <td>
-                    @if (usuario.active) {
-                    <i><i class="bi bi-check-circle-fill"></i></i>
-                    }@else {
-                    <i><i class="bi bi-x-circle-fill"></i></i>}
+                    {{ Gcontrata.fecha_creacion | date : "dd/MM/yyyy HH:mm" }}
                   </td>
-                  <td>{{ usuario.saldo }}</td>
-                  <td>
-                    {{ usuario.ultimoLoginEn | date : "dd/MM/yyyy HH:mm" }}
-                  </td>
-                  <td class="text-start">
-                    <a
-                      href="admin/tipousuario/view/{{ usuario.tipousuario.id }}"
-                    >
-                      {{ usuario.tipousuario.titulo }} ({{
-                        usuario.tipousuario.id
-                      }})
-                    </a>
-                    <a
-                      href="admin/usuario/plist/xtipousuario/{{
-                        usuario.tipousuario.id
-                      }}"
-                    >
-                      <i class="bi bi-filter-circle"></i>
-                    </a>
-                    <i
-                      class="bi bi-arrow-repeat"
-                      (click)="showTipousuarioSelectorModal(usuario.id)"
-                    ></i>
-                  </td>
-                  <td class="text-center">
-                    <a
-                      href="admin/gcontrata/xusuario/plist/{{ usuario.id }}"
-                      class="btn btn-ver-contratos"
-                    >
-                      <i class="fas fa-file-contract"></i> Ver Compras
-                    </a>
-                  </td>
+                  <td class="text-center">{{ Gcontrata.metodoPago }}</td>
+                  <td>{{ Gcontrata.ticket }}</td>
+                  <td>{{ Gcontrata.usuario.nombre }}</td>
+                  <td>{{ Gcontrata.zona.titulo }}</td>
 
                   <td>
                     <div class="btn-group" role="group">
                       <button
                         type="button"
                         class="btn btn-sm btn-outline-primary"
-                        (click)="view(usuario)"
+                        (click)="view(Gcontrata)"
                       >
                         <i class="bi bi-eye"></i>
                       </button>
                       <button
                         type="button"
                         class="btn btn-sm btn-outline-warning"
-                        (click)="edit(usuario)"
+                        (click)="edit(Gcontrata)"
                       >
                         <i class="bi bi-pencil"></i>
                       </button>
                       <button
                         type="button"
                         class="btn btn-sm btn-outline-danger"
-                        (click)="remove(usuario)"
+                        (click)="remove(Gcontrata)"
                       >
                         <i class="bi bi-trash"></i>
-                      </button>
-                      <button
-                        type="button"
-                        class="btn btn-sm btn-outline-secondary"
-                        [routerLink]="['']"
-                      >
-                        <i class="bi bi-cash-coin"></i>
-                      </button>
-
-                      <button
-                        type="button"
-                        class="btn btn-outline-secondary"
-                        [routerLink]="['']"
-                      >
-                        <i class="bi bi-box-seam"></i>
                       </button>
                     </div>
                   </td>
                 </tr>
                 } @empty {
                 <tr>
-                  <td colspan="7" class="text-center">No hay usuarios</td>
+                  <td colspan="7" class="text-center">No hay Productos</td>
                 </tr>
                 }
               </tbody>
