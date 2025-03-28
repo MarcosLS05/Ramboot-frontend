@@ -82,7 +82,7 @@ export class GcontrataAdminCreateRoutedComponent implements OnInit {
   generarTicket() {
     this.oGcontrataService.getTicket().subscribe({
       next: (ticket) => {
-        this.TicketRandom = ticket; // Asignas el ticket directamente
+        this.TicketRandom = ticket;
       },
       error: (err) => {
         console.error('Error al generar ticket:', err);
