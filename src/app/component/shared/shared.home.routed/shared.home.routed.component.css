@@ -1,7 +1,7 @@
 body {
   background-color: #000; /* Fondo negro */
   font-family: 'Arial', sans-serif;
-  background-image: url('/src/app/assets/img/fondoPagina.jpg'); /* Cambia esto por la ruta de tu imagen */
+  background-image: url('/assets/img/fondoPagina.jpg'); /* Cambia esto por la ruta de tu imagen */
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
