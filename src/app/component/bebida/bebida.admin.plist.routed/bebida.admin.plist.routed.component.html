@@ -45,13 +45,10 @@
             <table class="table table-hover table-striped">
               <thead class="thead-dark">
                 <tr>
-                  <th (click)="sort('id')" class="cursor-pointer">
-                    ID @if (strField === 'id') { @if (strDir === 'desc') {
-                    <i class="bi bi-caret-down-fill"></i>
-                    } @else {
-                    <i class="bi bi-caret-up-fill"></i>} }
-                  </th>
-                  <th (click)="sort('nombre')" class="cursor-pointer">
+                  <th
+                    (click)="sort('nombre')"
+                    class="cursor-pointer text-center"
+                  >
                     Nombre @if (strField === 'nombre') { @if (strDir === 'desc')
                     {
                     <i class="bi bi-caret-down-fill"></i>
@@ -79,7 +76,6 @@
               <tbody>
                 @for (Bebida of oPage?.content; track Bebida.id) {
                 <tr>
-                  <td class="text-center">{{ Bebida.id }}</td>
                   <td class="text-center">{{ Bebida.nombre }}</td>
                   <td>{{ Bebida.precio }}</td>
                   <td>{{ Bebida.stock }}</td>

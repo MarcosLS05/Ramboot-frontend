@@ -144,8 +144,8 @@ export class BonoAdminCreateRoutedComponent implements OnInit {
         this.oBonoForm?.controls['bebida'].setValue({
           id: result.id,
           nombre: result.nombre,
-          stock: result.stock,
           precio: result.precio,
+          stock: result.stock,
         });
       }
     });
@@ -164,10 +164,9 @@ export class BonoAdminCreateRoutedComponent implements OnInit {
       console.log('The dialog was closed');
       if (result !== undefined) {
         console.log(result);
-        this.oBonoForm?.controls['snack'].setValue({
+        this.oBonoForm?.controls['zona'].setValue({
           id: result.id,
-          nombre: result.nombre,
-          stock: result.stock,
+          titulo: result.titulo,
           precio: result.precio,
         });
       }

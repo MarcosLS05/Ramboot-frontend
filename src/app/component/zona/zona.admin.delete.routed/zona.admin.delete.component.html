@@ -9,10 +9,6 @@
     <table class="table table-striped table-bordered my-5 text-center">
       <tbody>
         <tr class="text-center">
-          <th scope="row" class="bg-danger text-white text-end pe-5">Id</th>
-          <td class="text-start ps-5">{{ oZona!.id }}</td>
-        </tr>
-        <tr class="text-center">
           <th scope="row" class="bg-primary text-white text-end pe-5">
             Nombre
           </th>
@@ -35,7 +31,7 @@
   <div class="d-flex justify-content-center mt-4">
     <button
       class="btn btn-warning mt-4 mx-1"
-      [routerLink]="['/admin', 'Zona', 'plist']"
+      [routerLink]="['/admin', 'zona', 'plist']"
     >
       <i class="bi bi-list"></i>
       Ir a listado de Zonas

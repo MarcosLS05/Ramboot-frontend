@@ -18,9 +18,10 @@
       <form [formGroup]="oBonoForm!" (ngSubmit)="onSubmit()" novalidate>
         <!-- Sección de Información Básica -->
         <div class="section mb-4">
-          <h4 class="mb-3" style="color: #ff8c42">Información Básica</h4>
+          <h4 class="mb-3 text-center" style="color: #ff8c42">
+            Información Básica
+          </h4>
           <div class="row">
-            <div class="col-md-6 mb-3"></div>
             <div class="col-md-6 mb-3">
               <mat-form-field appearance="outline" class="w-100">
                 <mat-label style="color: #ff8c42">Nombre</mat-label>
@@ -42,84 +43,98 @@
                 }
               </mat-form-field>
             </div>
-          </div>
-          <div class="row">
             <div class="col-md-6 mb-3">
               <mat-form-field appearance="outline" class="w-100">
                 <mat-label style="color: #ff8c42">Precio</mat-label>
                 <input
-                  matInput="number"
+                  matInput
+                  type="number"
                   formControlName="precio"
                   required
                   style="color: #fff"
                 />
                 <mat-hint align="start" style="color: #ccc"
-                  >De 3 a 10 caracteres</mat-hint
+                  >Introduce el precio en €</mat-hint
                 >
                 @if (oBonoForm?.get('precio')?.hasError('required')) {
                 <mat-error>Debes introducir un precio</mat-error>
-                } @if (oBonoForm?.get('precio')?.hasError('minlength')) {
-                <mat-error>Debes introducir un precio más alto</mat-error>
-                } @if (oBonoForm?.get('precio')?.hasError('maxlength')) {
-                <mat-error>Debes introducir un apellido más bajo</mat-error>
+                } @if (oBonoForm?.get('precio')?.hasError('min')) {
+                <mat-error>El precio mínimo es 0.50€</mat-error>
                 }
               </mat-form-field>
             </div>
           </div>
-        </div>
 
-        <div class="col-md-6 mb-3">
-          <mat-form-field appearance="outline" class="w-100">
-            <mat-label style="color: #ff8c42">Producto incluido</mat-label>
-            <div class="d-flex justify-content-end">
-              <button
-                class="btn btn-primary"
-                (click)="showSnackSelectorModal()"
-              >
-                <i class="bi bi-search"></i>
-                Buscar
-              </button>
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label style="color: #ff8c42">Producto incluido</mat-label>
+                <div class="d-flex justify-content-end">
+                  <button
+                    class="btn btn-primary"
+                    (click)="showSnackSelectorModal()"
+                  >
+                    <i class="bi bi-search"></i>
+                    Buscar
+                  </button>
+                </div>
+                <div class="d-flex justify-content-start" style="color: #fff">
+                  {{ oSnack.nombre }}
+                </div>
+                <input matInput formControlName="id" style="color: #fff" />
+              </mat-form-field>
             </div>
-            <div class="d-flex justify-content-start" style="color: #fff">
-              {{ oSnack.nombre }}
-            </div>
-            <input matInput formControlName="id" style="color: #fff" />
-          </mat-form-field>
-        </div>
 
-        <div class="col-md-6 mb-3">
-          <mat-form-field appearance="outline" class="w-100">
-            <mat-label style="color: #ff8c42">Producto incluido</mat-label>
-            <div class="d-flex justify-content-end">
-              <button
-                class="btn btn-primary"
-                (click)="showBebidaSelectorModal()"
-              >
-                <i class="bi bi-search"></i>
-                Buscar
-              </button>
+            <div class="col-md-6 mb-3">
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label style="color: #ff8c42">Bebida incluida</mat-label>
+                <div class="d-flex justify-content-end">
+                  <button
+                    class="btn btn-primary"
+                    (click)="showBebidaSelectorModal()"
+                  >
+                    <i class="bi bi-search"></i>
+                    Buscar
+                  </button>
+                </div>
+                <div class="d-flex justify-content-start" style="color: #fff">
+                  {{ oBebida.nombre }}
+                </div>
+                <input
+                  matInput
+                  formControlName="id"
+                  style="color: #fff"
+                  hidden
+                />
+              </mat-form-field>
             </div>
-            <div class="d-flex justify-content-start" style="color: #fff">
-              {{ oBebida.nombre }}
-            </div>
-            <input matInput formControlName="id" style="color: #fff" />
-          </mat-form-field>
-        </div>
+          </div>
 
-        <div class="col-md-6 mb-3">
-          <mat-form-field appearance="outline" class="w-100">
-            <mat-label style="color: #ff8c42">Zona perteneciente</mat-label>
-            <div class="d-flex justify-content-end">
-              <button class="btn btn-primary" (click)="showZonaSelectorModal()">
-                <i class="bi bi-search"></i>
-                Buscar
-              </button>
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label style="color: #ff8c42">Zona perteneciente</mat-label>
+                <div class="d-flex justify-content-end">
+                  <button
+                    class="btn btn-primary"
+                    (click)="showZonaSelectorModal()"
+                  >
+                    <i class="bi bi-search"></i>
+                    Buscar
+                  </button>
+                </div>
+                <div class="d-flex justify-content-start" style="color: #fff">
+                  {{ oZona.titulo }}
+                </div>
+                <input
+                  matInput
+                  formControlName="id"
+                  style="color: #fff"
+                  hidden
+                />
+              </mat-form-field>
             </div>
-            <div class="d-flex justify-content-start" style="color: #fff">
-              {{ oZona.titulo }}
-            </div>
-            <input matInput formControlName="id" style="color: #fff" />
-          </mat-form-field>
+          </div>
         </div>
 
         <!-- Botones de acción -->

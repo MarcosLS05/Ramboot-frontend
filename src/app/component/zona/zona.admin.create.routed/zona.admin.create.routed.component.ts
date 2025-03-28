@@ -58,8 +58,12 @@ export class ZonaAdminCreateRoutedComponent implements OnInit {
   }
 
   updateForm() {
-    this.oZonaForm?.controls['nombre'].setValue('');
-    this.oZonaForm?.controls['precio'].setValue('');
+    if (this.oZonaForm && this.oZonaForm.controls) {
+      this.oZonaForm.controls['titulo'].setValue('');
+      this.oZonaForm.controls['precio'].setValue('');
+    } else {
+      console.error('La forma no ha sido inicializada');
+    }
   }
 
   showModal(mensaje: string) {
