@@ -1,24 +1,79 @@
-<div class="container mt-50">
-  <div class="row justify-content-center">
-    <div class="col-md-60">
+<div class="container mt-5">
+  <div class="row">
+    <!-- Panel de Control Izquierdo -->
+    <div class="col-md-4">
+      <div class="card shadow-sm mb-4">
+        <div class="card-header bg-dark text-white">
+          <h3 class="my-2 text-center">
+            <i class="bi bi-sliders"></i>
+            Panel de Control
+          </h3>
+        </div>
+        <div class="card-body">
+          <form>
+            <div class="form-group mb-3">
+              <label for="usuario" class="form-label">Buscar usuario:</label>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Buscar usuarios..."
+                (keyup)="filter2($event)"
+                [(ngModel)]="strFiltro2"
+              />
+            </div>
+            <div class="form-group mb-4">
+              <label for="saldo" class="form-label">Añadir saldo:</label>
+              <input
+                type="number"
+                id="saldo"
+                class="form-control"
+                placeholder="Cantidad"
+              />
+            </div>
+            <button type="submit" class="btn btn-primary w-100">
+              <i class="bi bi-check-circle"></i> realizar operacion
+            </button>
+
+            <!-- Puedes añadir más controles aquí -->
+            <div class="mt-2 d-flex gap-3 w-10">
+              <button class="btn btn-success">
+                <i class="bi bi-cash-coin"></i> Efectivo
+              </button>
+              <button class="btn btn-info btn-primary">
+                <i class="bi bi-credit-card-fill"></i> Tarjeta
+              </button>
+              <button class="btn btn-info">
+                <i class="bi bi-person-badge"></i> Bizum
+              </button>
+              <button class="btn btn-info">
+                <i class="bi bi-paypal"></i> Paypal
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tabla de Registros Derecha -->
+    <div class="col-md-8">
       <div class="card shadow-sm">
         <div class="card-header bg-dark text-white">
           <h2 class="my-2 text-center">
             <i class="bi bi-wallet2"></i>
-            Caja
+            Registros de Caja
             <i class="bi bi-currency-dollar"></i>
           </h2>
         </div>
         <div class="card-body">
           <div class="d-flex justify-content-between align-items-center mb-4">
             <a href="admin/gcontrata/create" class="btn btn-success">
-              <i class="bi bi-plus-circle"></i>
+              <i class="bi bi-plus-circle"></i> Nuevo
             </a>
-            <div class="input-group w-25">
+            <div class="input-group w-50">
               <input
                 type="text"
                 class="form-control"
-                placeholder="Buscar"
+                placeholder="Buscar registros..."
                 (keyup)="filter($event)"
                 [(ngModel)]="strFiltro"
               />
@@ -124,7 +179,7 @@
                 </tr>
                 } @empty {
                 <tr>
-                  <td colspan="7" class="text-center">No hay Productos</td>
+                  <td colspan="7" class="text-center">No hay registros</td>
                 </tr>
                 }
               </tbody>

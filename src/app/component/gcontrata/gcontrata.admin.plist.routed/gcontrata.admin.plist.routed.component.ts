@@ -28,6 +28,7 @@ export class GcontrataAdminPlistRoutedComponent implements OnInit {
   strDir: string = '';
   //
   strFiltro: string = '';
+  strFiltro2: string = '';
   //
   arrBotonera: string[] = [];
   //
@@ -119,6 +120,10 @@ export class GcontrataAdminPlistRoutedComponent implements OnInit {
 
   filter(event: KeyboardEvent) {
     this.debounceSubject.next(this.strFiltro);
+  }
+
+  filter2(event: KeyboardEvent) {
+    this.debounceSubject.next(this.strFiltro2);
   }
 
   //  <td class="text-start">
