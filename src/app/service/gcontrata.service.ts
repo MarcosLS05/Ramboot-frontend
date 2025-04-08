@@ -44,6 +44,38 @@ export class GcontrataService {
     return this.oHttp.get<IPage<IGcontrata>>(URL, httpOptions);
   }
 
+  getPageXUsuario(
+    page: number,
+    size: number,
+    field: string,
+    dir: string,
+    filtro: string,
+    id_usuario: number
+  ): Observable<IPage<IGcontrata>> {
+    let URL: string = '';
+    URL += this.serverURL + '/xusuario/' + id_usuario;
+    if (!page) {
+      page = 0;
+    }
+    URL += '?page=' + page;
+    if (!size) {
+      size = 10;
+    }
+    URL += '&size=' + size;
+    if (field) {
+      URL += '&sort=' + field;
+      if (dir === 'asc') {
+        URL += ',asc';
+      } else {
+        URL += ',desc';
+      }
+    }
+    if (filtro) {
+      URL += '&filter=' + filtro;
+    }
+    return this.oHttp.get<IPage<IGcontrata>>(URL, httpOptions);
+  }
+
   get(id: number): Observable<IGcontrata> {
     let URL: string = '';
     URL += this.serverURL;
@@ -54,6 +86,18 @@ export class GcontrataService {
   create(oGcontrata: IGcontrata): Observable<IGcontrata> {
     const URL: string = `${serverURL}/gcontrata/new`;
     return this.oHttp.post<IGcontrata>(URL, oGcontrata, httpOptions);
+  }
+
+  addImporte(oGcontrata: IGcontrata, usuarioId: number, zonaId?: number): Observable<IGcontrata> {
+    const URL: string = `${this.serverURL}/add-importe`;
+    const params: any = { usuarioId: usuarioId.toString() };
+  
+    // Agregar zonaId si está definido
+    if (zonaId !== undefined) {
+      params.zonaId = zonaId.toString();
+    }
+  
+    return this.oHttp.post<IGcontrata>(URL, oGcontrata, { params });
   }
 
   getTicket(): Observable<string> {

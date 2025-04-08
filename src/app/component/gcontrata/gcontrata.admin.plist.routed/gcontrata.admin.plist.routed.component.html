@@ -10,46 +10,187 @@
           </h3>
         </div>
         <div class="card-body">
-          <form>
-            <div class="form-group mb-3">
-              <label for="usuario" class="form-label">Buscar usuario:</label>
-              <input
-                type="text"
-                class="form-control"
-                placeholder="Buscar usuarios..."
-                (keyup)="filter2($event)"
-                [(ngModel)]="strFiltro2"
-              />
+          <!-- Pestañas -->
+          <ul class="nav nav-tabs mb-3" id="controlTabs" role="tablist">
+            <li class="nav-item" role="presentation">
+              <button class="nav-link active" id="payment-tab" data-bs-toggle="tab" data-bs-target="#payment" type="button" role="tab" aria-controls="payment" aria-selected="true">
+                <i class="bi bi-cash-stack"></i> Pagos
+              </button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link" id="user-tab" data-bs-toggle="tab" data-bs-target="#user" type="button" role="tab" aria-controls="user" aria-selected="false">
+                <i class="bi bi-person" ></i> Tienda
+              </button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link" id="reports-tab" data-bs-toggle="tab" data-bs-target="#reports" type="button" role="tab" aria-controls="reports" aria-selected="false">
+                <i class="bi bi-graph-up"></i> Reportes
+              </button>
+            </li>
+          </ul>
+    
+          <!-- Contenido de las pestañas -->
+          <div class="tab-content" id="controlTabsContent">
+            <!-- Pestaña de Pagos -->
+            <div class="tab-pane fade show active" id="payment" role="tabpanel" aria-labelledby="payment-tab">
+              <form>
+                <!-- Buscar usuario -->
+                <div class="form-group mb-3">
+                  <label for="usuario" class="form-label">Buscar usuario:</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Buscar usuarios..."
+                    (keyup)="searchUsuarios()"
+                    [(ngModel)]="strFiltro2"
+                    name="strFiltro2"
+                  />
+                  <!-- Lista de resultados -->
+                  <ul *ngIf="usuarios.length > 0" class="list-group mt-2">
+                    <li
+                      *ngFor="let usuario of usuarios"
+                      class="list-group-item list-group-item-action"
+                      (click)="selectedUsuario = usuario"
+                      [class.active]="selectedUsuario?.id === usuario.id"
+                    >
+                      {{ usuario.username }}
+                    </li>
+                  </ul>
+                </div>
+            
+                <!-- Añadir saldo -->
+                <div class="form-group mb-4">
+                  <label for="saldo" class="form-label">Añadir saldo:</label>
+                  <input
+                    type="number"
+                    id="saldo"
+                    class="form-control"
+                    placeholder="Cantidad"
+                    [(ngModel)]="nuevoGcontrata.importe"
+                    name="importe"
+                  />
+                </div>
+            
+                <!-- Seleccionar zona -->
+                <div class="form-group mb-4">
+                  <label for="zona" class="form-label">Seleccionar Zona:</label>
+                  <select
+                  id="zona"
+                  class="form-select"
+                  [(ngModel)]="selectedZonaId"
+                  name="zonaId"
+                >
+                  <option *ngFor="let zona of zonas" [value]="zona.id">
+                    {{ zona.titulo }}
+                  </option>
+                </select>
+                </div>
+            
+                <!-- Sección de métodos de pago -->
+                <div class="payment-methods mb-4">
+                  <h5 class="section-title">Métodos de Pago</h5>
+                  <div class="methods-grid">
+                    <button
+                      type="button"
+                      class="btn btn-payment btn-cash"
+                      [class.active]="nuevoGcontrata.metodoPago === 'Efectivo'"
+                      (click)="nuevoGcontrata.metodoPago = 'Efectivo'"
+                    >
+                      <i class="bi bi-cash-coin"></i> Efectivo
+                    </button>
+                    <button
+                      type="button"
+                      class="btn btn-payment btn-card"
+                      [class.active]="nuevoGcontrata.metodoPago === 'Tarjeta'"
+                      (click)="nuevoGcontrata.metodoPago = 'Tarjeta'"
+                    >
+                      <i class="bi bi-credit-card-fill"></i> Tarjeta
+                    </button>
+                    <button
+                      type="button"
+                      class="btn btn-payment btn-bizum"
+                      [class.active]="nuevoGcontrata.metodoPago === 'Bizum'"
+                      (click)="nuevoGcontrata.metodoPago = 'Bizum'"
+                    >
+                      <i class="bi bi-person-badge"></i> Bizum
+                    </button>
+                    <button
+                      type="button"
+                      class="btn btn-payment btn-paypal"
+                      [class.active]="nuevoGcontrata.metodoPago === 'Paypal'"
+                      (click)="nuevoGcontrata.metodoPago = 'Paypal'"
+                    >
+                      <i class="bi bi-paypal"></i> Paypal
+                    </button>
+                  </div>
+                </div>
+            
+                <!-- Botón para realizar la operación -->
+                <button
+                  type="button"
+                  class="btn btn-primary w-100 mb-4"
+                  (click)="addImporte(nuevoGcontrata, selectedUsuario?.id ?? 0, selectedZonaId ?? undefined)"
+                  [disabled]="!selectedUsuario || nuevoGcontrata.importe <= 0 || !nuevoGcontrata.metodoPago"
+                >
+                  <i class="bi bi-check-circle"></i> Realizar operación
+                </button>
+              </form>
             </div>
-            <div class="form-group mb-4">
-              <label for="saldo" class="form-label">Añadir saldo:</label>
-              <input
-                type="number"
-                id="saldo"
-                class="form-control"
-                placeholder="Cantidad"
-              />
+          
+            <!-- Pestaña de Usuarios -->
+            <div class="tab-pane fade" id="user" role="tabpanel" aria-labelledby="user-tab">
+              <form>
+                <div class="form-group mb-3">
+                  <label for="usuario" class="form-label">Buscar usuario:</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Buscar usuarios..."
+                    (keyup)="searchUsuarios()"
+                    [(ngModel)]="strFiltro2"
+                    name="strFiltro2"
+                  />
+                </div>
+                <button type="submit" class="btn btn-primary w-100">
+                  <i class="bi bi-search"></i> Buscar
+                </button>
+              </form>
             </div>
-            <button type="submit" class="btn btn-primary w-100">
-              <i class="bi bi-check-circle"></i> realizar operacion
-            </button>
-
-            <!-- Puedes añadir más controles aquí -->
-            <div class="mt-2 d-flex gap-3 w-10">
-              <button class="btn btn-success">
-                <i class="bi bi-cash-coin"></i> Efectivo
-              </button>
-              <button class="btn btn-info btn-primary">
-                <i class="bi bi-credit-card-fill"></i> Tarjeta
-              </button>
-              <button class="btn btn-info">
-                <i class="bi bi-person-badge"></i> Bizum
-              </button>
-              <button class="btn btn-info">
-                <i class="bi bi-paypal"></i> Paypal
-              </button>
+          
+            <!-- Pestaña de Reportes -->
+            <div class="tab-pane fade" id="reports" role="tabpanel" aria-labelledby="reports-tab">
+              <form>
+                <div class="form-group mb-3">
+                  <label for="report-type" class="form-label">Tipo de reporte:</label>
+                  <select id="report-type" class="form-select">
+                    <option value="daily">Diario</option>
+                    <option value="weekly">Semanal</option>
+                    <option value="monthly">Mensual</option>
+                    <option value="custom">Personalizado</option>
+                  </select>
+                </div>
+          
+                <div class="row mb-3">
+                  <div class="col-md-6">
+                    <label for="start-date" class="form-label">Fecha inicio:</label>
+                    <input type="date" id="start-date" class="form-control" />
+                  </div>
+                  <div class="col-md-6">
+                    <label for="end-date" class="form-label">Fecha fin:</label>
+                    <input type="date" id="end-date" class="form-control" />
+                  </div>
+                </div>
+          
+                <button type="submit" class="btn btn-primary w-100 mb-2">
+                  <i class="bi bi-file-earmark-bar-graph"></i> Generar reporte
+                </button>
+          
+                <button type="button" class="btn btn-outline-secondary w-100">
+                  <i class="bi bi-download"></i> Exportar a Excel
+                </button>
+              </form>
             </div>
-          </form>
+          </div>
         </div>
       </div>
     </div>
@@ -75,7 +216,7 @@
                 class="form-control"
                 placeholder="Buscar registros..."
                 (keyup)="filter($event)"
-                [(ngModel)]="strFiltro"
+                [(ngModel)]="strFiltro" name="strFiltro"
               />
               <button class="btn btn-outline-secondary" type="button">
                 <i class="bi bi-search"></i>
@@ -99,9 +240,21 @@
             <table class="table table-hover table-striped">
               <thead class="thead-dark">
                 <tr>
-                  <th (click)="sort('fecha_creacion')" class="cursor-pointer">
-                    Creado en @if (strField === 'fecha_creacion') { @if (strDir
-                    === 'desc') {
+                  <tr>
+                    <th (click)="sort('fecha_creacion')" class="cursor-pointer">
+                      Creado en
+                      <i
+                        *ngIf="strField === 'fecha_creacion'"
+                        class="bi"
+                        [ngClass]="{
+                          'bi-caret-down-fill': strDir === 'desc',
+                          'bi-caret-up-fill': strDir === 'asc'
+                        }"
+                      ></i>
+                    </th>
+                  <th (click)="sort('importe')" class="cursor-pointer">
+                    Importe @if (strField === 'importe') { @if (strDir === 'desc')
+                    {
                     <i class="bi bi-caret-down-fill"></i>
                     } @else {
                     <i class="bi bi-caret-up-fill"></i>} }
@@ -124,7 +277,7 @@
                     <i class="bi bi-caret-up-fill"></i>} }
                   </th>
                   <th (click)="sort('usuario')" class="cursor-pointer">
-                    Usuario @if (strField === 'usuario') { @if (strDir ===
+                    Username @if (strField === 'usuario') { @if (strDir ===
                     'desc') {
                     <i class="bi bi-caret-down-fill"></i>
                     } @else {
@@ -146,10 +299,23 @@
                   <td>
                     {{ Gcontrata.fecha_creacion | date : "dd/MM/yyyy HH:mm" }}
                   </td>
+                  <td class="text-center">
+                    @if(Gcontrata.importe != null) {
+                    {{ Gcontrata.importe | number: '1.2-2' }} €
+                    } @else {
+                      0.00 €                 
+                    }
+                                     
+                  </td>
                   <td class="text-center">{{ Gcontrata.metodoPago }}</td>
                   <td>{{ Gcontrata.ticket }}</td>
-                  <td>{{ Gcontrata.usuario.nombre }}</td>
-                  <td>{{ Gcontrata.zona.titulo }}</td>
+                  <td>{{ Gcontrata.usuario.username }}</td>
+                  <td>
+                    @if (Gcontrata.zona != null) {
+                    {{ Gcontrata.zona.titulo }}
+                    } @else {
+                      Sin zona
+                    }
 
                   <td>
                     <div class="btn-group" role="group">

@@ -13,7 +13,7 @@ export interface IUsuario {
   feedback: string;
   password: string;
   active: boolean;
-  saldo: DoubleRange;
+  saldo: number;
   creadoEn: Date;
   ultimoLoginEn: Date;
   tipousuario: ITipousuario;

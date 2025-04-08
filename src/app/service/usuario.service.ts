@@ -114,6 +114,12 @@ export class UsuarioService {
     return this.oHttp.get<IUsuario>(URL);
   }
 
+  searchByUsername(username: string): Observable<IUsuario[]> {
+    return this.oHttp.get<IUsuario[]>(`${this.serverURL}/search`, {
+      params: { username },
+    });
+  }
+
   create(oUsuario: IUsuario): Observable<IUsuario> {
     const URL: string = `${serverURL}/usuarios/new`;
     return this.oHttp.post<IUsuario>(URL, oUsuario, httpOptions);

@@ -115,7 +115,7 @@
                     <i class="bi bi-caret-up-fill"></i>} }
                   </th>
 
-                  <th>Acciones</th>
+                  <th class="text-center">Acciones</th>
                 </tr>
               </thead>
               <tbody>
@@ -132,7 +132,7 @@
                     }@else {
                     <i><i class="bi bi-x-circle-fill"></i></i>}
                   </td>
-                  <td>{{ usuario.saldo }}</td>
+                  <td>{{ usuario.saldo | number: '1.2-2'}}</td>
                   <td>
                     {{ usuario.ultimoLoginEn | date : "dd/MM/yyyy HH:mm" }}
                   </td>

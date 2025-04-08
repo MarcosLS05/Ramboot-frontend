@@ -52,6 +52,7 @@ import { GcontrataAdminPlistRoutedComponent } from './component/gcontrata/gcontr
 import { GcontrataAdminEditRoutedComponent } from './component/gcontrata/gcontrata.admin.edit.routed/gcontrata.admin.edit.routed.component';
 import { GcontrataAdminViewRoutedComponent } from './component/gcontrata/gcontrata.admin.view.routed/gcontrata.admin.view.routed.component';
 import { GcontrataAdminDeleteRoutedComponent } from './component/gcontrata/gcontrata.admin.delete.routed/gcontrata.admin.delete.component';
+import { GcontrataXUsuarioAdminPlistRoutedComponent } from './component/gcontrata/gcontrata.xusuario.admin.plist.routed/gcontrata.xusuario.admin.plist.routed.component';
 
 import { serverURL } from './environment/environment';
 
@@ -266,4 +267,9 @@ export const routes: Routes = [
     component: GcontrataAdminDeleteRoutedComponent,
     canActivate: [AdminGuard],
   },
+  {
+    path: 'admin/gcontrata/xusuario/plist/:id',
+    component: GcontrataXUsuarioAdminPlistRoutedComponent,
+    canActivate: [AdminGuard],
+  }
 ];

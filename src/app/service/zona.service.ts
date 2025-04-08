@@ -62,6 +62,11 @@ export class ZonaService {
     return this.oHttp.put<IZona>(URL, oZona);
   }
 
+  getAll(): Observable<{ content: IZona[] }> {
+    const URL: string = `${this.serverURL}/all`;
+    return this.oHttp.get<{ content: IZona[] }>(URL);
+  }
+
   getOne(id: number): Observable<IZona> {
     let URL: string = '';
     URL += this.serverURL;
