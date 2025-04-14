@@ -11,9 +11,9 @@ import {
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { CommonModule } from '@angular/common';
-import { SnackselectorComponent } from '../../snack/snackselector/snackselector.component';
 import { MatDialog } from '@angular/material/dialog';
-import { BebidaselectorComponent } from '../../bebida/bebidaselector/bebidaselector.component';
+import { ProductoselectorComponent } from '../../producto/productoselector/productoselector.component';
+import { ZonaselectorComponent } from '../../zona/zonaselector/zonaselector.component';
 
 declare let bootstrap: any;
 
@@ -68,13 +68,7 @@ export class BonoAdminEditRoutedComponent implements OnInit {
         Validators.min(0),
         Validators.max(100),
       ]),
-      snack: new FormGroup({
-        id: new FormControl('', [Validators.required]),
-        nombre: new FormControl(''),
-        precio: new FormControl(''),
-        stock: new FormControl(''),
-      }),
-      bebida: new FormGroup({
+      producto: new FormGroup({
         id: new FormControl('', [Validators.required]),
         nombre: new FormControl(''),
         precio: new FormControl(''),
@@ -107,17 +101,11 @@ export class BonoAdminEditRoutedComponent implements OnInit {
         id: this.oBono.id,
         nombre: this.oBono.nombre,
         precio: this.oBono.precio,
-        snack: {
-          id: this.oBono.snack?.id || '',
-          nombre: this.oBono.snack?.nombre || '',
-          precio: this.oBono.snack?.precio || '',
-          stock: this.oBono.snack?.stock || '',
-        },
-        bebida: {
-          id: this.oBono.bebida?.id || '',
-          nombre: this.oBono.bebida?.nombre || '',
-          precio: this.oBono.bebida?.precio || '',
-          stock: this.oBono.bebida?.stock || '',
+        producto: {
+          id: this.oBono.producto?.id || '',
+          nombre: this.oBono.producto?.nombre || '',
+          precio: this.oBono.producto?.precio || '',
+          stock: this.oBono.producto?.stock || '',
         },
         zona: {
           id: this.oBono.zona?.id || '',
@@ -129,7 +117,7 @@ export class BonoAdminEditRoutedComponent implements OnInit {
   }
 
   showZonaSelectorModal() {
-    const dialogRef = this.dialog.open(SnackselectorComponent, {
+    const dialogRef = this.dialog.open(ZonaselectorComponent, {
       height: '800px',
       maxHeight: '1200px',
       width: '80%',
@@ -148,8 +136,8 @@ export class BonoAdminEditRoutedComponent implements OnInit {
     return false;
   }
 
-  showBebidaSelectorModal() {
-    const dialogRef = this.dialog.open(BebidaselectorComponent, {
+  showProductoSelectorModal() {
+    const dialogRef = this.dialog.open(ProductoselectorComponent, {
       height: '800px',
       maxHeight: '1200px',
       width: '80%',
@@ -159,7 +147,7 @@ export class BonoAdminEditRoutedComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result !== undefined) {
-        this.oBonoForm?.controls['bebida'].setValue({
+        this.oBonoForm?.controls['producto'].setValue({
           id: result.id,
           nombre: result.nombre,
         });
@@ -168,25 +156,7 @@ export class BonoAdminEditRoutedComponent implements OnInit {
     return false;
   }
 
-  showSnackSelectorModal() {
-    const dialogRef = this.dialog.open(SnackselectorComponent, {
-      height: '800px',
-      maxHeight: '1200px',
-      width: '80%',
-      maxWidth: '90%',
-      data: { origen: '' },
-    });
 
-    dialogRef.afterClosed().subscribe((result) => {
-      if (result !== undefined) {
-        this.oBonoForm?.controls['snack'].setValue({
-          id: result.id,
-          nombre: result.nombre,
-        });
-      }
-    });
-    return false;
-  }
 
   get() {
     this.oBonoService.get(this.id).subscribe({

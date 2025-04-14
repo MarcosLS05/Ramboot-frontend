@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { IBono } from '../model/bono.interface';
+import { IProducto } from '../model/producto.interface';
 import { Observable } from 'rxjs/internal/Observable';
 import { HttpClient } from '@angular/common/http';
 import { IPage } from '../model/model.interface';
@@ -8,8 +8,8 @@ import { httpOptions, serverURL } from '../environment/environment';
 @Injectable({
   providedIn: 'root',
 })
-export class BonoService {
-  serverURL: string = serverURL + '/bono';
+export class ProductoService {
+  serverURL: string = serverURL + '/producto';
 
   constructor(private oHttp: HttpClient) {}
 
@@ -19,7 +19,7 @@ export class BonoService {
     field: string,
     dir: string,
     filtro: string
-  ): Observable<IPage<IBono>> {
+  ): Observable<IPage<IProducto>> {
     let URL: string = '';
     URL += this.serverURL;
     if (!page) {
@@ -41,50 +41,35 @@ export class BonoService {
     if (filtro) {
       URL += '&filter=' + filtro;
     }
-    return this.oHttp.get<IPage<IBono>>(URL, httpOptions);
+    return this.oHttp.get<IPage<IProducto>>(URL, httpOptions);
   }
 
-  get(id: number): Observable<IBono> {
+  get(id: number): Observable<IProducto> {
     let URL: string = '';
     URL += this.serverURL;
     URL += '/' + id;
-    return this.oHttp.get<IBono>(URL);
+    return this.oHttp.get<IProducto>(URL);
   }
 
-  create(oBono: IBono): Observable<IBono> {
-    const URL: string = `${serverURL}/bono/new`;
-    return this.oHttp.post<IBono>(URL, oBono, httpOptions);
+  create(oProducto: IProducto): Observable<IProducto> {
+    const URL: string = `${serverURL}/productos/new`;
+    return this.oHttp.post<IProducto>(URL, oProducto, httpOptions);
   }
 
-  update(oBono: IBono): Observable<IBono> {
+  update(oProducto: IProducto): Observable<IProducto> {
     let URL: string = '';
     URL += this.serverURL;
-    return this.oHttp.put<IBono>(URL, oBono);
+    return this.oHttp.put<IProducto>(URL, oProducto);
   }
 
-  getOne(id: number): Observable<IBono> {
+  getOne(id: number): Observable<IProducto> {
     let URL: string = '';
     URL += this.serverURL;
     URL += '/' + id;
-    return this.oHttp.get<IBono>(URL);
+    return this.oHttp.get<IProducto>(URL);
   }
 
   delete(id: number) {
     return this.oHttp.delete(this.serverURL + '/' + id);
-  }
-
-
-  setProducto(id: number, id_producto: number): Observable<IBono> {
-    return this.oHttp.put<IBono>(
-      this.serverURL + '/setproducto/' + id + '/' + id_producto,
-      null
-    );
-  }
-
-  setZona(id: number, id_zona: number): Observable<IBono> {
-    return this.oHttp.put<IBono>(
-      this.serverURL + '/setzona/' + id + '/' + id_zona,
-      null
-    );
   }
 }

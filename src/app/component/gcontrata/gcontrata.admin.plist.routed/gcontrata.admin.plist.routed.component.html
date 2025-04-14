@@ -71,21 +71,6 @@
                   />
                 </div>
             
-                <!-- Seleccionar zona -->
-                <div class="form-group mb-4">
-                  <label for="zona" class="form-label">Seleccionar Zona:</label>
-                  <select
-                  id="zona"
-                  class="form-select"
-                  [(ngModel)]="selectedZonaId"
-                  name="zonaId"
-                >
-                  <option *ngFor="let zona of zonas" [value]="zona.id">
-                    {{ zona.titulo }}
-                  </option>
-                </select>
-                </div>
-            
                 <!-- Sección de métodos de pago -->
                 <div class="payment-methods mb-4">
                   <h5 class="section-title">Métodos de Pago</h5>
@@ -129,7 +114,7 @@
                 <button
                   type="button"
                   class="btn btn-primary w-100 mb-4"
-                  (click)="addImporte(nuevoGcontrata, selectedUsuario?.id ?? 0, selectedZonaId ?? undefined)"
+                  (click)="addImporte(nuevoGcontrata, selectedUsuario?.id ?? 0)"
                   [disabled]="!selectedUsuario || nuevoGcontrata.importe <= 0 || !nuevoGcontrata.metodoPago"
                 >
                   <i class="bi bi-check-circle"></i> Realizar operación
@@ -283,12 +268,6 @@
                     } @else {
                     <i class="bi bi-caret-up-fill"></i>} }
                   </th>
-                  <th (click)="sort('zona')" class="cursor-pointer">
-                    Zona @if (strField === 'zona') { @if (strDir === 'desc') {
-                    <i class="bi bi-caret-down-fill"></i>
-                    } @else {
-                    <i class="bi bi-caret-up-fill"></i>} }
-                  </th>
 
                   <th>Acciones</th>
                 </tr>
@@ -301,7 +280,7 @@
                   </td>
                   <td class="text-center">
                     @if(Gcontrata.importe != null) {
-                    {{ Gcontrata.importe | number: '1.2-2' }} €
+                    + {{ Gcontrata.importe | number: '1.2-2' }} €
                     } @else {
                       0.00 €                 
                     }
@@ -310,12 +289,6 @@
                   <td class="text-center">{{ Gcontrata.metodoPago }}</td>
                   <td>{{ Gcontrata.ticket }}</td>
                   <td>{{ Gcontrata.usuario.username }}</td>
-                  <td>
-                    @if (Gcontrata.zona != null) {
-                    {{ Gcontrata.zona.titulo }}
-                    } @else {
-                      Sin zona
-                    }
 
                   <td>
                     <div class="btn-group" role="group">

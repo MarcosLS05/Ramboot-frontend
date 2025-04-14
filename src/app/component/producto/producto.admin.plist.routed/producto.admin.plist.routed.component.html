@@ -5,15 +5,15 @@
         <div class="card-header bg-dark text-white">
           <h2 class="my-2 text-center">
             <i class="bi bi-people-fill"></i>
-            Lista de Bonos
+            Lista de productos
             <i class="bi bi-person-badge"></i>
           </h2>
         </div>
         <div class="card-body">
           <div class="d-flex justify-content-between align-items-center mb-4">
-            <a href="admin/bono/create" class="btn btn-success">
+            <a href="admin/producto/create" class="btn btn-success">
               <i class="bi bi-plus-circle"></i>
-              Crear nuevo Bono
+              Crear nuevo Producto
             </a>
             <div class="input-group w-25">
               <input
@@ -55,23 +55,16 @@
                     } @else {
                     <i class="bi bi-caret-up-fill"></i>} }
                   </th>
-                  <th (click)="sort('precio_unidad')" class="cursor-pointer">
-                    Precio @if (strField === 'precio_unidad') { @if (strDir ===
+                  <th (click)="sort('precio_unidad')" class="cursor-pointer text-center">
+                    Precio unidad @if (strField === 'precio_unidad') { @if
+                    (strDir === 'desc') {
+                    <i class="bi bi-caret-down-fill"></i>
+                    } @else {
+                    <i class="bi bi-caret-up-fill"></i>} }
+                  </th>
+                  <th (click)="sort('creadoEn')" class="cursor-pointe text-center">
+                    Stock @if (strField === 'creadoEn') { @if (strDir ===
                     'desc') {
-                    <i class="bi bi-caret-down-fill"></i>
-                    } @else {
-                    <i class="bi bi-caret-up-fill"></i>} }
-                  </th>
-                  <th (click)="sort('bebida')" class="cursor-pointer">
-                    Producto incluido @if (strField === 'bebida') { @if (strDir
-                    === 'desc') {
-                    <i class="bi bi-caret-down-fill"></i>
-                    } @else {
-                    <i class="bi bi-caret-up-fill"></i>} }
-                  </th>
-                  <th (click)="sort('zona')" class="cursor-pointer">
-                    Zona disponible @if (strField === 'zona') { @if (strDir
-                    === 'desc') {
                     <i class="bi bi-caret-down-fill"></i>
                     } @else {
                     <i class="bi bi-caret-up-fill"></i>} }
@@ -81,55 +74,32 @@
                 </tr>
               </thead>
               <tbody>
-                @for (bono of oPage?.content; track bono.id) {
+                @for (producto of oPage?.content; track producto.id) {
                 <tr>
-                  <td class="text-center">{{ bono.nombre }}</td>
-                  <td>{{ bono.precio }} €/día</td>
-                  <td class="text-start">
-                    <a href="admin/producto/view/{{ bono.producto.id }}">
-                      {{ bono.producto.nombre }} ({{ bono.producto.id }})
-                    </a>
-                    <a href="admin/producto/plist/xbono/{{ bono.producto.id }}">
-                      <i class="bi bi-filter-circle"></i>
-                    </a>
-                    <i
-                      class="bi bi-arrow-repeat"
-                      (click)="showProductoSelectorModal(bono.id)"
-                    ></i>
-                  </td>
-                  <td class="text-start">
-                    <a href="admin/zona/view/{{ bono.zona.id }}">
-                      {{ bono.zona.titulo }} ({{ bono.zona.id }})
-                    </a>
-                    <a href="admin/zona/plist/xbono/{{ bono.zona.id }}">
-                      <i class="bi bi-filter-circle"></i>
-                    </a>
-                    <i
-                      class="bi bi-arrow-repeat"
-                      (click)="showZonaSelectorModal(bono.id)"
-                    ></i>
-                  </td>
+                  <td class="text-center">{{ producto.nombre }}</td>
+                  <td class="text-center">{{ producto.precio }}</td>
+                  <td class="text-center">{{ producto.stock }}</td>
 
                   <td>
                     <div class="btn-group" role="group">
                       <button
                         type="button"
                         class="btn btn-sm btn-outline-primary"
-                        (click)="view(bono)"
+                        (click)="view(producto)"
                       >
                         <i class="bi bi-eye"></i>
                       </button>
                       <button
                         type="button"
                         class="btn btn-sm btn-outline-warning"
-                        (click)="edit(bono)"
+                        (click)="edit(producto)"
                       >
                         <i class="bi bi-pencil"></i>
                       </button>
                       <button
                         type="button"
                         class="btn btn-sm btn-outline-danger"
-                        (click)="remove(bono)"
+                        (click)="remove(producto)"
                       >
                         <i class="bi bi-trash"></i>
                       </button>
@@ -138,7 +108,7 @@
                 </tr>
                 } @empty {
                 <tr>
-                  <td colspan="7" class="text-center">No hay Bonos</td>
+                  <td colspan="7" class="text-center">No hay productos</td>
                 </tr>
                 }
               </tbody>

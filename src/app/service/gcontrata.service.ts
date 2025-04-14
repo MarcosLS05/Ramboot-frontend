@@ -31,6 +31,7 @@ export class GcontrataService {
     }
     URL += '&size=' + size;
     if (field) {
+      console.log('Ordenando por:', field); // Depuración
       URL += '&sort=' + field;
       if (dir === 'asc') {
         URL += ',asc';
@@ -88,15 +89,9 @@ export class GcontrataService {
     return this.oHttp.post<IGcontrata>(URL, oGcontrata, httpOptions);
   }
 
-  addImporte(oGcontrata: IGcontrata, usuarioId: number, zonaId?: number): Observable<IGcontrata> {
+  addImporte(oGcontrata: IGcontrata, usuarioId: number): Observable<IGcontrata> {
     const URL: string = `${this.serverURL}/add-importe`;
-    const params: any = { usuarioId: usuarioId.toString() };
-  
-    // Agregar zonaId si está definido
-    if (zonaId !== undefined) {
-      params.zonaId = zonaId.toString();
-    }
-  
+    const params: any = { usuarioId: usuarioId.toString() }; 
     return this.oHttp.post<IGcontrata>(URL, oGcontrata, { params });
   }
 

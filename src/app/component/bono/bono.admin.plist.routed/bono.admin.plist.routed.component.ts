@@ -9,9 +9,7 @@ import { debounceTime, Subject } from 'rxjs';
 import { Router, RouterModule } from '@angular/router';
 import { TrimPipe } from '../../../pipe/trim.pipe';
 import { MatDialog } from '@angular/material/dialog';
-import { HttpErrorResponse } from '@angular/common/http';
-import { SnackselectorComponent } from '../../snack/snackselector/snackselector.component';
-import { BebidaselectorComponent } from '../../bebida/bebidaselector/bebidaselector.component';
+import { HttpErrorResponse } from '@angular/common/http';import { ProductoselectorComponent } from '../../producto/productoselector/productoselector.component';
 import { ZonaselectorComponent } from '../../zona/zonaselector/zonaselector.component';
 
 @Component({
@@ -73,9 +71,11 @@ export class BonoAdminPlistRoutedComponent implements OnInit {
       });
   }
 
-  showSnackSelectorModal(id: number | undefined) {
+
+
+  showProductoSelectorModal(id: number | undefined) {
     if (id) {
-      const dialogRef = this.dialog.open(SnackselectorComponent, {
+      const dialogRef = this.dialog.open(ProductoselectorComponent, {
         height: '500px',
         maxHeight: '500px',
         width: '50%',
@@ -87,38 +87,7 @@ export class BonoAdminPlistRoutedComponent implements OnInit {
         if (result !== undefined) {
           console.log(result);
           // llamada al servidor
-          this.oBonoService.setSnack(id, result.id).subscribe({
-            next: (response: IBono) => {
-              console.log(response);
-              this.getPage();
-            },
-            error: (err: HttpErrorResponse) => {
-              console.log(err);
-            },
-          });
-        }
-      });
-      return false;
-    } else {
-      return false;
-    }
-  }
-
-  showBebidaSelectorModal(id: number | undefined) {
-    if (id) {
-      const dialogRef = this.dialog.open(BebidaselectorComponent, {
-        height: '500px',
-        maxHeight: '500px',
-        width: '50%',
-        maxWidth: '90%',
-      });
-
-      dialogRef.afterClosed().subscribe((result) => {
-        console.log('The dialog was closed');
-        if (result !== undefined) {
-          console.log(result);
-          // llamada al servidor
-          this.oBonoService.setBebida(id, result.id).subscribe({
+          this.oBonoService .setProducto(id, result.id).subscribe({
             next: (response: IBono) => {
               console.log(response);
               this.getPage();

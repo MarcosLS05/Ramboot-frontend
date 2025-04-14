@@ -14,6 +14,7 @@ import { IUsuario } from '../../../model/usuario.interface';
 import { IZona } from '../../../model/zona.interface';
 import { UsuarioService } from '../../../service/usuario.service';
 import { ZonaService } from '../../../service/zona.service';
+import { IGcontrataproducto } from '../../../model/gcontrataproducto.interface';
 
 @Component({
   selector: 'app-gcontrata.admin.routed',
@@ -47,7 +48,7 @@ export class GcontrataAdminPlistRoutedComponent implements OnInit {
     metodoPago:'',
     ticket:'',
     usuario: {} as IUsuario,
-    zona: {} as IZona,
+    gcontrataproducto: {} as IGcontrataproducto,
   }
 
   zonas: IZona[] = [];
@@ -98,7 +99,7 @@ export class GcontrataAdminPlistRoutedComponent implements OnInit {
   private loadZonas(): void {
     this.oZonaService.getAll().subscribe({
       next: (response) => {
-        console.log('Zonas cargadas:', response); // Verifica la estructura de los datos
+//        console.log('Zonas cargadas:', response); // Verifica la estructura de los datos
         this.zonas = response.content; // Extrae el array de zonas desde la propiedad content
       },
       error: (err) => {
@@ -112,13 +113,13 @@ export class GcontrataAdminPlistRoutedComponent implements OnInit {
     this.oRouter.navigate(['admin/gcontrata/edit', oGcontrata.id]);
   }
 
-  addImporte(oGcontrata: IGcontrata, usuarioId: number, zonaId?: number) {
+  addImporte(oGcontrata: IGcontrata, usuarioId: number) {
     if (!oGcontrata.metodoPago) {
       alert('Por favor, selecciona un método de pago.');
       return;
     }
   
-    this.oGcontrataService.addImporte(oGcontrata, usuarioId, zonaId).subscribe({
+    this.oGcontrataService.addImporte(oGcontrata, usuarioId).subscribe({
       next: (nuevoContrato) => {
         console.log('Contrato actualizado con nuevo importe:', nuevoContrato);
         alert('El importe se ha añadido correctamente.');

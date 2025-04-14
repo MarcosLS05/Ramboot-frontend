@@ -1,115 +1,62 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <div class="container-fluid">
-    <!-- Logo y nombre del sitio -->
+<!-- Botón de menú hamburguesa -->
+<button class="sidebar-toggle" [class.open]="sidebarOpen" (click)="sidebarOpen = !sidebarOpen">
+  <i class="bi" [ngClass]="sidebarOpen ? 'bi-x' : 'bi-list'"></i>
+</button>
+
+<!-- Sidebar -->
+<nav class="sidebar" [class.open]="sidebarOpen">
+  <div class="sidebar-header">
     <a class="navbar-brand d-flex align-items-center" href="#">
-      <img
-        src="../../../assets/img/Ramboot-Logo.png"
-        alt="Logo"
-        class="me-2"
-        style="width: 40px; height: 40px; border-radius: 50%"
-      />
-      <span class="d-none d-md-block">RAMBOOT</span>
+      <img src="../../../assets/img/Ramboot-Logo.png" alt="Logo" />
+      <span>RAMBOOT</span>
     </a>
+  </div>
 
-    <button
-      class="navbar-toggler"
-      type="button"
-      data-bs-toggle="collapse"
-      data-bs-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
-      <span class="navbar-toggler-icon"></span>
-    </button>
+  <ul class="sidebar-menu">
+    <li>
+      <a [class.active]="strRuta == '/home' || strRuta == '/' || strRuta == ''" href="/login">
+        <i class="bi bi-house-door me-1"></i>Inicio
+      </a>
+    </li>
+    <li>
+      <a [class.active]="strRuta == '/admin/usuario/plist'" href="/admin/usuario/plist">
+        <i class="bi bi-people"></i> Usuarios
+      </a>
+    </li>
+    <li>
+      <a [class.active]="strRuta == '/admin/bono/plist'" href="admin/bono/plist">
+        <i class="bi bi-clipboard-data me-1"></i>Bonos
+      </a>
+    </li>
+    <li>
+      <a [class.active]="strRuta == '/admin/gcontrata/plist'" href="/admin/gcontrata/plist">
+        <i class="bi bi-bag"></i>Caja
+      </a>
+    </li>
+    <li>
+      <a [class.active]="strRuta == '/admin/zona/plist'" href="/admin/zona/plist">
+        <i class="bi bi-pc-display-horizontal"></i> Zonas
+      </a>
+    </li>
+    <li>
+      <a [class.active]="strRuta == '/admin/producto/plist'" href="/admin/producto/plist">
+        <i class="bi bi-cup-straw"></i>Productos
+      </a>
+    </li>
+  </ul>
 
-    <!-- Contenido del navbar -->
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a
-            class="nav-link"
-            [class.active]="
-              strRuta == '/home' || strRuta == '/' || strRuta == ''
-            "
-            href="/login"
-          >
-            <i class="bi bi-house-door me-1"></i>Inicio
-          </a>
-        </li>
-        <li class="nav-item">
-          <a
-            class="nav-link"
-            [class.active]="strRuta == '/admin/usuario/plist'"
-            href="/admin/usuario/plist"
-          >
-            <i class="bi bi-people"></i> Usuarios
-          </a>
-        </li>
-        <li class="nav-item">
-          <a
-            class="nav-link"
-            [class.active]="strRuta == '/admin/bono/plist'"
-            href="admin/bono/plist"
-          >
-            <i class="bi bi-clipboard-data me-1"></i>Bonos
-          </a>
-        </li>
-        <li class="nav-item">
-          <a
-            class="nav-link"
-            [class.active]="strRuta == '/admin/gcontrata/plist'"
-            href="/admin/gcontrata/plist"
-          >
-            <i class="bi bi-bag"></i>Caja
-          </a>
-        </li>
-        <li class="nav-item">
-          <a
-            class="nav-link"
-            [class.active]="strRuta == '/admin/zona/plist'"
-            href="/admin/zona/plist"
-          >
-            <i class="bi bi-pc-display-horizontal"></i> Zonas
-          </a>
-        </li>
-        <li class="nav-item">
-          <a
-            class="nav-link"
-            [class.active]="strRuta == '/admin/bebida/plist'"
-            href="/admin/bebida/plist"
-          >
-            <i class="bi bi-cup-straw"></i>Bebidas
-          </a>
-        </li>
-        <li class="nav-item">
-          <a
-            class="nav-link"
-            [class.active]="strRuta == '/admin/snack/plist'"
-            href="/admin/snack/plist"
-          >
-            <i class="bi bi-bag"></i>Snacks
-          </a>
-        </li>
-      </ul>
-
-      <!-- Botones de sesión -->
-      <div class="navbar-text">
-        @if(!activeSession) {
-        <a href="/login" class="btn btn-outline-light">
-          <i class="bi bi-box-arrow-in-right me-1"></i>Iniciar Sesión
-        </a>
-        } @else {
-        <span class="me-3">
-          <a href="/byemail/{{ userEmail }}" class="text-white"
-            >Bienvenido {{ userEmail }}</a
-          >
-        </span>
-        <a href="/logout" class="btn btn-outline-light">
-          <i class="bi bi-box-arrow-right me-1"></i>Logout
-        </a>
-        }
-      </div>
-    </div>
+  <div class="sidebar-footer">
+    @if(!activeSession) {
+      <a href="/login" class="btn btn-outline-light">
+        <i class="bi bi-box-arrow-in-right me-1"></i>Iniciar Sesión
+      </a>
+    } @else {
+      <span class="me-3">
+        <a href="/byemail/{{ userEmail }}" class="text-white">Bienvenido {{ userEmail }}</a>
+      </span>
+      <a href="/logout" class="btn btn-outline-light">
+        <i class="bi bi-box-arrow-right me-1"></i>Logout
+      </a>
+    }
   </div>
 </nav>

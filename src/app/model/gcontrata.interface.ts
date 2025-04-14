@@ -1,3 +1,4 @@
+import { IGcontrataproducto } from "./gcontrataproducto.interface";
 import { IUsuario } from "./usuario.interface";
 import { IZona } from "./zona.interface";
 
@@ -8,5 +9,5 @@ export interface IGcontrata {
     metodoPago: string;
     ticket: string;
     usuario: IUsuario;
-    zona: IZona;
+    gcontrataproducto: IGcontrataproducto;
 }

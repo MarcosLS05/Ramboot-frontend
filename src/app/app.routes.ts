@@ -20,19 +20,12 @@ import { TipousuarioAdminViewRoutedComponent } from './component/tipousuario/tip
 import { TipousuarioAdminCreateRoutedComponent } from './component/tipousuario/tipousuario.admin.create.routed/tipousuario.admin.create.routed.component';
 import { TipousuarioAdminDeleteRoutedComponent } from './component/tipousuario/tipousuario.admin.delete.routed/tipousuario.admin.delete.component';
 
-import { BebidaAdminCreateRoutedComponent } from './component/bebida/bebida.admin.create.routed/bebida.admin.create.routed.component';
-import { BebidaAdminPlistRoutedComponent } from './component/bebida/bebida.admin.plist.routed/bebida.admin.plist.routed.component';
-import { BebidaAdminEditRoutedComponent } from './component/bebida/bebida.admin.edit.routed/bebida.admin.edit.routed.component';
-import { BebidaAdminViewRoutedComponent } from './component/bebida/bebida.admin.view.routed/bebida.admin.view.routed.component';
-import { BebidaAdminDeleteRoutedComponent } from './component/bebida/bebida.admin.delete.routed/bebida.admin.delete.component';
-import { BebidaselectorComponent } from './component/bebida/bebidaselector/bebidaselector.component';
-
-import { SnackAdminPlistRoutedComponent } from './component/snack/snack.admin.plist.routed/snack.admin.plist.routed.component';
-import { SnackAdminCreateRoutedComponent } from './component/snack/snack.admin.create.routed/snack.admin.create.routed.component';
-import { SnackAdminEditRoutedComponent } from './component/snack/snack.admin.edit.routed/snack.admin.edit.routed.component';
-import { SnackAdminViewRoutedComponent } from './component/snack/snack.admin.view.routed/snack.admin.view.routed.component';
-import { SnackAdminDeleteRoutedComponent } from './component/snack/snack.admin.delete.routed/snack.admin.delete.component';
-import { SnackselectorComponent } from './component/snack/snackselector/snackselector.component';
+import { ProductoAdminPlistRoutedComponent } from './component/producto/producto.admin.plist.routed/producto.admin.plist.routed.component';
+import { ProductoAdminEditRoutedComponent } from './component/producto/producto.admin.edit.routed/producto.admin.edit.routed.component';  
+import { ProductoAdminViewRoutedComponent } from './component/producto/producto.admin.view.routed/producto.admin.view.routed.component';
+import { ProductoAdminCreateRoutedComponent } from './component/producto/producto.admin.create.routed/producto.admin.create.routed.component';
+import { ProductoAdminDeleteRoutedComponent } from './component/producto/producto.admin.delete.routed/producto.admin.delete.component';
+import { ProductoselectorComponent } from './component/producto/productoselector/productoselector.component';
 
 import { ZonaAdminPlistRoutedComponent } from './component/zona/zona.admin.plist.routed/zona.admin.plist.routed.component';
 import { ZonaAdminEditRoutedComponent } from './component/zona/zona.admin.edit.routed/zona.admin.edit.routed.component';
@@ -123,65 +116,36 @@ export const routes: Routes = [
   },
 
   {
-    path: 'admin/bebida/plist',
-    component: BebidaAdminPlistRoutedComponent,
+    path: 'admin/producto/plist',
+    component: ProductoAdminPlistRoutedComponent,
     canActivate: [AdminGuard],
   },
   {
-    path: 'admin/bebida/edit/:id',
-    component: BebidaAdminEditRoutedComponent,
+    path: 'admin/producto/edit/:id',
+    component: ProductoAdminEditRoutedComponent,
     canActivate: [AdminGuard],
   },
   {
-    path: 'admin/bebida/view/:id',
-    component: BebidaAdminViewRoutedComponent,
+    path: 'admin/producto/view/:id',
+    component: ProductoAdminViewRoutedComponent,
     canActivate: [AdminGuard],
   },
   {
-    path: 'admin/bebida/create',
-    component: BebidaAdminCreateRoutedComponent,
-    canActivate: [AdminGuard],
-    pathMatch: 'full',
-  },
-  {
-    path: 'admin/bebida/delete/:id',
-    component: BebidaAdminDeleteRoutedComponent,
-    canActivate: [AdminGuard],
-  },
-
-  {
-    path: 'bebidaselector',
-    component: BebidaselectorComponent,
-  },
-
-  {
-    path: 'admin/snack/plist',
-    component: SnackAdminPlistRoutedComponent,
-    canActivate: [AdminGuard],
-  },
-  {
-    path: 'admin/snack/edit/:id',
-    component: SnackAdminEditRoutedComponent,
-    canActivate: [AdminGuard],
-  },
-  {
-    path: 'admin/snack/view/:id',
-    component: SnackAdminViewRoutedComponent,
-    canActivate: [AdminGuard],
-  },
-  {
-    path: 'admin/snack/create',
-    component: SnackAdminCreateRoutedComponent,
+    path: 'admin/producto/create',
+    component: ProductoAdminCreateRoutedComponent,
     canActivate: [AdminGuard],
     pathMatch: 'full',
   },
   {
-    path: 'admin/snack/delete/:id',
-    component: SnackAdminDeleteRoutedComponent,
+    path: 'admin/producto/delete/:id',
+    component: ProductoAdminDeleteRoutedComponent,
     canActivate: [AdminGuard],
   },
 
-  { path: 'snackselector', component: SnackselectorComponent },
+  {
+    path: 'Productoselector',
+    component: ProductoselectorComponent,
+  },
 
   {
     path: 'admin/zona/plist',

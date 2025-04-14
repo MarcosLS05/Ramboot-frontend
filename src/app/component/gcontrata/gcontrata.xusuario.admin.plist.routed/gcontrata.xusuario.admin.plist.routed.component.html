@@ -133,7 +133,16 @@
               <tr>
                 <td class="text-center">{{ gcontrata.id }}</td>
                 <td class="text-center">{{ gcontrata.fecha_creacion | date : "dd/MM/yyyy HH:mm"  }}</td>
-                <td class="text-center">{{ gcontrata.importe | number: '1.2-2' }}</td>
+                <td class="text-center">
+                  @if (gcontrata.importe == null) {
+
+                    0.00€
+
+                  }@else{
+                    {{ gcontrata.importe | number: '1.2-2' }}
+                  }
+                  
+                </td>
                 <td class="text-center">{{ gcontrata.ticket }}</td>
                 <td>
                   <div class="btn-group" role="group" aria-label="Basic example">
