@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/internal/Observable';
 import { HttpClient } from '@angular/common/http';
 import { IPage } from '../model/model.interface';
 import { httpOptions, serverURL } from '../environment/environment';
+import { IGcontrataproducto } from '../model/gcontrataproducto.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -89,10 +90,25 @@ export class GcontrataService {
     return this.oHttp.post<IGcontrata>(URL, oGcontrata, httpOptions);
   }
 
-  addImporte(oGcontrata: IGcontrata, usuarioId: number): Observable<IGcontrata> {
+  addImporte(
+    gcontrataEntity: IGcontrata,
+    usuarioId: number,
+    productosComprados: IGcontrataproducto[] | null,
+    montoParaSaldo: number
+  ): Observable<IGcontrata> {
     const URL: string = `${this.serverURL}/add-importe`;
-    const params: any = { usuarioId: usuarioId.toString() }; 
-    return this.oHttp.post<IGcontrata>(URL, oGcontrata, { params });
+  
+    
+    const body = {
+      gcontrataEntity: gcontrataEntity,
+      productosComprados: productosComprados, 
+      montoParaSaldo: montoParaSaldo,
+    };
+  
+   
+    return this.oHttp.post<IGcontrata>(URL, body, {
+      params: { usuarioId: usuarioId.toString() },
+    });
   }
 
   getTicket(): Observable<string> {

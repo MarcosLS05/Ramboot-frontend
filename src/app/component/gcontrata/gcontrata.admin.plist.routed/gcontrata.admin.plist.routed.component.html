@@ -19,7 +19,7 @@
             </li>
             <li class="nav-item" role="presentation">
               <button class="nav-link" id="user-tab" data-bs-toggle="tab" data-bs-target="#user" type="button" role="tab" aria-controls="user" aria-selected="false">
-                <i class="bi bi-person" ></i> Tienda
+                <i class="bi bi-basket"></i> Tienda
               </button>
             </li>
             <li class="nav-item" role="presentation">
@@ -38,19 +38,19 @@
                 <div class="form-group mb-3">
                   <label for="usuario" class="form-label">Buscar usuario:</label>
                   <input
-                    type="text"
-                    class="form-control"
-                    placeholder="Buscar usuarios..."
-                    (keyup)="searchUsuarios()"
-                    [(ngModel)]="strFiltro2"
-                    name="strFiltro2"
-                  />
+                  type="text"
+                  class="form-control"
+                  placeholder="Buscar usuarios..."
+                  (keyup)="searchUsuarios()"
+                  [(ngModel)]="strFiltro2"
+                  name="strFiltro2"
+                />
                   <!-- Lista de resultados -->
                   <ul *ngIf="usuarios.length > 0" class="list-group mt-2">
                     <li
                       *ngFor="let usuario of usuarios"
                       class="list-group-item list-group-item-action"
-                      (click)="selectedUsuario = usuario"
+                      (click)="selectUsuario(usuario)"
                       [class.active]="selectedUsuario?.id === usuario.id"
                     >
                       {{ usuario.username }}
@@ -70,7 +70,41 @@
                     name="importe"
                   />
                 </div>
-            
+<!-- Sección de selección de productos -->
+<div class="mb-4 p-3 border rounded bg-light">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h5 class="section-title mb-0">Agregar productos</h5>
+    <button class="btn btn-primary btn-sm" (click)="showProductoSelectorModal()">
+      <i class="bi bi-patch-plus"></i>
+    </button>
+  </div>
+  
+  <div class="border-top pt-2">
+    <h6 class="text-muted mb-2">Productos seleccionados:</h6>
+    
+    <div *ngIf="nuevoGcontrata.gcontrataproducto?.producto; else noProducts" class="mb-2">
+      <div class="d-flex justify-content-between align-items-center bg-white p-2 rounded border">
+        <div>
+          {{ nuevoGcontrata.gcontrataproducto.producto.nombre }}
+        </div>
+        <div class="input-group input-group-sm" style="width: 120px;">
+          <span class="input-group-text">Cant.</span>
+          <input type="number" 
+                 class="form-control" 
+                 [(ngModel)]="nuevoGcontrata.gcontrataproducto.cantidad"
+                 min="1"
+                 value="1">
+        </div>
+      </div>
+    </div>
+    
+    <ng-template #noProducts>
+      <div class="alert alert-secondary py-2 mb-0">
+        Ningún producto seleccionado
+      </div>
+    </ng-template>
+  </div>
+</div>
                 <!-- Sección de métodos de pago -->
                 <div class="payment-methods mb-4">
                   <h5 class="section-title">Métodos de Pago</h5>
@@ -112,26 +146,25 @@
             
                 <!-- Botón para realizar la operación -->
                 <button
-                  type="button"
-                  class="btn btn-primary w-100 mb-4"
-                  (click)="addImporte(nuevoGcontrata, selectedUsuario?.id ?? 0)"
-                  [disabled]="!selectedUsuario || nuevoGcontrata.importe <= 0 || !nuevoGcontrata.metodoPago"
-                >
-                  <i class="bi bi-check-circle"></i> Realizar operación
-                </button>
+                type="button"
+                class="btn btn-primary w-100 mb-4"
+                (click)="addImporte(nuevoGcontrata, selectedUsuario?.id ?? 0, productosSeleccionados, nuevoGcontrata.importe)"
+                [disabled]="!selectedUsuario || nuevoGcontrata.importe <= 0 || !nuevoGcontrata.metodoPago"
+              >
+                <i class="bi bi-check-circle"></i> Realizar operación
+              </button>
               </form>
             </div>
           
-            <!-- Pestaña de Usuarios -->
+            <!-- Pestaña de tienda -->
             <div class="tab-pane fade" id="user" role="tabpanel" aria-labelledby="user-tab">
               <form>
                 <div class="form-group mb-3">
-                  <label for="usuario" class="form-label">Buscar usuario:</label>
+                  <label for="usuario" class="form-label">Buscar productos:</label>
                   <input
                     type="text"
                     class="form-control"
                     placeholder="Buscar usuarios..."
-                    (keyup)="searchUsuarios()"
                     [(ngModel)]="strFiltro2"
                     name="strFiltro2"
                   />
@@ -268,6 +301,13 @@
                     } @else {
                     <i class="bi bi-caret-up-fill"></i>} }
                   </th>
+                  <th (click)="sort('gcontrataproducto')" class="cursor-pointer">
+                    Detalles @if (strField === 'gcontrataproducto') { @if (strDir ===
+                    'desc') {
+                    <i class="bi bi-caret-down-fill"></i>
+                    } @else {
+                    <i class="bi bi-caret-up-fill"></i>} }
+                  </th>
 
                   <th>Acciones</th>
                 </tr>
@@ -282,13 +322,18 @@
                     @if(Gcontrata.importe != null) {
                     + {{ Gcontrata.importe | number: '1.2-2' }} €
                     } @else {
-                      0.00 €                 
+                    +  0.00 €                 
                     }
                                      
                   </td>
                   <td class="text-center">{{ Gcontrata.metodoPago }}</td>
                   <td>{{ Gcontrata.ticket }}</td>
                   <td>{{ Gcontrata.usuario.username }}</td>
+                  <td>
+                    @if (Gcontrata.gcontrataproducto == null) {
+                    <span class="badge bg-secondary">Sin detalles</span>
+                    }
+                  </td>
 
                   <td>
                     <div class="btn-group" role="group">
@@ -321,6 +366,7 @@
                   <td colspan="7" class="text-center">No hay registros</td>
                 </tr>
                 }
+              
               </tbody>
             </table>
           </div>

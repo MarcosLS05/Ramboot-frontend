@@ -3,27 +3,41 @@ import { GcontrataService } from '../../../service/gcontrata.service';
 import { IGcontrata } from '../../../model/gcontrata.interface';
 import { CommonModule } from '@angular/common';
 import { IPage } from '../../../model/model.interface';
-import { FormsModule } from '@angular/forms';
+import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BotoneraService } from '../../../service/botonera.service';
 import { debounceTime, Subject } from 'rxjs';
 import { Router, RouterModule } from '@angular/router';
 import { TrimPipe } from '../../../pipe/trim.pipe';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { HttpErrorResponse } from '@angular/common/http';
 import { IUsuario } from '../../../model/usuario.interface';
 import { IZona } from '../../../model/zona.interface';
 import { UsuarioService } from '../../../service/usuario.service';
 import { ZonaService } from '../../../service/zona.service';
 import { IGcontrataproducto } from '../../../model/gcontrataproducto.interface';
+import { ProductoselectorComponent } from '../../producto/productoselector/productoselector.component';
+import { IProducto } from '../../../model/producto.interface';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+
+declare let bootstrap: any;
 
 @Component({
   selector: 'app-gcontrata.admin.routed',
   templateUrl: './gcontrata.admin.plist.routed.component.html',
   styleUrls: ['./gcontrata.admin.plist.routed.component.css'],
   standalone: true,
-  imports: [CommonModule, FormsModule, TrimPipe, RouterModule],
+  imports: [CommonModule, FormsModule, TrimPipe, RouterModule, MatDialogModule,
+      MatFormFieldModule,
+      MatInputModule,
+      MatSelectModule,
+      ReactiveFormsModule,
+      MatIconModule,],
 })
 export class GcontrataAdminPlistRoutedComponent implements OnInit {
+  oGcontrataForm: FormGroup | undefined = undefined;
   oPage: IPage<IGcontrata> | null = null;
   //
   nPage: number = 0; // 0-based server count
@@ -38,7 +52,13 @@ export class GcontrataAdminPlistRoutedComponent implements OnInit {
   //
   arrBotonera: string[] = [];
   //
+  strMessage: string = '';
 
+  myModal: any;
+  cantidadProducto: number = 1;
+  importeProducto: number = 0;
+
+  selectedProducto: { id: number; nombre: string } | null = null;
   selectedUsuario: IUsuario | null = null;
   selectedZonaId: number | null = null;
   nuevoGcontrata: IGcontrata = {
@@ -51,13 +71,11 @@ export class GcontrataAdminPlistRoutedComponent implements OnInit {
     gcontrataproducto: {} as IGcontrataproducto,
   }
 
-  zonas: IZona[] = [];
   
   private debounceSubject = new Subject<string>();
   readonly dialog = inject(MatDialog);
   constructor(
     private oGcontrataService: GcontrataService,
-    private oZonaService: ZonaService,
     private oBotoneraService: BotoneraService,
     private UsuarioService: UsuarioService,
     private oRouter: Router
@@ -69,7 +87,6 @@ export class GcontrataAdminPlistRoutedComponent implements OnInit {
 
   ngOnInit() {
     this.getPage();
-    this.loadZonas();
   }
 
   getPage() {
@@ -96,30 +113,27 @@ export class GcontrataAdminPlistRoutedComponent implements OnInit {
       });
   }
 
-  private loadZonas(): void {
-    this.oZonaService.getAll().subscribe({
-      next: (response) => {
-//        console.log('Zonas cargadas:', response); // Verifica la estructura de los datos
-        this.zonas = response.content; // Extrae el array de zonas desde la propiedad content
-      },
-      error: (err) => {
-        console.error('Error al cargar las zonas:', err);
-      },
-    });
-  }
+
 
   edit(oGcontrata: IGcontrata) {
     //navegar a la página de edición
     this.oRouter.navigate(['admin/gcontrata/edit', oGcontrata.id]);
   }
 
-  addImporte(oGcontrata: IGcontrata, usuarioId: number) {
+  addImporte(oGcontrata: IGcontrata, usuarioId: number, productosComprados: IGcontrataproducto[] | null, montoParaSaldo: number) {
+    // Validaciones
     if (!oGcontrata.metodoPago) {
       alert('Por favor, selecciona un método de pago.');
       return;
     }
   
-    this.oGcontrataService.addImporte(oGcontrata, usuarioId).subscribe({
+    if (montoParaSaldo <= 0) {
+      alert('El monto para saldo de la cuenta debe ser mayor que 0.');
+      return;
+    }
+  
+    // Llamada al servicio
+    this.oGcontrataService.addImporte(oGcontrata, usuarioId, productosComprados, montoParaSaldo).subscribe({
       next: (nuevoContrato) => {
         console.log('Contrato actualizado con nuevo importe:', nuevoContrato);
         alert('El importe se ha añadido correctamente.');
@@ -127,17 +141,50 @@ export class GcontrataAdminPlistRoutedComponent implements OnInit {
       },
       error: (err: HttpErrorResponse) => {
         console.error('Error al añadir el importe:', err);
-        alert('Ocurrió un error al añadir el importe.');
+  
+        // Mostrar un mensaje de error más detallado
+        if (err.status === 400) {
+          alert('Solicitud inválida. Por favor, verifica los datos ingresados.');
+        } else if (err.status === 404) {
+          alert('Usuario o contrato no encontrado.');
+        } else if (err.status === 500) {
+          alert('Error interno del servidor. Por favor, intenta nuevamente más tarde.');
+        } else {
+          alert('Ocurrió un error al añadir el importe.');
+        }
       },
     });
   }
 
+  
+  
+
+  showModal(mensaje: string) {
+    this.strMessage = mensaje;
+    this.myModal = new bootstrap.Modal(document.getElementById('mimodal'), {
+      keyboard: false,
+    });
+    this.myModal.show();
+  }
+
+
+productosSeleccionados: IGcontrataproducto[] = [];
+
+toggleProductoSeleccionado(producto: IGcontrataproducto, event: Event): void {
+  const checkbox = event.target as HTMLInputElement;
+  if (checkbox.checked) {
+    this.productosSeleccionados.push(producto);
+  } else {
+    this.productosSeleccionados = this.productosSeleccionados.filter(
+      (p) => p.id !== producto.id
+    );
+  }
+}
+
   searchUsuarios() {
-    console.log('Buscando usuarios con filtro:', this.strFiltro2);
     if (this.strFiltro2.trim() !== '') {
       this.UsuarioService.searchByUsername(this.strFiltro2).subscribe({
         next: (data) => {
-          console.log('Usuarios encontrados:', data); // Verifica los datos recibidos
           this.usuarios = data; // Asegúrate de que los datos se asignen correctamente
         },
         error: (err) => {
@@ -149,6 +196,39 @@ export class GcontrataAdminPlistRoutedComponent implements OnInit {
       this.usuarios = [];
     }
   }
+
+  selectUsuario(usuario: IUsuario): void {
+    this.selectedUsuario = usuario; 
+    this.strFiltro2 = usuario.username; 
+    this.usuarios = []; 
+  }
+
+  
+
+  showProductoSelectorModal() {
+    const dialogRef = this.dialog.open(ProductoselectorComponent, {
+      height: '500px',
+      maxHeight: '500px',
+      width: '50%',
+      maxWidth: '90%',
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log('The dialog was closed');
+      if (result !== undefined) {
+        console.log(result);
+        this.oGcontrataForm?.controls['producto'].setValue({
+          id: result.id,
+          nombre: result.nombre,
+          precio: result.precio,
+          stock: result.stock,
+        });
+      }
+    });
+    return false;
+  }
+
+  
 
   view(oGcontrata: IGcontrata) {
     //navegar a la página de edición
@@ -206,18 +286,4 @@ export class GcontrataAdminPlistRoutedComponent implements OnInit {
   filter2(event: KeyboardEvent) {
     this.debounceSubject.next(this.strFiltro2);
   }
-
-  //  <td class="text-start">
-  //  <a href="admin/tipoGcontrata/view/{{ gcontrata.tipoGcontrata.id }}">
-  //    {{ gcontrata.tipoGcontrata.titulo }} ({{ gcontrata.tipoGcontrata.id }})
-  //  </a>
-  //  <a href="admin/gcontrata/plist/xtipoGcontrata/{{ gcontrata.tipoGcontrata.id }}">
-  //    <i class="bi bi-filter-circle"></i>
-  // </a>
-  //</td>
-
-  //<td class="text-center">
-  //<a href="/admin/planesentrenamiento/plist/xGcontrata/{{ gcontrata.id }}" class="btn btn-primary">{{ gcontrata.planesentrenamiento }}</a>
-
-  //</td>
 }

@@ -5,7 +5,7 @@ import { IGcontrata } from "./gcontrata.interface";
 export interface IGcontrataproducto {
     id: number;
     cantidad: number;
-    importe: number;
-    IGcontrata: number;
-    IProducto: number;
+    importe: DoubleRange;
+    gcontrata: IGcontrata;
+    producto: IProducto;
 }
