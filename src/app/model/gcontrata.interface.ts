@@ -9,5 +9,5 @@ export interface IGcontrata {
     metodoPago: string;
     ticket: string;
     usuario: IUsuario;
-    gcontrataproducto: IGcontrataproducto;
+    gcontrataproducto: IGcontrataproducto[];
 }

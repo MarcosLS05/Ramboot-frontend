@@ -29,7 +29,7 @@ declare let bootstrap: any;
   templateUrl: './gcontrata.admin.plist.routed.component.html',
   styleUrls: ['./gcontrata.admin.plist.routed.component.css'],
   standalone: true,
-  imports: [CommonModule, FormsModule, TrimPipe, RouterModule, MatDialogModule,
+  imports: [CommonModule, FormsModule, RouterModule, MatDialogModule,
       MatFormFieldModule,
       MatInputModule,
       MatSelectModule,
@@ -68,7 +68,7 @@ export class GcontrataAdminPlistRoutedComponent implements OnInit {
     metodoPago:'',
     ticket:'',
     usuario: {} as IUsuario,
-    gcontrataproducto: {} as IGcontrataproducto,
+    gcontrataproducto: [],
   }
 
   
@@ -112,6 +112,7 @@ export class GcontrataAdminPlistRoutedComponent implements OnInit {
         },
       });
   }
+
 
 
 
@@ -181,11 +182,15 @@ toggleProductoSeleccionado(producto: IGcontrataproducto, event: Event): void {
   }
 }
 
+eliminarProducto(index: number): void {
+  this.nuevoGcontrata.gcontrataproducto.splice(index, 1);
+}
+
   searchUsuarios() {
     if (this.strFiltro2.trim() !== '') {
       this.UsuarioService.searchByUsername(this.strFiltro2).subscribe({
         next: (data) => {
-          this.usuarios = data; // Asegúrate de que los datos se asignen correctamente
+          this.usuarios = data;
         },
         error: (err) => {
           console.error('Error al buscar usuarios:', err);
@@ -212,20 +217,28 @@ toggleProductoSeleccionado(producto: IGcontrataproducto, event: Event): void {
       width: '50%',
       maxWidth: '90%',
     });
-
+  
     dialogRef.afterClosed().subscribe((result) => {
-      console.log('The dialog was closed');
       if (result !== undefined) {
-        console.log(result);
-        this.oGcontrataForm?.controls['producto'].setValue({
+        
+  
+        const nuevoProducto: IGcontrataproducto = {
           id: result.id,
-          nombre: result.nombre,
-          precio: result.precio,
-          stock: result.stock,
-        });
+          cantidad: 1, 
+          importe: result.precio, // Asignar el precio como importe
+          gcontrata: this.nuevoGcontrata,
+          producto: {
+            id: result.id,
+            nombre: result.nombre,
+            precio: result.precio,
+            stock: result.stock,
+          },
+        };
+  
+        // Agregar el producto al array
+        this.nuevoGcontrata.gcontrataproducto.push(nuevoProducto);
       }
     });
-    return false;
   }
 
   

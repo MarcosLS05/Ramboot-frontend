@@ -75,36 +75,42 @@
   <div class="d-flex justify-content-between align-items-center mb-3">
     <h5 class="section-title mb-0">Agregar productos</h5>
     <button class="btn btn-primary btn-sm" (click)="showProductoSelectorModal()">
-      <i class="bi bi-patch-plus"></i>
+      <i class="bi bi-patch-plus"></i> 
     </button>
   </div>
   
   <div class="border-top pt-2">
     <h6 class="text-muted mb-2">Productos seleccionados:</h6>
-    
-    <div *ngIf="nuevoGcontrata.gcontrataproducto?.producto; else noProducts" class="mb-2">
-      <div class="d-flex justify-content-between align-items-center bg-white p-2 rounded border">
-        <div>
-          {{ nuevoGcontrata.gcontrataproducto.producto.nombre }}
-        </div>
-        <div class="input-group input-group-sm" style="width: 120px;">
-          <span class="input-group-text">Cant.</span>
-          <input type="number" 
-                 class="form-control" 
-                 [(ngModel)]="nuevoGcontrata.gcontrataproducto.cantidad"
-                 min="1"
-                 value="1">
-        </div>
-      </div>
+    <div *ngIf="(nuevoGcontrata.gcontrataproducto ?? []).length > 0; else noProductos">
+      <ul class="list-group">
+        <li *ngFor="let producto of nuevoGcontrata.gcontrataproducto; let i = index" class="list-group-item d-flex justify-content-between align-items-center">
+          <span>
+            {{ producto?.producto?.nombre || 'Sin nombre' }}
+          </span>
+          <div class="input-group input-group-sm" style="width: 150px;">
+            
+            <input
+              type="number"
+              class="form-control"
+              [(ngModel)]="producto.cantidad"
+              [ngModelOptions]="{standalone: true}"
+              min="1"
+            />
+            <button class="btn btn-danger btn-sm ms-2" (click)="eliminarProducto(i)">
+              <i class="bi bi-x"></i>
+            </button>
+          </div>
+        </li>
+      </ul>
     </div>
-    
-    <ng-template #noProducts>
+    <ng-template #noProductos>
       <div class="alert alert-secondary py-2 mb-0">
         Ningún producto seleccionado
       </div>
     </ng-template>
   </div>
 </div>
+
                 <!-- Sección de métodos de pago -->
                 <div class="payment-methods mb-4">
                   <h5 class="section-title">Métodos de Pago</h5>
