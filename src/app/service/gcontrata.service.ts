@@ -98,18 +98,32 @@ export class GcontrataService {
   ): Observable<IGcontrata> {
     const URL: string = `${this.serverURL}/add-importe`;
   
-    
+    // LIMPIAR el objeto que se va a enviar (evitar referencias circulares)
+    const cleanGcontrata = {
+      importe: gcontrataEntity.importe,
+      metodoPago: gcontrataEntity.metodoPago,
+      fecha_creacion: gcontrataEntity.fecha_creacion,
+    };
+  
+    const cleanProductos = productosComprados?.map(p => ({
+      producto: { id: p.producto.id },
+      cantidad: p.cantidad
+    })) ?? [];
+  
+    console.log('Productos a enviar:', cleanProductos);  // Verifica los productos en la consola.
+  
     const body = {
-      gcontrataEntity: gcontrataEntity,
-      productosComprados: productosComprados, 
+      gcontrataEntity: cleanGcontrata,
+      productosComprados: cleanProductos,
       montoParaSaldo: montoParaSaldo,
     };
   
-   
     return this.oHttp.post<IGcontrata>(URL, body, {
       params: { usuarioId: usuarioId.toString() },
     });
   }
+  
+  
 
   getTicket(): Observable<string> {
     const URL: string = `${serverURL}/gcontrata/genTicketRandom`;

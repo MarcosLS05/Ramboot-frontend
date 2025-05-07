@@ -154,7 +154,7 @@
                 <button
                 type="button"
                 class="btn btn-primary w-100 mb-4"
-                (click)="addImporte(nuevoGcontrata, selectedUsuario?.id ?? 0, productosSeleccionados, nuevoGcontrata.importe)"
+                (click)="addImporte(nuevoGcontrata, selectedUsuario?.id ?? 0, nuevoGcontrata.gcontrataproducto, nuevoGcontrata.importe)"
                 [disabled]="!selectedUsuario || nuevoGcontrata.importe <= 0 || !nuevoGcontrata.metodoPago"
               >
                 <i class="bi bi-check-circle"></i> Realizar operación
