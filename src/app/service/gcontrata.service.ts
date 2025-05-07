@@ -98,7 +98,7 @@ export class GcontrataService {
   ): Observable<IGcontrata> {
     const URL: string = `${this.serverURL}/add-importe`;
   
-    // LIMPIAR el objeto que se va a enviar (evitar referencias circulares)
+    
     const cleanGcontrata = {
       importe: gcontrataEntity.importe,
       metodoPago: gcontrataEntity.metodoPago,
@@ -110,7 +110,7 @@ export class GcontrataService {
       cantidad: p.cantidad
     })) ?? [];
   
-    console.log('Productos a enviar:', cleanProductos);  // Verifica los productos en la consola.
+    console.log('Productos a enviar:', cleanProductos);  // Depuración
   
     const body = {
       gcontrataEntity: cleanGcontrata,

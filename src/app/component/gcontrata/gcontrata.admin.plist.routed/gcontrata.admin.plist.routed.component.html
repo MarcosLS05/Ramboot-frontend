@@ -70,8 +70,8 @@
                     name="importe"
                   />
                 </div>
-<!-- Sección de selección de productos -->
-<div class="mb-4 p-3 border rounded bg-light">
+              <!-- Sección de selección de productos -->
+              <div class="mb-4 p-3 border rounded bg-light">
   <div class="d-flex justify-content-between align-items-center mb-3">
     <h5 class="section-title mb-0">Agregar productos</h5>
     <button class="btn btn-primary btn-sm" (click)="showProductoSelectorModal()">
@@ -109,7 +109,7 @@
       </div>
     </ng-template>
   </div>
-</div>
+              </div>
 
                 <!-- Sección de métodos de pago -->
                 <div class="payment-methods mb-4">
@@ -165,19 +165,92 @@
             <!-- Pestaña de tienda -->
             <div class="tab-pane fade" id="user" role="tabpanel" aria-labelledby="user-tab">
               <form>
-                <div class="form-group mb-3">
-                  <label for="usuario" class="form-label">Buscar productos:</label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    placeholder="Buscar usuarios..."
-                    [(ngModel)]="strFiltro2"
-                    name="strFiltro2"
-                  />
+                <div class="mb-4 p-3 border rounded bg-light">
+                  <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h5 class="section-title mb-0">Agregar productos</h5>
+                    <button class="btn btn-primary btn-sm" (click)="showProductoSelectorModal()">
+                      <i class="bi bi-patch-plus"></i> 
+                    </button>
+                  </div>
+                  
+                  <div class="border-top pt-2">
+                    <h6 class="text-muted mb-2">Productos seleccionados:</h6>
+                    <div *ngIf="(nuevoGcontrata.gcontrataproducto ?? []).length > 0; else noProductos">
+                      <ul class="list-group">
+                        <li *ngFor="let producto of nuevoGcontrata.gcontrataproducto; let i = index" class="list-group-item d-flex justify-content-between align-items-center">
+                          <span>
+                            {{ producto?.producto?.nombre || 'Sin nombre' }}
+                          </span>
+                          <div class="input-group input-group-sm" style="width: 150px;">
+                            
+                            <input
+                              type="number"
+                              class="form-control"
+                              [(ngModel)]="producto.cantidad"
+                              [ngModelOptions]="{standalone: true}"
+                              min="1"
+                            />
+                            <button class="btn btn-danger btn-sm ms-2" (click)="eliminarProducto(i)">
+                              <i class="bi bi-x"></i>
+                            </button>
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                    <ng-template #noProductos>
+                      <div class="alert alert-secondary py-2 mb-0">
+                        Ningún producto seleccionado
+                      </div>
+                    </ng-template>
+                  </div>
                 </div>
-                <button type="submit" class="btn btn-primary w-100">
-                  <i class="bi bi-search"></i> Buscar
-                </button>
+                                <!-- Sección de métodos de pago -->
+                                <div class="payment-methods mb-4">
+                                  <h5 class="section-title">Métodos de Pago</h5>
+                                  <div class="methods-grid">
+                                    <button
+                                      type="button"
+                                      class="btn btn-payment btn-cash"
+                                      [class.active]="nuevoGcontrata.metodoPago === 'Efectivo'"
+                                      (click)="nuevoGcontrata.metodoPago = 'Efectivo'"
+                                    >
+                                      <i class="bi bi-cash-coin"></i> Efectivo
+                                    </button>
+                                    <button
+                                      type="button"
+                                      class="btn btn-payment btn-card"
+                                      [class.active]="nuevoGcontrata.metodoPago === 'Tarjeta'"
+                                      (click)="nuevoGcontrata.metodoPago = 'Tarjeta'"
+                                    >
+                                      <i class="bi bi-credit-card-fill"></i> Tarjeta
+                                    </button>
+                                    <button
+                                      type="button"
+                                      class="btn btn-payment btn-bizum"
+                                      [class.active]="nuevoGcontrata.metodoPago === 'Bizum'"
+                                      (click)="nuevoGcontrata.metodoPago = 'Bizum'"
+                                    >
+                                      <i class="bi bi-person-badge"></i> Bizum
+                                    </button>
+                                    <button
+                                      type="button"
+                                      class="btn btn-payment btn-paypal"
+                                      [class.active]="nuevoGcontrata.metodoPago === 'Paypal'"
+                                      (click)="nuevoGcontrata.metodoPago = 'Paypal'"
+                                    >
+                                      <i class="bi bi-paypal"></i> Paypal
+                                    </button>
+                                  </div>
+                                </div>
+                <!-- Botón para realizar la operación -->
+                <button
+                type="button"
+                class="btn btn-primary w-100 mb-4"
+                
+                [disabled]="!selectedUsuario || nuevoGcontrata.importe <= 0 || !nuevoGcontrata.metodoPago"
+              >
+                <i class="bi bi-check-circle"></i> Realizar operación
+              </button>
               </form>
             </div>
           
