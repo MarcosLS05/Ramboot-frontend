@@ -246,8 +246,8 @@
                 <button
                 type="button"
                 class="btn btn-primary w-100 mb-4"
-                
-                [disabled]="!selectedUsuario || nuevoGcontrata.importe <= 0 || !nuevoGcontrata.metodoPago"
+                (click)="addProducto(nuevoGcontrata, nuevoGcontrata.gcontrataproducto)"
+                [disabled]="nuevoGcontrata.gcontrataproducto.length === 0 || !nuevoGcontrata.metodoPago"
               >
                 <i class="bi bi-check-circle"></i> Realizar operación
               </button>
@@ -407,7 +407,14 @@
                   </td>
                   <td class="text-center">{{ Gcontrata.metodoPago }}</td>
                   <td>{{ Gcontrata.ticket }}</td>
-                  <td>{{ Gcontrata.usuario.username }}</td>
+                  <td class="text-center">
+                    @if (Gcontrata.usuario == null) {
+                     Sin usuario
+                    }@else {
+                      {{ Gcontrata.usuario.username }}
+                    }
+                    
+                  </td>
                   <td>
                     @if (Gcontrata.gcontrataproducto == null) {
                     <span class="badge bg-secondary">Sin detalles</span>

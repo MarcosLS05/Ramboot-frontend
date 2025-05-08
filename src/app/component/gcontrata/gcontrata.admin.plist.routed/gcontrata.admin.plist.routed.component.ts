@@ -157,6 +157,41 @@ export class GcontrataAdminPlistRoutedComponent implements OnInit {
     });
   }
 
+  addProducto(oGcontrata: IGcontrata, producto: IGcontrataproducto[]) {
+    // Validaciones
+    if (!oGcontrata.metodoPago) {
+      alert('Por favor, selecciona un método de pago.');
+      return;
+    }
+
+    if (producto.length === 0) {
+      alert('Por favor, selecciona al menos un producto.');
+      return;
+    }
+
+    this.oGcontrataService.addProducto(oGcontrata, producto).subscribe({
+      next: (nuevoContrato) => {
+        console.log('Contrato actualizado con nuevo producto:', nuevoContrato);
+        alert('El producto se ha añadido correctamente.');
+        this.getPage(); // Actualiza la lista después de la operación
+      },
+      error: (err: HttpErrorResponse) => {
+        console.error('Error al añadir el importe:', err);
+  
+        // Mostrar un mensaje de error más detallado
+        if (err.status === 400) {
+          alert('Solicitud inválida. Por favor, verifica los datos ingresados.');
+        } else if (err.status === 404) {
+          alert('Usuario o contrato no encontrado.');
+        } else if (err.status === 500) {
+          alert('Error interno del servidor. Por favor, intenta nuevamente más tarde.');
+        } else {
+          alert('Ocurrió un error al añadir el importe.');
+        }
+      },
+    });
+  }
+
   
   
 

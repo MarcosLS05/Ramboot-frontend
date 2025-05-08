@@ -123,6 +123,35 @@ export class GcontrataService {
     });
   }
   
+  addProducto(
+    gcontrata: IGcontrata,
+    productos: IGcontrataproducto[]
+  ): Observable<IGcontrata> {
+    const URL = `${this.serverURL}/add-producto`;
+  
+    // Limpiamos el objeto contrato para evitar referencias circulares
+    const cleanGcontrata = {
+      id: gcontrata.id,
+      importe: gcontrata.importe,
+      metodoPago: gcontrata.metodoPago,
+      fecha_creacion: gcontrata.fecha_creacion
+    };
+  
+    // Limpiamos cada producto: solo enviamos id del producto y cantidad
+    const cleanProductos = productos.map(p => ({
+      producto: { id: p.producto.id },
+      cantidad: p.cantidad
+    }));
+  
+    const body = {
+      gcontrata: cleanGcontrata,
+      productos: cleanProductos
+    };
+  
+    return this.oHttp.post<IGcontrata>(URL, body);
+  }
+  
+  
   
 
   getTicket(): Observable<string> {

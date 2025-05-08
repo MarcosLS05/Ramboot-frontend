@@ -48,6 +48,7 @@ import { GcontrataAdminDeleteRoutedComponent } from './component/gcontrata/gcont
 import { GcontrataXUsuarioAdminPlistRoutedComponent } from './component/gcontrata/gcontrata.xusuario.admin.plist.routed/gcontrata.xusuario.admin.plist.routed.component';
 
 import { serverURL } from './environment/environment';
+import { LoadingGuard } from './guards/lodingScreen.guard';
 
 export const routes: Routes = [
   { path: '', component: SharedHomeRoutedComponent },
@@ -59,33 +60,33 @@ export const routes: Routes = [
   {
     path: 'admin/usuario/plist',
     component: UsuarioAdminPlistRoutedComponent,
-    canActivate: [AdminGuard],
+    canActivate: [AdminGuard, LoadingGuard], 
   },
   {
     path: 'admin/usuario/edit/:id',
     component: UsuarioAdminEditRoutedComponent,
-    canActivate: [AdminGuard],
+    canActivate: [AdminGuard, LoadingGuard],
   },
   {
     path: 'admin/usuario/view/:id',
     component: UsuarioAdminViewRoutedComponent,
-    canActivate: [AdminGuard],
+    canActivate: [AdminGuard, LoadingGuard],
   },
   {
     path: 'admin/usuario/create',
     component: UsuarioAdminCreateRoutedComponent,
-    canActivate: [AdminGuard],
+    canActivate: [AdminGuard, LoadingGuard],
     pathMatch: 'full',
   },
   {
     path: 'admin/usuario/delete/:id',
     component: UsuarioAdminDeleteRoutedComponent,
-    canActivate: [AdminGuard],
+    canActivate: [AdminGuard, LoadingGuard],
   },
   {
     path: 'admin/usuario/plist/xtipousuario/:id',
     component: UsuarioXTipousuarioAdminPlistRoutedComponent,
-    canActivate: [AdminGuard],
+    canActivate: [AdminGuard, LoadingGuard],
   },
 
   {
@@ -150,7 +151,7 @@ export const routes: Routes = [
   {
     path: 'admin/zona/plist',
     component: ZonaAdminPlistRoutedComponent,
-    canActivate: [AdminGuard],
+    canActivate: [AdminGuard, LoadingGuard],
   },
   {
     path: 'admin/zona/edit/:id',
@@ -182,7 +183,7 @@ export const routes: Routes = [
   {
     path: 'admin/bono/plist',
     component: BonoAdminPlistRoutedComponent,
-    canActivate: [AdminGuard],
+    canActivate: [AdminGuard, LoadingGuard],
   },
   {
     path: 'admin/bono/edit/:id',
@@ -208,7 +209,7 @@ export const routes: Routes = [
   {
     path: 'admin/gcontrata/plist',
     component: GcontrataAdminPlistRoutedComponent,
-    canActivate: [AdminGuard],
+    canActivate: [AdminGuard, LoadingGuard],
   },
   {
     path: 'admin/gcontrata/edit/:id',
