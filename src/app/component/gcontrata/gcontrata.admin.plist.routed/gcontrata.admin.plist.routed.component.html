@@ -303,23 +303,22 @@
           </h2>
         </div>
         <div class="card-body">
-          <div class="d-flex justify-content-between align-items-center mb-4">
-            <a href="admin/gcontrata/create" class="btn btn-success">
-              <i class="bi bi-plus-circle"></i> Nuevo
-            </a>
-            <div class="input-group w-50">
-              <input
-                type="text"
-                class="form-control"
-                placeholder="Buscar registros..."
-                (keyup)="filter($event)"
-                [(ngModel)]="strFiltro" name="strFiltro"
-              />
-              <button class="btn btn-outline-secondary" type="button">
-                <i class="bi bi-search"></i>
-              </button>
-            </div>
-          </div>
+<div class="d-flex justify-content-center mb-4">
+  <div class="input-group w-50">
+    <input
+      type="text"
+      class="form-control text-center"
+      placeholder="Buscar registros..."
+      (keyup)="filter($event)"
+      [(ngModel)]="strFiltro"
+      name="strFiltro"
+    />
+    <button class="btn btn-outline-secondary" type="button">
+      <i class="bi bi-search"></i>
+    </button>
+  </div>
+</div>
+
 
           <div class="d-flex justify-content-between mb-3">
             <h5 class="text-muted">
@@ -340,15 +339,14 @@
                   <tr>
                     <th (click)="sort('fecha_creacion')" class="cursor-pointer">
                       Creado en
-                      <i
-                        *ngIf="strField === 'fecha_creacion'"
-                        class="bi"
-                        [ngClass]="{
-                          'bi-caret-down-fill': strDir === 'desc',
-                          'bi-caret-up-fill': strDir === 'asc'
-                        }"
-                      ></i>
+                      <i *ngIf="strField === 'fecha_creacion'"
+                         class="bi"
+                         [ngClass]="{
+                           'bi-caret-down-fill': strDir === 'desc',
+                           'bi-caret-up-fill': strDir === 'asc'
+                         }"></i>
                     </th>
+                    
                   <th (click)="sort('importe')" class="cursor-pointer">
                     Importe @if (strField === 'importe') { @if (strDir === 'desc')
                     {

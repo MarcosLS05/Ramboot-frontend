@@ -309,14 +309,12 @@ eliminarProducto(index: number): void {
 
   sort(field: string): void {
     if (this.strField === field) {
-      // Alternar entre ascendente y descendente si el campo es el mismo
       this.strDir = this.strDir === 'asc' ? 'desc' : 'asc';
     } else {
-      // Cambiar el campo de ordenación y establecer dirección descendente
       this.strField = field;
       this.strDir = 'desc';
     }
-    this.getPage(); // Recargar la página con el nuevo orden
+    this.getPage();
   }
 
 
