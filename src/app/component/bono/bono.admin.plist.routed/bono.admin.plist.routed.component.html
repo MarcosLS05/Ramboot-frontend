@@ -62,13 +62,6 @@
                     } @else {
                     <i class="bi bi-caret-up-fill"></i>} }
                   </th>
-                  <th (click)="sort('bebida')" class="cursor-pointer">
-                    Producto incluido @if (strField === 'bebida') { @if (strDir
-                    === 'desc') {
-                    <i class="bi bi-caret-down-fill"></i>
-                    } @else {
-                    <i class="bi bi-caret-up-fill"></i>} }
-                  </th>
                   <th (click)="sort('zona')" class="cursor-pointer">
                     Zona disponible @if (strField === 'zona') { @if (strDir
                     === 'desc') {
@@ -85,18 +78,6 @@
                 <tr>
                   <td class="text-center">{{ bono.nombre }}</td>
                   <td>{{ bono.precio }} €/día</td>
-                  <td class="text-start">
-                    <a href="admin/producto/view/{{ bono.producto.id }}">
-                      {{ bono.producto.nombre }} ({{ bono.producto.id }})
-                    </a>
-                    <a href="admin/producto/plist/xbono/{{ bono.producto.id }}">
-                      <i class="bi bi-filter-circle"></i>
-                    </a>
-                    <i
-                      class="bi bi-arrow-repeat"
-                      (click)="showProductoSelectorModal(bono.id)"
-                    ></i>
-                  </td>
                   <td class="text-start">
                     <a href="admin/zona/view/{{ bono.zona.id }}">
                       {{ bono.zona.titulo }} ({{ bono.zona.id }})

@@ -51,33 +51,7 @@
               </div>
             </div>
 
-            <div class="mb-3">
-              <label for="descripcion" class="form-label fw-bold">Nombre</label>
-              <input
-                type="text"
-                id="descripcion"
-                class="form-control"
-                formControlName="descripcion"
-                placeholder="Descripcion"
-              />
-              <div
-                *ngIf="oBonoForm?.get('descripcion')?.errors"
-                class="text-danger"
-              >
-                <small
-                  *ngIf="oBonoForm?.get('descripcion')?.hasError('required')"
-                  >Debes introducir una descripcion.</small
-                >
-                <small
-                  *ngIf="oBonoForm?.get('descripcion')?.hasError('minlength')"
-                  >La descripcion es demasiado corta.</small
-                >
-                <small
-                  *ngIf="oBonoForm?.get('descripcion')?.hasError('maxlength')"
-                  >La descripcion es demasiado larga.</small
-                >
-              </div>
-            </div>
+            
 
             <div class="mt-4 d-flex justify-content-evenly">
               <button

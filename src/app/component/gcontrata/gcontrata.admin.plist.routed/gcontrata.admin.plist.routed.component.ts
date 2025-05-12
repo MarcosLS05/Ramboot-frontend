@@ -43,8 +43,9 @@ export class GcontrataAdminPlistRoutedComponent implements OnInit {
   nPage: number = 0; // 0-based server count
   nRpp: number = 10;
   //
-  strField: string = '';
-  strDir: string = 'asc';
+strField: string = 'id';     // Campo por el que se ordena
+strDir: string = 'desc';     // Dirección de orden: descendente
+
   //
   usuarios: IUsuario[] = [];
   strFiltro: string = '';
@@ -89,29 +90,23 @@ export class GcontrataAdminPlistRoutedComponent implements OnInit {
     this.getPage();
   }
 
-  getPage() {
-    this.oGcontrataService
-      .getPage(this.nPage, this.nRpp, this.strField, this.strDir, this.strFiltro)
-      .subscribe({
-        next: (oPageFromServer: IPage<IGcontrata>) => {
-          // Ordenar los datos por fecha_creacion en orden descendente
-          oPageFromServer.content.sort((a, b) => {
-            const dateA = new Date(a.fecha_creacion).getTime();
-            const dateB = new Date(b.fecha_creacion).getTime();
-            return dateB - dateA; // Orden descendente
-          });
-  
-          this.oPage = oPageFromServer;
-          this.arrBotonera = this.oBotoneraService.getBotonera(
-            this.nPage,
-            oPageFromServer.totalPages
-          );
-        },
-        error: (err) => {
-          console.log(err);
-        },
-      });
-  }
+getPage() {
+  this.oGcontrataService
+    .getPage(this.nPage, this.nRpp, this.strField, this.strDir, this.strFiltro)
+    .subscribe({
+      next: (oPageFromServer: IPage<IGcontrata>) => {
+        this.oPage = oPageFromServer;
+        this.arrBotonera = this.oBotoneraService.getBotonera(
+          this.nPage,
+          oPageFromServer.totalPages
+        );
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+}
+
 
 
 

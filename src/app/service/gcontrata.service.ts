@@ -32,7 +32,7 @@ export class GcontrataService {
     }
     URL += '&size=' + size;
     if (field) {
-      console.log('Ordenando por:', field); // Depuración
+      
       URL += '&sort=' + field;
       if (dir === 'asc') {
         URL += ',asc';

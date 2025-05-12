@@ -73,36 +73,7 @@ export class BonoAdminPlistRoutedComponent implements OnInit {
 
 
 
-  showProductoSelectorModal(id: number | undefined) {
-    if (id) {
-      const dialogRef = this.dialog.open(ProductoselectorComponent, {
-        height: '500px',
-        maxHeight: '500px',
-        width: '50%',
-        maxWidth: '90%',
-      });
 
-      dialogRef.afterClosed().subscribe((result) => {
-        console.log('The dialog was closed');
-        if (result !== undefined) {
-          console.log(result);
-          // llamada al servidor
-          this.oBonoService .setProducto(id, result.id).subscribe({
-            next: (response: IBono) => {
-              console.log(response);
-              this.getPage();
-            },
-            error: (err: HttpErrorResponse) => {
-              console.log(err);
-            },
-          });
-        }
-      });
-      return false;
-    } else {
-      return false;
-    }
-  }
 
   showZonaSelectorModal(id: number | undefined) {
     if (id) {

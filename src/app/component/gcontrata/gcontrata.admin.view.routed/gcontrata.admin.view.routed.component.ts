@@ -30,11 +30,21 @@ export class GcontrataAdminViewRoutedComponent implements OnInit {
     this.getOne();
   }
 
-  getOne() {
-    this.oGcontrataService.getOne(this.id).subscribe({
-      next: (data: IGcontrata) => {
-        this.oGcontrata = data;
-      },
-    });
-  }
+getOne() {
+  this.oGcontrataService.getOne(this.id).subscribe({
+    next: (data: any) => {
+      this.oGcontrata = data;
+      this.oGcontrata.gcontrataproducto = data.gcontrataproductos.map((item: any) => ({
+        ...item,
+        importe: Number(item.importe), // Conversión explícita a number
+      }));
+    },
+    error: (err: HttpErrorResponse) => {
+      console.error('Error al obtener la gcontrata:', err);
+    }
+  });
 }
+
+
+}
+

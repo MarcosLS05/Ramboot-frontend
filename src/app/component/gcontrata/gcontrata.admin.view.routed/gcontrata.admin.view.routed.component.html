@@ -33,6 +33,12 @@
               </th>
               <td class="text-start ps-4 py-3">{{ oGcontrata.metodoPago }}</td>
             </tr>
+                        <tr>
+              <th scope="row" class="bg-primary text-white text-end pe-4 py-3">
+                Importe 
+              </th>
+              <td class="text-start ps-4 py-3">+ {{ oGcontrata.importe  | number: '1.2-2'}} €</td>
+            </tr>
             <tr>
               <th scope="row" class="bg-primary text-white text-end pe-4 py-3">
                 Ticket
@@ -44,7 +50,12 @@
                 Usuario
               </th>
               <td class="text-start ps-4 py-3">
-                {{ oGcontrata.usuario.nombre }}
+                    @if (oGcontrata.usuario == null) {
+                     Ticket realizado sin usuario
+                    }@else {
+                      {{ oGcontrata.usuario.username }}
+                    }
+               
               </td>
             </tr>
 
