@@ -90,6 +90,11 @@ export class GcontrataService {
     return this.oHttp.post<IGcontrata>(URL, oGcontrata, httpOptions);
   }
 
+  getFacturaById(id: number): Observable<IGcontrata> {
+  return this.oHttp.get<IGcontrata>(`${this.serverURL}/factura/${id}`);
+}
+
+
   addImporte(
     gcontrataEntity: IGcontrata,
     usuarioId: number,
@@ -109,16 +114,16 @@ export class GcontrataService {
       producto: { id: p.producto.id },
       cantidad: p.cantidad
     })) ?? [];
-  
-    console.log('Productos a enviar:', cleanProductos);  // Depuración
+
   
     const body = {
       gcontrataEntity: cleanGcontrata,
       productosComprados: cleanProductos,
       montoParaSaldo: montoParaSaldo,
     };
-  
+    console.log('Cuerpo de la solicitud:', body);  // Depuración
     return this.oHttp.post<IGcontrata>(URL, body, {
+
       params: { usuarioId: usuarioId.toString() },
     });
   }

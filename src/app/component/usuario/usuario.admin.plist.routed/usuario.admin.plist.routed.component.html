@@ -45,69 +45,69 @@
             <table class="table table-hover table-striped">
               <thead class="thead-dark">
                 <tr>
-                  <th (click)="sort('username')" class="cursor-pointer">
+                  <th (click)="sort('username')" class="cursor-pointer text-center">
                     Username @if (strField === 'username') { @if (strDir ===
                     'desc') {
                     <i class="bi bi-caret-down-fill"></i>
                     } @else {
                     <i class="bi bi-caret-up-fill"></i>} }
                   </th>
-                  <th (click)="sort('nombre')" class="cursor-pointer">
+                  <th (click)="sort('nombre')" class="cursor-pointer text-center">
                     Nombre @if (strField === 'nombre') { @if (strDir === 'desc')
                     {
                     <i class="bi bi-caret-down-fill"></i>
                     } @else {
                     <i class="bi bi-caret-up-fill"></i>} }
                   </th>
-                  <th (click)="sort('apellido1')" class="cursor-pointer">
+                  <th (click)="sort('apellido1')" class="cursor-pointer text-center">
                     Primer Apellido @if (strField === 'apellido1') { @if (strDir
                     === 'desc') {
                     <i class="bi bi-caret-down-fill"></i>
                     } @else {
                     <i class="bi bi-caret-up-fill"></i>} }
                   </th>
-                  <th (click)="sort('telefono')" class="cursor-pointer">
+                  <th (click)="sort('telefono')" class="cursor-pointer text-center">
                     Télefono @if (strField === 'telefono') { @if (strDir ===
                     'desc') {
                     <i class="bi bi-caret-down-fill"></i>
                     } @else {
                     <i class="bi bi-caret-up-fill"></i>} }
                   </th>
-                  <th (click)="sort('email')" class="cursor-pointer">
+                  <th (click)="sort('email')" class="cursor-pointer text-center">
                     Correo @if (strField === 'email') { @if (strDir === 'desc')
                     {
                     <i class="bi bi-caret-down-fill"></i>
                     } @else {
                     <i class="bi bi-caret-up-fill"></i>} }
                   </th>
-                  <th (click)="sort('active')" class="cursor-pointer">
+                  <th (click)="sort('active')" class="cursor-pointer text-center">
                     Estado @if (strField === 'active') { @if (strDir === 'desc')
                     {
                     <i class="bi bi-caret-down-fill"></i>
                     } @else {
                     <i class="bi bi-caret-up-fill"></i>} }
                   </th>
-                  <th (click)="sort('saldo')" class="cursor-pointer">
+                  <th (click)="sort('saldo')" class="cursor-pointer text-center">
                     Saldo @if (strField === 'saldo') { @if (strDir === 'desc') {
                     <i class="bi bi-caret-down-fill"></i>
                     } @else {
                     <i class="bi bi-caret-up-fill"></i>} }
                   </th>
-                  <th (click)="sort('ultimoLoginEn')" class="cursor-pointer">
+                  <th (click)="sort('ultimoLoginEn')" class="cursor-pointer text-center">
                     Ultimo Login @if (strField === 'ultimoLoginEn') { @if
                     (strDir === 'desc') {
                     <i class="bi bi-caret-down-fill"></i>
                     } @else {
                     <i class="bi bi-caret-up-fill"></i>} }
                   </th>
-                  <th (click)="sort('tipousuario')" class="cursor-pointer">
+                  <th (click)="sort('tipousuario')" class="cursor-pointer text-center">
                     Tipo de usuario @if (strField === 'tipousuario') { @if
                     (strDir === 'desc') {
                     <i class="bi bi-caret-down-fill"></i>
                     } @else {
                     <i class="bi bi-caret-up-fill"></i>} }
                   </th>
-                  <th (click)="sort('Gcontrata')" class="cursor-pointer">
+                  <th (click)="sort('Gcontrata')" class="cursor-pointer text-center">
                     Compras @if (strField === 'Gcontrata') { @if (strDir ===
                     'desc') {
                     <i class="bi bi-caret-down-fill"></i>
@@ -186,22 +186,7 @@
                         class="btn btn-sm btn-outline-danger"
                         (click)="remove(usuario)"
                       >
-                        <i class="bi bi-trash"></i>
-                      </button>
-                      <button
-                        type="button"
-                        class="btn btn-sm btn-outline-secondary"
-                        [routerLink]="['']"
-                      >
-                        <i class="bi bi-cash-coin"></i>
-                      </button>
-
-                      <button
-                        type="button"
-                        class="btn btn-outline-secondary"
-                        [routerLink]="['']"
-                      >
-                        <i class="bi bi-box-seam"></i>
+                        <i class="bi bi-trash"></i>   
                       </button>
                     </div>
                   </td>

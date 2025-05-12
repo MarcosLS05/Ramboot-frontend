@@ -7,20 +7,17 @@ import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BotoneraService } from '../../../service/botonera.service';
 import { debounceTime, Subject } from 'rxjs';
 import { Router, RouterModule } from '@angular/router';
-import { TrimPipe } from '../../../pipe/trim.pipe';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { HttpErrorResponse } from '@angular/common/http';
 import { IUsuario } from '../../../model/usuario.interface';
-import { IZona } from '../../../model/zona.interface';
 import { UsuarioService } from '../../../service/usuario.service';
-import { ZonaService } from '../../../service/zona.service';
 import { IGcontrataproducto } from '../../../model/gcontrataproducto.interface';
 import { ProductoselectorComponent } from '../../producto/productoselector/productoselector.component';
-import { IProducto } from '../../../model/producto.interface';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
+import { PdfService } from '../../../service/pdf.service';
 
 declare let bootstrap: any;
 
@@ -56,6 +53,7 @@ strDir: string = 'desc';     // Dirección de orden: descendente
   strMessage: string = '';
 
   myModal: any;
+
   cantidadProducto: number = 1;
   importeProducto: number = 0;
 
@@ -79,7 +77,8 @@ strDir: string = 'desc';     // Dirección de orden: descendente
     private oGcontrataService: GcontrataService,
     private oBotoneraService: BotoneraService,
     private UsuarioService: UsuarioService,
-    private oRouter: Router
+    private oRouter: Router,
+    private oPdfService: PdfService
   ) {
     this.debounceSubject.pipe(debounceTime(10)).subscribe((value) => {
       this.getPage();
@@ -110,35 +109,62 @@ getPage() {
 
 
 
+verFactura(idContrato: number) {
+  this.oGcontrataService.getFacturaById(idContrato).subscribe({
+    next: (contratoConProductos) => {
+      this.oPdfService.generarFactura(contratoConProductos);
+    },
+    error: (err) => {
+      alert('No se pudo obtener la factura');
+      console.error(err);
+    }
+  });
+}
+
+
+
 
   edit(oGcontrata: IGcontrata) {
     //navegar a la página de edición
     this.oRouter.navigate(['admin/gcontrata/edit', oGcontrata.id]);
   }
 
-  addImporte(oGcontrata: IGcontrata, usuarioId: number, productosComprados: IGcontrataproducto[] | null, montoParaSaldo: number) {
-    // Validaciones
-    if (!oGcontrata.metodoPago) {
-      alert('Por favor, selecciona un método de pago.');
-      return;
-    }
-  
-    if (montoParaSaldo <= 0) {
-      alert('El monto para saldo de la cuenta debe ser mayor que 0.');
-      return;
-    }
-  
-    // Llamada al servicio
-    this.oGcontrataService.addImporte(oGcontrata, usuarioId, productosComprados, montoParaSaldo).subscribe({
-      next: (nuevoContrato) => {
-        console.log('Contrato actualizado con nuevo importe:', nuevoContrato);
-        alert('El importe se ha añadido correctamente.');
-        this.getPage(); // Actualiza la lista después de la operación
-      },
+addImporte(
+  oGcontrata: IGcontrata,
+  usuarioId: number,
+  productosComprados: IGcontrataproducto[] | null,
+  montoParaSaldo: number
+): void {
+  // Validaciones
+  if (!oGcontrata.metodoPago) {
+    alert('Por favor, selecciona un método de pago.');
+    return;
+  }
+
+  if (montoParaSaldo <= 0) {
+    alert('El monto para saldo de la cuenta debe ser mayor que 0.');
+    return;
+  }
+
+  // Llamada al servicio
+  this.oGcontrataService
+    .addImporte(oGcontrata, usuarioId, productosComprados, montoParaSaldo)
+    .subscribe({
+next: (nuevoContrato: IGcontrata) => {
+  alert('El importe se ha añadido correctamente.');
+
+  // Verificar si el contrato contiene productos
+  if (nuevoContrato.gcontrataproducto && nuevoContrato.gcontrataproducto.length > 0) {
+  } else {
+    alert('No se encontraron productos en el contrato.');
+  }
+
+  // Actualiza la página si es necesario
+  this.getPage();
+},
       error: (err: HttpErrorResponse) => {
         console.error('Error al añadir el importe:', err);
-  
-        // Mostrar un mensaje de error más detallado
+
         if (err.status === 400) {
           alert('Solicitud inválida. Por favor, verifica los datos ingresados.');
         } else if (err.status === 404) {
@@ -150,7 +176,8 @@ getPage() {
         }
       },
     });
-  }
+}
+
 
   addProducto(oGcontrata: IGcontrata, producto: IGcontrataproducto[]) {
     // Validaciones
@@ -166,14 +193,13 @@ getPage() {
 
     this.oGcontrataService.addProducto(oGcontrata, producto).subscribe({
       next: (nuevoContrato) => {
-        console.log('Contrato actualizado con nuevo producto:', nuevoContrato);
         alert('El producto se ha añadido correctamente.');
-        this.getPage(); // Actualiza la lista después de la operación
+        this.getPage(); 
       },
       error: (err: HttpErrorResponse) => {
         console.error('Error al añadir el importe:', err);
   
-        // Mostrar un mensaje de error más detallado
+        
         if (err.status === 400) {
           alert('Solicitud inválida. Por favor, verifica los datos ingresados.');
         } else if (err.status === 404) {
